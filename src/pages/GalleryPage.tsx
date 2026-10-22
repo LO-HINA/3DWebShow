@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { allArtworks, type ArtworkSpec } from '../world/data/artworks';
-import { ArtworkModal } from '../components/overlays/ArtworkModal';
-import { ArrowIcon } from '../components/common/Icons';
+import { allArtworks, type ArtworkSpec } from '../content/artworks/index';
+import { ArtworkModal } from '../features/lightbox/ArtworkModal';
+import { ArrowIcon } from '../ui/Icons';
 import { usePageTitle } from '../ui/usePageTitle';
 
 function cardClass(index: number): string {

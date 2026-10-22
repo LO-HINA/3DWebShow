@@ -1,0 +1,70 @@
+{
+  "cameraRelativeMovement": "four headings, diagonal normalization and analog magnitude passed",
+  "response": {
+    "speed": 6,
+    "sprintSpeed": 10,
+    "fullSpeedWithinSeconds": 0.1,
+    "stoppedWithinSeconds": 0.08333333333333333,
+    "stopDistanceMeters": 0.17796063077376428
+  },
+  "lowFpsTravel": {
+    "seconds": 2,
+    "distances": {
+      "1": 11.750053631141782,
+      "2": 11.750053631141782,
+      "5": 11.750053631141782,
+      "10": 11.750053631141782,
+      "20": 11.750053631141782,
+      "30": 11.750053631141782,
+      "60": 11.750053631141782,
+      "144": 11.750053631141782
+    },
+    "longStallSteps": 60
+  },
+  "sprint": {
+    "speed": 10,
+    "oneSecondDistance": 9.249896639958024
+  },
+  "jump": {
+    "heightMeters": 1.2667666703273426,
+    "ceilingLimitedHeightMeters": 0.4849473686699639,
+    "checks": "takeoff, air steering, no double jump, landing, repeat after landing, ceiling collision"
+  },
+  "wallSlide": "capsule blocked; actual speed zero; diagonal input slides along wall",
+  "framingMathOnly": [
+    {
+      "preset": "low",
+      "screenY": 0.6906161365057527,
+      "camera": [
+        0,
+        2.824657380407055,
+        13.320590453496647
+      ]
+    },
+    {
+      "preset": "medium",
+      "screenY": 0.677027617601259,
+      "camera": [
+        0,
+        4.157171218268184,
+        14.487387276680222
+      ]
+    },
+    {
+      "preset": "high",
+      "screenY": 0.6661450021300588,
+      "camera": [
+        0,
+        6.098089813814168,
+        15.246185545965709
+      ]
+    }
+  ],
+  "lookUpRestore": "yaw, pitch and distance preserved independently",
+  "frameRateIndependence": "30/60/144fps orbit converges identically; moving player anchor has no extra position damping",
+  "cameraCollision": {
+    "contracted": 4.770062408447266,
+    "firstRecoveryLength": 5.125012900224159
+  },
+  "snapshot": "new camera round-trip, legacy migration, malformed numeric bounds passed"
+}

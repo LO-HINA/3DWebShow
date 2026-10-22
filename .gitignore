@@ -8,3 +8,7 @@ dist-ssr
 docs/screenshots/.tmp
 .idea/
 .claude/
+.camera-preview/
+scripts/__pycache__/
+docs/camera-review/.raw/
+docs/locomotion-review/.raw/

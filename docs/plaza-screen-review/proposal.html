@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><title>艺术画幕 · 同出生机位比较</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#101522;color:#e8ded0;font:15px system-ui}header{display:flex;align-items:center;gap:12px;padding:18px 24px}h1{font-size:18px;margin:0 auto 0 0}button{background:#242d3a;border:1px solid #63717c;color:inherit;padding:10px 18px;cursor:pointer}button[aria-pressed=true]{background:#cfb298;color:#171d28}#viewport{width:min(100vw,1440px);aspect-ratio:16/10;margin:auto}canvas{width:100%!important;height:100%!important;display:block}p{max-width:1100px;margin:16px auto;padding:0 20px;line-height:1.8;color:#b5c1cc}#error{color:#ffbc90;white-space:pre-wrap}
+</style>
+<header><h1>宽幅艺术画幕 / 同出生机位</h1><button data-width="12" aria-pressed="true">12 × 6.75m</button><button data-width="14" aria-pressed="false">14 × 7.875m</button><button id="sculpture">雕塑：侧前方提案</button></header>
+<div id="viewport"></div><p id="status">正在加载当前工程的真实场景。此页仅作独立方案预览，不写入正式布局与碰撞。</p><p>固定 1440×900、当前出生点及默认镜头；尺寸切换不改相机。大屏北移和雕塑侧移仅在本预览内生效，选定后由整合负责人调整正式场景。</p><p id="error"></p>
+<script type="module">
+import * as THREE from 'three';
+import {WorldEngine} from '/src/app/WorldEngine.ts';
+import {FollowCamera} from '/src/engine/camera/follow.ts';
+import {SPAWN,SNAPSHOT_KEY} from '/src/worlds/cyberpunk/layout.ts';
+import {ART_CURTAIN_CANDIDATES,PROPOSED_SCULPTURE_POSITION,createArtCurtainProposal} from '/src/worlds/cyberpunk/props/artCurtainProposal.ts';
+try {
+ const noop=()=>{}; const prior=sessionStorage.getItem(SNAPSHOT_KEY);sessionStorage.removeItem(SNAPSHOT_KEY);
+ const engine=new WorldEngine(document.querySelector('#viewport'),{onFocus:noop,onLockedHint:noop,onZone:noop,onStats:noop,onPortal:noop,onCameraDebug:noop});
+ try {await engine.init(noop)}finally{if(prior!==null)sessionStorage.setItem(SNAPSHOT_KEY,prior)}
+ // 独立评审页只使用静态场景与渲染器，不启动模拟或调用正式布局写入。
+ engine.renderer.setSize(1440,900);engine.renderer.setPixelRatio(1);
+ engine.plazaScreen?.dispose();
+ const options=ART_CURTAIN_CANDIDATES.map(spec=>createArtCurtainProposal(spec,4));
+ options.forEach(handle=>engine.scene.add(handle.group));
+ const follow=new FollowCamera(1440/900);follow.reset(new THREE.Vector3(...SPAWN.feet));
+ engine.landmark.update(0,true);engine.landmark.group.position.fromArray(PROPOSED_SCULPTURE_POSITION);
+ let selected=12, moved=true;
+ const render=()=>engine.renderer.render(engine.scene,follow.camera);
+ const choose=width=>{selected=width;options.forEach((h,i)=>h.group.visible=ART_CURTAIN_CANDIDATES[i].width===width);
+  document.querySelectorAll('[data-width]').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.width===width)));render()};
+ document.querySelectorAll('[data-width]').forEach(b=>b.onclick=()=>choose(+b.dataset.width));
+ document.querySelector('#sculpture').onclick=()=>{moved=!moved;engine.landmark.group.position.fromArray(moved?PROPOSED_SCULPTURE_POSITION:[0,0,0]);document.querySelector('#sculpture').textContent=moved?'雕塑：侧前方提案':'雕塑：当前中央（遮挡检查）';render()};
+ choose(12);
+ await new Promise((resolve,reject)=>{const began=performance.now();const tick=()=>{
+  if(options.some(h=>h.group.userData.imageStatus==='error'))return reject(Error('封面加载失败'));
+  if(options.every(h=>h.group.userData.imageStatus==='loaded'))return resolve();
+  if(performance.now()-began>30000)return reject(Error('封面加载超时'));setTimeout(tick,100)};tick()});
+ render();document.querySelector('#status').textContent='真实场景预览已加载；12m / 14m 共用同一出生相机，可切回中央雕塑检查遮挡。此页没有新增打开/关闭事件或世界切换。';
+ window.__screenReview={ready:true,choose,camera:()=>({position:follow.camera.position.toArray(),quaternion:follow.camera.quaternion.toArray(),fov:follow.camera.fov}),selected:()=>selected};
+ addEventListener('pagehide',()=>{options.forEach(h=>h.dispose());engine.dispose()},{once:true});
+}catch(error){document.querySelector('#error').textContent=String(error);throw error}
+</script></html>

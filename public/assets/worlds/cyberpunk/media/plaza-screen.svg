@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1">
+      <stop stop-color="#182638"/><stop offset=".68" stop-color="#6f7f89"/><stop offset="1" stop-color="#d6b5a0"/>
+    </linearGradient>
+    <linearGradient id="sand" x2=".7" y2="1">
+      <stop stop-color="#e6c3a1"/><stop offset="1" stop-color="#a96c55"/>
+    </linearGradient>
+    <linearGradient id="near" x2="1" y2="1">
+      <stop stop-color="#405c64"/><stop offset="1" stop-color="#19333d"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#sky)" d="M0 0h1600v900H0z"/>
+  <circle cx="1080" cy="355" r="174" fill="#f5d9ae"/>
+  <path d="M0 580Q210 456 420 550T840 520T1250 495T1600 545V900H0Z" fill="#8a9b9b"/>
+  <path d="M0 700Q220 520 500 654T980 620T1600 567V900H0Z" fill="url(#sand)"/>
+  <path d="M0 795Q300 658 610 750T1110 693T1600 756V900H0Z" fill="url(#near)"/>
+  <path d="M600 900Q810 743 1000 698Q1180 654 1400 697" fill="none" stroke="#c1d6cd" stroke-width="3" opacity=".5"/>
+  <g fill="#f0e7d5" font-family="sans-serif">
+    <text x="100" y="115" font-size="21" letter-spacing="8">LOHINA WORLD</text>
+    <text x="100" y="190" font-size="54" letter-spacing="4">AFTER THE LIGHT</text>
+    <text x="104" y="230" font-size="17" letter-spacing="5" opacity=".8">A PLACE TO WANDER</text>
+    <text x="100" y="836" font-size="15" letter-spacing="4">PLAZA COLLECTION / 01</text>
+    <text x="1500" y="836" text-anchor="end" font-size="15" letter-spacing="4">EST. 2026</text>
+  </g>
+  <path d="M100 270h70" stroke="#f0e7d5" stroke-width="2"/>
+</svg>

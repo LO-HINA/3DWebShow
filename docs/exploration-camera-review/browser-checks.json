@@ -1,0 +1,81 @@
+{
+  "status": "passed-static",
+  "runAt": "2026-10-22",
+  "environment": {
+    "browser": "Microsoft Edge (Playwright, headless)",
+    "renderer": "ANGLE SwiftShader",
+    "viewport": "1440x900",
+    "url": "http://127.0.0.1:5173/world",
+    "debugPanel": "F3"
+  },
+  "runtime": {
+    "cameraMode": "follow",
+    "chain": "follow.ts > collision.ts > avatarFade.ts",
+    "finalViewSource": "camera.getWorldDirection()"
+  },
+  "checks": {
+    "topDownToSky": {
+      "topDownViewPitchUpDeg": -85,
+      "samplesTargetPitchUpDeg": [-47.2, -9.4, 28.4, 66.3, 85],
+      "viewAtTarget66Deg": 64.6,
+      "settledViewPitchUpDeg": 85,
+      "note": "普通拖拽从最大俯视连续经过水平到达最大仰视；未使用 V 键。"
+    },
+    "avatarFade": {
+      "nearBefore": { "boomLength": 0.98, "trigger": "中心遮挡", "target": 0.06, "opacity": 0.06, "materialOpacity": 0.06 },
+      "nearFade": { "boomLength": 0.48, "trigger": "近距", "target": 0, "opacity": 0, "materialOpacity": 0 },
+      "nearHidden": { "boomLength": 0.35, "trigger": "近距", "target": 0, "opacity": 0, "materialOpacity": 0 },
+      "restored": { "boomLength": 6.23, "trigger": "none", "target": 1, "opacity": 1, "materialOpacity": 1 }
+    },
+    "upLookComposition": {
+      "viewPitchUpDeg": {
+        "64.6": { "target": 0.38, "opacity": 0.5, "reason": "仰视构图" },
+        "85": { "target": 0.24, "opacity": 0.24, "reason": "仰视构图" }
+      }
+    },
+    "straightWall": {
+      "location": "E-01 北墙 z=-0.5",
+      "facing": { "boomLength": 0, "hitDistance": 0.021, "object": "E-01:footprint", "startOverlap": false },
+      "afterRotate": { "boomLength": 8.5, "desiredLength": 8.5, "collisionObject": "—" },
+      "note": "贴墙时无可用臂长，镜头收到人物锚点并淡出人物；水平拖拽后恢复完整距离。"
+    },
+    "corner": {
+      "location": "E-01 东北角 (x=-13, z=-0.5)",
+      "facing": { "boomLength": 0, "hitDistance": 0.029, "object": "E-01:footprint", "startOverlap": false },
+      "afterRotate": { "boomLength": 8.5, "desiredLength": 8.5, "collisionObject": "—" }
+    },
+    "lowAngleTower": {
+      "target": "T-01",
+      "viewPitchUpDeg": 20,
+      "cameraHeight": 0.5,
+      "desiredLength": 16,
+      "boomLength": 14.07,
+      "collisionObject": "bench",
+      "note": "低机位完整纳入 T-01 塔身与塔顶；镜头被长椅缩短但不遮挡构图。"
+    },
+    "reset": {
+      "viewPitchUpDeg": -13,
+      "boomLength": 8.5,
+      "collisionObject": "—",
+      "avatarMaterialOpacity": 1
+    }
+  },
+  "screenshots": [
+    "screenshots/01-top-down-panel.png",
+    "screenshots/02-skyward-panel.png",
+    "screenshots/03-skyward-clean.png",
+    "screenshots/04-near-fade-clean.png",
+    "screenshots/05-near-restored-clean.png",
+    "screenshots/06-wall-facing-panel.png",
+    "screenshots/07-wall-recovered-clean.png",
+    "screenshots/08-corner-facing-panel.png",
+    "screenshots/09-corner-recovered-clean.png",
+    "screenshots/10-low-angle-tower-panel.png"
+  ],
+  "notVerified": [
+    "连续录屏与真实 GPU 下的镜头手感",
+    "近地透明排序在真实显卡上的表现",
+    "触屏真机拖拽"
+  ],
+  "note": "静态关键状态已由真实浏览器截图和运行时采样验证；连续动作与主观手感仍标记为运行效果待验收，不以 typecheck 或孤立数学测试替代。"
+}

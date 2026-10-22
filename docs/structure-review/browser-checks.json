@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "checks": [
+    "desktop exploration / single canvas",
+    "W1 lightbox image / close",
+    "directory / eight exhibits / close",
+    "settings / close",
+    "E-01 enter / gallery / return / single canvas",
+    "direct gallery route",
+    "mobile viewport / exploration / touch controls"
+  ],
+  "errors": [],
+  "device": "headless Edge / SwiftShader; simulated viewports"
+}

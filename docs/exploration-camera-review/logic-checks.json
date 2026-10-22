@@ -1,0 +1,1121 @@
+{
+  "ground_0": {
+    "samples": [
+      {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": 0.21039280275926286,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": -12.054619638034143,
+        "actualPitchUpDeg": -12.754974635653127,
+        "viewPitchUpDeg": -12.754974635653129,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0,
+          4.122986682035048,
+          7.999746716293538
+        ],
+        "cameraHeight": 4.122986682035048,
+        "lookAt": [
+          0,
+          1.9151655111544845,
+          -1.7534848341932836
+        ],
+        "pivot": [
+          0,
+          1.25,
+          0
+        ],
+        "viewDirection": [
+          0,
+          -0.2207821170880564,
+          -0.9753231550486824
+        ],
+        "solverViewDirection": [
+          0,
+          -0.22078211708805637,
+          -0.9753231550486822
+        ],
+        "boomLength": 8.5,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": -3.518907298882823e-8,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          0.677118033044758
+        ]
+      },
+      {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -0.037107197240737216,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 2.126085791453736,
+        "actualPitchUpDeg": -0.5538528021118547,
+        "viewPitchUpDeg": -0.553852802111854,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0,
+          2.367393017735757,
+          8.426234796391288
+        ],
+        "cameraHeight": 2.367393017735757,
+        "lookAt": [
+          0,
+          2.270728973487879,
+          -1.5732979958220383
+        ],
+        "pivot": [
+          0,
+          1.25,
+          0
+        ],
+        "viewDirection": [
+          0,
+          -0.009666404424787835,
+          -0.9999532792213328
+        ],
+        "solverViewDirection": [
+          0,
+          -0.009666404424787849,
+          -0.9999532792213326
+        ],
+        "boomLength": 8.499999999999996,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": 7.72145174465777e-8,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          0.6804575585322388
+        ]
+      },
+      {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -0.28460719724073735,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 16.30679122094162,
+        "actualPitchUpDeg": 13.604861440061494,
+        "viewPitchUpDeg": 13.6048614400615,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0,
+          0.40000007629394563,
+          8.457393223074098
+        ],
+        "cameraHeight": 0.40000007629394563,
+        "lookAt": [
+          0,
+          2.752245889641077,
+          -1.2620172340262137
+        ],
+        "pivot": [
+          0,
+          1.25,
+          0
+        ],
+        "viewDirection": [
+          0,
+          0.23522458133471322,
+          -0.9719410457100314
+        ],
+        "solverViewDirection": [
+          0,
+          0.23522458133471313,
+          -0.9719410457100311
+        ],
+        "boomLength": 8.499999999999998,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": 7.629394538355427e-8,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          0.6973579319299531
+        ]
+      },
+      {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -0.5321071972407375,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 30.487496650429502,
+        "actualPitchUpDeg": 27.785322569525633,
+        "viewPitchUpDeg": 27.785322569525636,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0,
+          0.40000007629394563,
+          8.457393223074098
+        ],
+        "cameraHeight": 0.40000007629394563,
+        "lookAt": [
+          0,
+          5.06160030013882,
+          -0.3896109790866209
+        ],
+        "pivot": [
+          0,
+          1.25,
+          0
+        ],
+        "viewDirection": [
+          0,
+          0.46616002238448745,
+          -0.8847004202160719
+        ],
+        "solverViewDirection": [
+          0,
+          0.4661600223844874,
+          -0.8847004202160719
+        ],
+        "boomLength": 8.499999999999998,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": 7.629394538355427e-8,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          0.9797251136369703
+        ]
+      },
+      {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -0.7796071972407369,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 44.66820207991734,
+        "actualPitchUpDeg": 41.96602528508536,
+        "viewPitchUpDeg": 41.96602528508535,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0,
+          0.40000007629394563,
+          8.457393223074098
+        ],
+        "cameraHeight": 0.40000007629394563,
+        "lookAt": [
+          0,
+          7.086898333151193,
+          1.0219785270104325
+        ],
+        "pivot": [
+          0,
+          1.25,
+          0
+        ],
+        "viewDirection": [
+          0,
+          0.6686898256857247,
+          -0.7435414696063665
+        ],
+        "solverViewDirection": [
+          0,
+          0.6686898256857248,
+          -0.7435414696063665
+        ],
+        "boomLength": 8.499999999999998,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": 7.629394538355427e-8,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          1.3378285889653343
+        ]
+      },
+      {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -1.0271071972407364,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 58.84890750940519,
+        "actualPitchUpDeg": 56.14673068442418,
+        "viewPitchUpDeg": 56.14673068442419,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0,
+          0.40000007629394563,
+          8.457393223074098
+        ],
+        "cameraHeight": 0.40000007629394563,
+        "lookAt": [
+          0,
+          8.704669159198763,
+          2.8867136035442815
+        ],
+        "pivot": [
+          0,
+          1.25,
+          0
+        ],
+        "viewDirection": [
+          0,
+          0.8304669082904819,
+          -0.5570679619529815
+        ],
+        "solverViewDirection": [
+          0,
+          0.8304669082904818,
+          -0.5570679619529816
+        ],
+        "boomLength": 8.499999999999998,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": 7.629394538355427e-8,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          1.8823276297653235
+        ]
+      },
+      {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -1.2746071972407358,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 73.02961293889302,
+        "actualPitchUpDeg": 70.32743611357712,
+        "viewPitchUpDeg": 70.32743611357714,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0,
+          0.40000007629394563,
+          8.457393223074098
+        ],
+        "cameraHeight": 0.40000007629394563,
+        "lookAt": [
+          0,
+          9.816318627350894,
+          5.090949261707628
+        ],
+        "pivot": [
+          0,
+          1.25,
+          0
+        ],
+        "viewDirection": [
+          0,
+          0.941631855105695,
+          -0.3366443961366467
+        ],
+        "solverViewDirection": [
+          0,
+          0.9416318551056948,
+          -0.336644396136647
+        ],
+        "boomLength": 8.499999999999998,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": 7.629394538355427e-8,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          2.9896218648827606
+        ]
+      },
+      {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -1.4835298641951802,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 85,
+        "actualPitchUpDeg": 83.64693635825219,
+        "viewPitchUpDeg": 83.64693635825219,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0,
+          0.40000007629394563,
+          8.457393223074098
+        ],
+        "cameraHeight": 0.40000007629394563,
+        "lookAt": [
+          0,
+          10.338589080108875,
+          7.350845161194726
+        ],
+        "pivot": [
+          0,
+          1.25,
+          0
+        ],
+        "viewDirection": [
+          0,
+          0.9938589003814928,
+          -0.1106548061879371
+        ],
+        "solverViewDirection": [
+          0,
+          0.9938589003814928,
+          -0.11065480618793719
+        ],
+        "boomLength": 8.499999999999998,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": 7.629394538355427e-8,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          6.928324444267465
+        ]
+      },
+      {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -1.4835298641951802,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 85,
+        "actualPitchUpDeg": 84.98496882068781,
+        "viewPitchUpDeg": 84.98496882068783,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0,
+          0.40000007629394563,
+          8.457393223074098
+        ],
+        "cameraHeight": 0.40000007629394563,
+        "lookAt": [
+          0,
+          10.361718066916257,
+          7.583222372889892
+        ],
+        "pivot": [
+          0,
+          1.25,
+          0
+        ],
+        "viewDirection": [
+          0,
+          0.9961717990622312,
+          -0.0874170850184206
+        ],
+        "solverViewDirection": [
+          0,
+          0.9961717990622312,
+          -0.08741708501842052
+        ],
+        "boomLength": 8.499999999999998,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": 7.629394538355427e-8,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          8.059462562432188
+        ]
+      },
+      {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -1.4835298641951802,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 85,
+        "actualPitchUpDeg": 84.99983301868107,
+        "viewPitchUpDeg": 84.99983301868114,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0,
+          0.40000007629394563,
+          8.457393223074098
+        ],
+        "cameraHeight": 0.40000007629394563,
+        "lookAt": [
+          0,
+          10.36194451712496,
+          7.585806762763893
+        ],
+        "pivot": [
+          0,
+          1.25,
+          0
+        ],
+        "viewDirection": [
+          0,
+          0.9961944440831014,
+          -0.0871586460310203
+        ],
+        "solverViewDirection": [
+          0,
+          0.9961944440831013,
+          -0.08715864603102053
+        ],
+        "boomLength": 8.499999999999998,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": 7.629394538355427e-8,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          8.07421821574427
+        ]
+      }
+    ],
+    "upwardAndDownwardDrag": true,
+    "nearPlaneClear": true,
+    "skyMovementStable": true
+  },
+  "ground_2": {
+    "samples": [
+      {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": 0.21039280275926286,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": -12.054619638034143,
+        "actualPitchUpDeg": -12.754974635653127,
+        "viewPitchUpDeg": -12.754974635653129,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0,
+          6.122986682035048,
+          7.999746716293538
+        ],
+        "cameraHeight": 6.122986682035048,
+        "lookAt": [
+          0,
+          3.9151655111544845,
+          -1.7534848341932836
+        ],
+        "pivot": [
+          0,
+          3.25,
+          0
+        ],
+        "viewDirection": [
+          0,
+          -0.2207821170880564,
+          -0.9753231550486824
+        ],
+        "solverViewDirection": [
+          0,
+          -0.22078211708805637,
+          -0.9753231550486822
+        ],
+        "boomLength": 8.5,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": 1.999999964810927,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          0.6771180330447581
+        ]
+      },
+      {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -0.037107197240737216,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 2.126085791453736,
+        "actualPitchUpDeg": -0.5538528021118547,
+        "viewPitchUpDeg": -0.5538528021118565,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0,
+          4.367393017735758,
+          8.426234796391292
+        ],
+        "cameraHeight": 4.367393017735758,
+        "lookAt": [
+          0,
+          4.270728973487879,
+          -1.5732979958220348
+        ],
+        "pivot": [
+          0,
+          3.25,
+          0
+        ],
+        "viewDirection": [
+          0,
+          -0.00966640442478788,
+          -0.9999532792213328
+        ],
+        "solverViewDirection": [
+          0,
+          -0.009666404424787849,
+          -0.9999532792213326
+        ],
+        "boomLength": 8.5,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": 2.0000000772145174,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          0.6804575585322388
+        ]
+      },
+      {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -0.28460719724073735,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 16.30679122094162,
+        "actualPitchUpDeg": 13.604861440061494,
+        "viewPitchUpDeg": 13.6048614400615,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0,
+          2.4000000762939453,
+          8.4573932230741
+        ],
+        "cameraHeight": 2.4000000762939453,
+        "lookAt": [
+          0,
+          4.752245889641077,
+          -1.262017234026212
+        ],
+        "pivot": [
+          0,
+          3.25,
+          0
+        ],
+        "viewDirection": [
+          0,
+          0.23522458133471322,
+          -0.9719410457100314
+        ],
+        "solverViewDirection": [
+          0,
+          0.23522458133471313,
+          -0.9719410457100311
+        ],
+        "boomLength": 8.5,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": 2.0000000762939454,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          0.6973579319299531
+        ]
+      },
+      {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -0.5321071972407375,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 30.487496650429502,
+        "actualPitchUpDeg": 27.785322569525633,
+        "viewPitchUpDeg": 27.785322569525636,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0,
+          2.4000000762939453,
+          8.4573932230741
+        ],
+        "cameraHeight": 2.4000000762939453,
+        "lookAt": [
+          0,
+          7.061600300138819,
+          -0.3896109790866191
+        ],
+        "pivot": [
+          0,
+          3.25,
+          0
+        ],
+        "viewDirection": [
+          0,
+          0.46616002238448745,
+          -0.8847004202160721
+        ],
+        "solverViewDirection": [
+          0,
+          0.4661600223844874,
+          -0.8847004202160719
+        ],
+        "boomLength": 8.5,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": 2.0000000762939454,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          0.9797251136369703
+        ]
+      },
+      {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -0.7796071972407369,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 44.66820207991734,
+        "actualPitchUpDeg": 41.96602528508536,
+        "viewPitchUpDeg": 41.96602528508535,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0,
+          2.4000000762939453,
+          8.4573932230741
+        ],
+        "cameraHeight": 2.4000000762939453,
+        "lookAt": [
+          0,
+          9.086898333151193,
+          1.0219785270104342
+        ],
+        "pivot": [
+          0,
+          3.25,
+          0
+        ],
+        "viewDirection": [
+          0,
+          0.6686898256857247,
+          -0.7435414696063665
+        ],
+        "solverViewDirection": [
+          0,
+          0.6686898256857248,
+          -0.7435414696063665
+        ],
+        "boomLength": 8.5,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": 2.0000000762939454,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          1.3378285889653347
+        ]
+      },
+      {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -1.0271071972407364,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 58.84890750940519,
+        "actualPitchUpDeg": 56.14673068442418,
+        "viewPitchUpDeg": 56.14673068442419,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0,
+          2.4000000762939453,
+          8.4573932230741
+        ],
+        "cameraHeight": 2.4000000762939453,
+        "lookAt": [
+          0,
+          10.704669159198763,
+          2.8867136035442833
+        ],
+        "pivot": [
+          0,
+          3.25,
+          0
+        ],
+        "viewDirection": [
+          0,
+          0.8304669082904819,
+          -0.5570679619529815
+        ],
+        "solverViewDirection": [
+          0,
+          0.8304669082904818,
+          -0.5570679619529816
+        ],
+        "boomLength": 8.5,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": 2.0000000762939454,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          1.8823276297653235
+        ]
+      },
+      {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -1.2746071972407358,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 73.02961293889302,
+        "actualPitchUpDeg": 70.32743611357712,
+        "viewPitchUpDeg": 70.32743611357714,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0,
+          2.4000000762939453,
+          8.4573932230741
+        ],
+        "cameraHeight": 2.4000000762939453,
+        "lookAt": [
+          0,
+          11.816318627350894,
+          5.09094926170763
+        ],
+        "pivot": [
+          0,
+          3.25,
+          0
+        ],
+        "viewDirection": [
+          0,
+          0.941631855105695,
+          -0.3366443961366467
+        ],
+        "solverViewDirection": [
+          0,
+          0.9416318551056948,
+          -0.336644396136647
+        ],
+        "boomLength": 8.5,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": 2.0000000762939454,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          2.98962186488276
+        ]
+      },
+      {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -1.4835298641951802,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 85,
+        "actualPitchUpDeg": 83.64693635825219,
+        "viewPitchUpDeg": 83.64693635825219,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0,
+          2.4000000762939453,
+          8.4573932230741
+        ],
+        "cameraHeight": 2.4000000762939453,
+        "lookAt": [
+          0,
+          12.338589080108875,
+          7.350845161194727
+        ],
+        "pivot": [
+          0,
+          3.25,
+          0
+        ],
+        "viewDirection": [
+          0,
+          0.9938589003814928,
+          -0.1106548061879371
+        ],
+        "solverViewDirection": [
+          0,
+          0.9938589003814928,
+          -0.11065480618793719
+        ],
+        "boomLength": 8.5,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": 2.0000000762939454,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          6.928324444267465
+        ]
+      },
+      {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -1.4835298641951802,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 85,
+        "actualPitchUpDeg": 84.98496882068781,
+        "viewPitchUpDeg": 84.98496882068783,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0,
+          2.4000000762939453,
+          8.4573932230741
+        ],
+        "cameraHeight": 2.4000000762939453,
+        "lookAt": [
+          0,
+          12.361718066916257,
+          7.583222372889894
+        ],
+        "pivot": [
+          0,
+          3.25,
+          0
+        ],
+        "viewDirection": [
+          0,
+          0.9961717990622312,
+          -0.0874170850184206
+        ],
+        "solverViewDirection": [
+          0,
+          0.9961717990622312,
+          -0.08741708501842052
+        ],
+        "boomLength": 8.5,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": 2.0000000762939454,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          8.059462562432184
+        ]
+      },
+      {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -1.4835298641951802,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 85,
+        "actualPitchUpDeg": 84.99983301868107,
+        "viewPitchUpDeg": 84.99983301868114,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0,
+          2.4000000762939453,
+          8.4573932230741
+        ],
+        "cameraHeight": 2.4000000762939453,
+        "lookAt": [
+          0,
+          12.36194451712496,
+          7.5858067627638945
+        ],
+        "pivot": [
+          0,
+          3.25,
+          0
+        ],
+        "viewDirection": [
+          0,
+          0.9961944440831014,
+          -0.0871586460310203
+        ],
+        "solverViewDirection": [
+          0,
+          0.9961944440831013,
+          -0.08715864603102053
+        ],
+        "boomLength": 8.5,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": 2.0000000762939454,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          8.074218215744269
+        ]
+      }
+    ],
+    "upwardAndDownwardDrag": true,
+    "nearPlaneClear": true,
+    "skyMovementStable": true
+  },
+  "wideNearPlane": {
+    "aspect": 12,
+    "radius": 0.6273078094375011,
+    "clearance": 0.6673078094375011
+  },
+  "cornerVolume": {
+    "hitFrames": 109,
+    "temporalFrames": 2,
+    "contractedLength": 2.365570268630981,
+    "nextRecoveryLength": 2.9493384407450316
+  },
+  "avatarFade": {
+    "nearAndCenterTriggers": true,
+    "lowCameraStaysVisible": true,
+    "upLookComposition": true,
+    "actualMaterialOpacity": true,
+    "distinctEnterExitThresholds": true,
+    "cityMaterialsUntouched": true,
+    "animatedShadowPreserved": true
+  },
+  "snapshotAndReset": {
+    "oldPitchMigrated": true,
+    "upwardPitchRestored": true,
+    "resetDefault": true
+  }
+}

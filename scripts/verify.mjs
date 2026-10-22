@@ -118,7 +118,7 @@ if (await page.locator('.intro').count()) {
   await page.waitForTimeout(1200);
 
   console.log('→ settings + quality low');
-  await page.locator('.hud-btn').nth(1).click();
+  await page.locator('.hud-btn', { hasText: '设置' }).click();
   await page.waitForTimeout(2500);
   await snap('10-settings');
   await page.locator('.segmented button').nth(1).click();

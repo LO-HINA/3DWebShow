@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "note": "Rapier and configuration checks; no rendered image evidence",
+  "centralAndSidePassages": true,
+  "supportAndScreenCollision": true,
+  "sculptureRetained": true,
+  "rotatedTranslatedColliders": true,
+  "imageAspectPreserved": true,
+  "spec": {
+    "id": "SCREEN-01",
+    "position": [
+      0,
+      0,
+      -6.4
+    ],
+    "yawRad": 0,
+    "width": 8,
+    "height": 4.5,
+    "bottom": 2.6,
+    "frameWidth": 0.12,
+    "depth": 0.34,
+    "imageUrl": "/assets/worlds/cyberpunk/media/plaza-screen.svg"
+  }
+}

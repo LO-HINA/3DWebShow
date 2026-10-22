@@ -6,7 +6,7 @@ export const COPY = {
   introKicker: 'A TWILIGHT LEARNING BLOCK',
   introParagraph:
     '双塔、广场与三座展馆沿环路展开。走近画框打开灯箱，穿过东侧入口进入视觉与摄影馆，其余两馆保留清晰标识，下一轮开放。',
-  introHint: 'WASD / 方向键 行走 · 鼠标 视差 · E 互动',
+  introHint: 'WASD 移动 · Shift 冲刺 · 空格 跳跃 · 拖动 自由环视 · 滚轮 距离 · R 复位镜头 · E 互动',
   start: '进入街区',
   continueExploring: '继续探索',
   fallbackTitle: '无法启动三维街区',
