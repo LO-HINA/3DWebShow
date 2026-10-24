@@ -32,14 +32,15 @@ function fixture() {
   world.createCollider(RAPIER.ColliderDesc.cuboid(50, 0.5, 50).setTranslation(0, -0.5, 0));
   const rig = { group: new THREE.Group(), update: () => {}, dispose: () => {} };
   const player = new PlayerController(world, rig, [0, 0, 0], Math.PI, WORLD_BOUNDS);
-  const step = (input: { x: number; z: number; sprint?: boolean } = { x: 0, z: 0 }) => { player.update(1 / 60, input, false); world.step(); };
+  const step = (input: { x: number; z: number } = { x: 0, z: 0 }) => { player.update(1 / 60, input, false); world.step(); };
   return { world, rig, player, step, dispose: () => { player.dispose(); world.free(); } };
 }
 
 const f = fixture();
 f.step({ x: 0, z: -1 });
 assert.ok(f.player.position.z < 0);
-for (let i = 1; i < 6; i++) f.step({ x: 0, z: -1 });
+const startSteps = Math.ceil(PLAYER.speed / PLAYER.acceleration / PLAYER.physicsStep);
+for (let i = 1; i < startSteps; i++) f.step({ x: 0, z: -1 });
 close(f.player.speedRatio * PLAYER.speed, PLAYER.speed, 0.01);
 const stopStart = f.player.position.clone();
 const stopSteps = Math.ceil(PLAYER.speed / PLAYER.deceleration / PLAYER.physicsStep);
@@ -50,8 +51,8 @@ assert.equal(f.player.moving, false);
 const stopped = f.player.position.clone();
 for (let i = 0; i < 20; i++) f.step();
 close(Math.hypot(stopped.x - f.player.position.x, stopped.z - f.player.position.z), 0);
-results.response = { speed: PLAYER.speed, sprintSpeed: PLAYER.sprintSpeed,
-  fullSpeedWithinSeconds: 0.1, stoppedWithinSeconds: stopSteps / 60, stopDistanceMeters: stopDistance };
+results.response = { speed: PLAYER.speed,
+  fullSpeedWithinSeconds: startSteps / 60, stoppedWithinSeconds: stopSteps / 60, stopDistanceMeters: stopDistance };
 f.step({ x: 1, z: 0 });
 const paused = f.player.position.clone();
 f.player.stop();
@@ -68,7 +69,7 @@ for (const fps of [1, 2, 5, 10, 20, 30, 60, 144]) {
     sim.player.render(alpha);
   }
   distances[fps] = -sim.player.position.z;
-  assert.ok(distances[fps] > 11.5, `slow at ${fps}fps: ${distances[fps]}`);
+  assert.ok(distances[fps] > PLAYER.speed * 1.8, `slow at ${fps}fps: ${distances[fps]}`);
   sim.dispose();
 }
 for (const distance of Object.values(distances)) close(distance, distances[60]);
@@ -80,13 +81,18 @@ timer.reset();
 timer.advance(0, () => assert.fail('unexpected background catchup'));
 results.lowFpsTravel = { seconds: 2, distances, longStallSteps };
 
-const sprint = fixture();
-for (let i = 0; i < 60; i++) sprint.step({ x: 1, z: 0, sprint: true });
-close(sprint.player.speedRatio * PLAYER.speed, PLAYER.sprintSpeed, 0.01);
-assert.ok(sprint.player.position.x > 9);
-const sprintDistance = sprint.player.position.x;
-sprint.dispose();
-results.sprint = { speed: PLAYER.sprintSpeed, oneSecondDistance: sprintDistance };
+const walking = fixture();
+const legacyInput = { x: 1, z: 0, sprint: true }; // Old callers cannot enable a second speed.
+for (let i = 0; i < 60; i++) walking.step(legacyInput);
+close(walking.player.speedRatio * PLAYER.speed, 10, 0.01);
+assert.ok(walking.player.position.x > 9);
+const walkingDistance = walking.player.position.x;
+walking.dispose();
+const diagonalWalking = fixture();
+for (let i = 0; i < 60; i++) diagonalWalking.step({ x: 1, z: -1 });
+assert.ok(Math.hypot(diagonalWalking.player.position.x, diagonalWalking.player.position.z) <= walkingDistance + 0.01);
+diagonalWalking.dispose();
+results.singleMovementSpeed = { speed: 10, legacySprintIgnored: true, diagonalNotFaster: true, oneSecondDistance: walkingDistance };
 
 const jumping = fixture();
 for (let i = 0; i < 6; i++) jumping.step();
@@ -136,13 +142,21 @@ assert.ok(wall.player.position.z > -2.53);
 results.wallSlide = 'capsule blocked; actual speed zero; diagonal input slides along wall';
 wall.dispose();
 
+// 单独运行移动回归，避免依赖其他 agent 正在更新的镜头接口。
+if (process.argv.includes('--movement-only')) {
+  mkdirSync('docs/movement-review', { recursive: true });
+  writeFileSync('docs/movement-review/logic-checks.json', JSON.stringify(results, null, 2));
+  console.log(JSON.stringify(results, null, 2));
+  process.exit(0);
+}
+
 const camera = new FollowCamera(1440 / 900);
 const feet = new THREE.Vector3(0, 0, 6.5);
 const framing: object[] = [];
 for (const preset of ['low', 'medium', 'high'] as const) {
   camera.reset(feet);
   camera.setFraming(preset);
-  for (let i = 0; i < 120; i++) { camera.update(1 / 60, feet, { reducedMotion: false }); camera.resolveCollision(null, 1 / 60); }
+  for (let i = 0; i < 120; i++) { camera.update(1 / 60, feet, { reducedMotion: false }); camera.commit(camera.desiredPosition); }
   camera.camera.updateMatrixWorld();
   const center = feet.clone().add(new THREE.Vector3(0, 0.8, 0)).project(camera.camera);
   const screenY = (1 - center.y) / 2;
@@ -156,7 +170,7 @@ camera.orbit(120, 35); camera.zoom(-100);
 const follow = camera.snapshot();
 camera.toggleLookUp(); camera.orbit(-220, -60); camera.zoom(150);
 camera.update(1, feet, { reducedMotion: true });
-camera.resolveCollision(null, 1, true);
+camera.commit(camera.desiredPosition);
 assert.ok(camera.look.y > feet.y + 2.5);
 camera.toggleLookUp();
 const after = camera.snapshot();
@@ -172,7 +186,7 @@ for (const fps of [30, 60, 144]) {
   for (let i = 0; i < fps; i++) {
     const movingFeet = feet.clone().add(new THREE.Vector3((i + 1) * 3.2 / fps, 0, 0));
     follow.update(1 / fps, movingFeet, { reducedMotion: false });
-    follow.resolveCollision(null, 1 / fps);
+    follow.commit(follow.desiredPosition);
     close(follow.pivot.x, movingFeet.x);
     close(follow.look.x - follow.camera.position.x, follow.viewDirection.x * 10);
   }
@@ -191,10 +205,15 @@ const direction = camera.desiredPosition.clone().sub(camera.pivot).normalize();
 const hit = collision.world.castShape(camera.pivot, { x: 0, y: 0, z: 0, w: 1 }, direction,
   new RAPIER.Ball(CAMERA.collisionRadius), 0, 10, true, undefined, undefined, collision.player.colliderHandle);
 assert.ok(hit);
-camera.resolveCollision(hit.time_of_impact, 1 / 60);
+const safe = new THREE.Vector3();
+camera.resolveLength(hit.time_of_impact, 1 / 60, true);
+camera.positionAtLength(camera.resolvedLength, safe);
+camera.commit(safe);
 assert.ok(camera.camera.position.z < 4.51);
 const contracted = camera.camera.position.distanceTo(camera.pivot);
-camera.resolveCollision(null, 1 / 60);
+camera.resolveLength(null, 1 / 60);
+camera.positionAtLength(camera.resolvedLength, safe);
+camera.commit(safe);
 const recovering = camera.camera.position.distanceTo(camera.pivot);
 assert.ok(recovering > contracted && recovering < 8.5);
 results.cameraCollision = { contracted, firstRecoveryLength: recovering };

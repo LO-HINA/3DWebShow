@@ -19,7 +19,7 @@ assert.equal(walk(5), null, 'east bypass must stay open');
 assert.ok(walk(screenDimensions(plazaScreen).supportX), 'support must block player');
 assert.ok(world.castShape({ x: 0, y: 4, z: -3 }, identity, north, new RAPIER.Ball(0.28), 0, 7, true),
   'screen body must block the camera');
-assert.ok(worldColliders.some(c => c.id === 'LM-01:base'), 'existing sculpture retained');
+assert.ok(worldColliders.some(c => c.id === 'LM-01:orbital-envelope'), 'current landmark retained');
 const rotated = createPlazaScreenColliders({ ...plazaScreen, position: [10, 2, 20], yawRad: Math.PI / 2 });
 const foot = rotated.find(c => c.id.endsWith('foot-1'))!;
 assert.ok(Math.abs(foot.center[0] - 10) < 1e-6);

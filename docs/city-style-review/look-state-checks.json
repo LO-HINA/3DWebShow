@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "evidence": "renderer double, not GPU rendering",
+  "highCalls": 18,
+  "lowCalls": 1,
+  "low": {
+    "bloom": false,
+    "reflection": false,
+    "reflectionSize": [
+      1,
+      1
+    ],
+    "backend": "WebGL2"
+  },
+  "emissiveSelection": true,
+  "materialAndFogRestored": true,
+  "noReflectionTextureFeedback": true
+}

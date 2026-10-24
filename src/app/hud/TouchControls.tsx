@@ -10,16 +10,13 @@ export function TouchControls(): React.JSX.Element | null {
   const activePointer = useRef<number | null>(null);
   const [knob, setKnob] = useState({ x: 0, y: 0 });
   const [active, setActive] = useState(false);
-  const [sprinting, setSprinting] = useState(false);
 
   useEffect(() => {
     activePointer.current = null;
     setActive(false);
     setKnob({ x: 0, y: 0 });
-    setSprinting(false);
     worldBridge.setTouchMove(0, 0);
-    worldBridge.setSprint(false);
-    return () => { worldBridge.setTouchMove(0, 0); worldBridge.setSprint(false); };
+    return () => { worldBridge.setTouchMove(0, 0); };
   }, [mode, cameraMode]);
 
   if (mode !== 'exploring' || cameraMode === 'lookUp') return null;
@@ -92,30 +89,6 @@ export function TouchControls(): React.JSX.Element | null {
         </div>
       </div>
 
-      <button type="button" className={`touch__sprint ${sprinting ? 'is-active' : ''}`}
-        aria-label="按住冲刺" aria-pressed={sprinting}
-        onKeyDown={(event) => {
-          if (event.code !== 'Space' && event.code !== 'Enter') return;
-          event.preventDefault(); event.stopPropagation();
-          setSprinting(true); worldBridge.setSprint(true);
-        }}
-        onKeyUp={(event) => {
-          if (event.code !== 'Space' && event.code !== 'Enter') return;
-          event.preventDefault(); event.stopPropagation();
-          setSprinting(false); worldBridge.setSprint(false);
-        }}
-        onBlur={() => { setSprinting(false); worldBridge.setSprint(false); }}
-        onPointerDown={(event) => {
-          event.preventDefault();
-          event.currentTarget.setPointerCapture(event.pointerId);
-          setSprinting(true);
-          worldBridge.setSprint(true);
-        }}
-        onPointerUp={() => { setSprinting(false); worldBridge.setSprint(false); }}
-        onPointerCancel={() => { setSprinting(false); worldBridge.setSprint(false); }}
-        onLostPointerCapture={() => { setSprinting(false); worldBridge.setSprint(false); }}>
-        冲刺<small>按住</small>
-      </button>
       <button type="button" className="touch__jump" aria-label="跳跃"
         onClick={() => worldBridge.jump()}>跳跃<span aria-hidden="true">↑</span></button>
 

@@ -1,6 +1,6 @@
 # 近地探索镜头本轮记录
 
-> 2026-10-22 更新。以下结论以本地运行工程 `http://127.0.0.1:5173/world` 为准，未用 GitHub 版本覆盖工作区，未改建筑、地图和三个运动实现文件。
+> 2026-10-23 更新。以下结论以本地运行工程 `http://127.0.0.1:5173/world` 为准，未用 GitHub 版本覆盖工作区，未改建筑、地图和三个运动实现文件。
 
 ## 本轮定位到的真实问题
 
@@ -14,7 +14,7 @@
 - 内部快照 `pitch` 仍遵循“向下为正”的旧语义；面板统一转换为“水平向上为正”。
 - 地面限制只修正相机位置，不改变观察方向；贴地后仍可继续抬头。
 - 主臂球扫掠立即收缩，`recoveryLambda=6` 平滑恢复；碰撞不会改写用户期望角度或距离。
-- 前后帧路径补充扫掠，减少快速拖拽穿过墙角。
+- 前后帧路径补充扫掠，减少快速拖拽穿过墙角；扫掠起点随角色平移，命中只允许缩短当前镜臂。
 - 人物弱化有三个独立触发源：
   - 相机距人物身体轴进入 0.70m，退出 1.02m；
   - 相机中心射线距身体轴进入 0.34m 且屏幕估算高度超过 32%，退出 0.46m / 24%；
@@ -37,6 +37,14 @@
 
 **验收状态：静态关键状态已通过真实浏览器截图与运行时采数；连续录屏、真实 GPU 透明排序和主观拖拽手感仍为「运行效果待验收」。** 本轮没有生成连续视频，也没有用类型检查或孤立数学测试替代上述截图。
 
+## 移动贴墙跟随修复（2026-10-23）
+
+- **问题**：角色沿墙持续移动时，镜头可能停在上一个世界坐标，角色继续走并离开画面；只验证静止贴墙不穿模无法暴露。
+- **根因**：`CameraCollision.update()` 的帧间球扫掠以 `previousPosition`（上一帧相机的世界坐标）为固定起点。角色移动后，修正点会落在旧位置；当主臂起点与墙重叠、按当前镜臂重查又失败时，`commit()` 每帧把该冻结点写回相机，角色与镜头的距离随之被记成越来越长的 boom。
+- **修复**：帧间扫掠起点改为“当前角色锚点 + 上一帧相机相对偏移”，始终随角色平移；命中点只用于沿当前“角色→期望机位”镜臂缩短，不能把相机放到当前解之外；主臂起点重叠时跳过帧间扫掠，交给 0.08m 探针沿当前方向重查。离开障碍后仍由 `recoveryLambda=6` 平滑恢复，不改写用户期望角度与距离。`reviewCamera` 只由 DEV 的 `window.__lohina.review()` 显式启用。
+- **逻辑回归**：`check-exploration-camera.ts` 新增 `movingCollision`。角色距 4×4×4 合成建筑墙面 0.28m 逆时针绕行 720 帧，逐帧断言角色移动时相机必须移动，且相机不超出当前期望镜臂；离开建筑后镜臂恢复 8.5m。
+- **浏览器验收**：`scripts/camera-follow-check.mjs` 在 E-03 西墙外侧布置机位，镜臂初始被建筑压缩到 1.79m；角色沿墙向北绕过西北墙角，沿北墙向东再折返回到墙角，沿西墙向南后向西离开。72 个 100ms 采样中镜头停滞 0 帧、`reviewCamera` 启用 0 帧；镜臂最小 1.79m、最大 8.5m，最终恢复 8.5m；人物屏幕锚点 x=0.5、y=0.677–0.86。截图与完整采样见 [moving-follow/](moving-follow/)。
+
 ## 手动复现步骤
 
 1. `npm run dev`，浏览器打开 `http://127.0.0.1:5173/world`，进入世界后按 `F3`。
@@ -45,7 +53,8 @@
 4. **直墙**：贴住 E-01 北墙（东侧入口建筑背侧、z≈-0.5），把镜头臂压向墙内，看到「碰撞后距离」接近 0；水平拖拽约 90°-120°，再向外走，镜头应平滑拉远。
 5. **墙角**：贴 E-01 东北角，把镜头压向墙角后水平拖拽约 180°；镜头应离开墙角并恢复 8.5m。
 6. **低机位高楼**：站在广场东侧（约 x=-10、z=-8），把镜头距离拉到 16m、抬头约 20°，应能完整看到 T-01 塔顶和塔身。
-7. 按 `R` 或 HUD「复位镜头」，确认复位后没有残留碰撞收缩或人物透明状态。
+7. **移动贴墙**：到 E-03 西墙外侧约 2m（x≈12、z≈-5），把镜头拖到角色东侧、视线朝西，使镜臂压入建筑；按 `D` 沿西墙向北绕过西北墙角，`S` 沿北墙向东，`W` 折返向西，`A` 沿西墙向南，再按 `W` 向西离开。全程人物应保持在画面内，镜头持续跟随；绕角后「碰撞后距离」应从压缩值平滑恢复到 8.5m。可直接运行 `scripts/camera-follow-check.mjs` 复核同一路线。
+8. 按 `R` 或 HUD「复位镜头」，确认复位后没有残留碰撞收缩或人物透明状态。
 
 开发环境还可使用 `window.__lohina.teleport(x,z,yaw)` 和 `window.__lohina.look(yaw,pitch,distance)` 精确布置测试机位。注意 `teleport()` 会重置相机 yaw；贴墙测试必须在 `teleport()` 之后再调用 `look()`，否则镜头朝向会被重置。面板显示的「球半径」「命中距离」「起点重叠」用于判断是否进入零距离分支。
 
@@ -61,9 +70,13 @@ node scripts/check-dependencies.mjs
   --bundle --platform=node --format=esm --packages=external `
   --outfile=.camera-preview/check-exploration-camera.mjs
 node .camera-preview/check-exploration-camera.mjs
+
+# 先运行 npm run dev，再执行移动贴墙跟随的浏览器验收
+# 端口不同时：PowerShell 使用 $env:LOHINA_URL='http://127.0.0.1:5174/world'
+LOHINA_URL=http://127.0.0.1:5173/world node scripts/camera-follow-check.mjs
 ```
 
-`check-exploration-camera.ts` 覆盖平地/抬高地面、连续俯仰、近裁剪面、墙角主臂与帧间扫掠、离墙恢复、淡出滞回、共享材质隔离、85° 仰视构图与角色克隆材质的实际 `opacity`、快照与复位。当前结果为 `ground_0, ground_2, wideNearPlane, cornerVolume, avatarFade, snapshotAndReset` 全部通过；它仍不等于真实 GPU 上的视觉和手感验收。
+`check-exploration-camera.ts` 覆盖平地/抬高地面、连续俯仰、近裁剪面、墙角主臂与帧间扫掠、移动贴墙跟随、离墙恢复、淡出滞回、共享材质隔离、85° 仰视构图与角色克隆材质的实际 `opacity`、快照与复位。当前结果为 `ground_0, ground_2, wideNearPlane, groundApproach, cornerVolume, movingCollision, avatarFade, snapshotAndReset` 全部通过；它仍不等于真实 GPU 上的视觉和手感验收。`camera-follow-check.mjs` 输出 `cameraStalls`、`reviewEnabledFrames`、镜臂范围和人物屏幕锚点，并写入 `.camera-preview/camera-follow/report.json`。
 
 ## 已知限制
 

@@ -114,7 +114,16 @@ export class FollowCamera {
     const minimumY = this.groundHeight + this.clearance;
     const floorPitch = Math.asin(clamp((minimumY - this.pivot.y) / this.distance, -1, 1));
     const armPitch = clamp(Math.max(floorPitch, this.pitch + CAMERA.compositionTilt), -Math.PI / 2, Math.PI / 2);
-    const horizontal = Math.cos(armPitch) * this.distance;
+    let horizontal = Math.cos(armPitch) * this.distance;
+    // 触地后把剩余的仰视拖拽映射为沿地面靠近脚边；反向拖拽沿原路径退出。
+    // 不修改用户缩放距离，避免退回正常轨道时丢失原来的取景。
+    const groundPitch = floorPitch - CAMERA.compositionTilt;
+    if (this.pitch < groundPitch) {
+      const progress = clamp((groundPitch - this.pitch) / (groundPitch - CAMERA.minPitch), 0, 1);
+      const eased = progress * progress * (3 - 2 * progress);
+      horizontal = THREE.MathUtils.lerp(horizontal,
+        Math.min(horizontal, CAMERA.groundApproachDistance), eased);
+    }
     this.desiredPosition.set(this.pivot.x + Math.sin(this.yaw) * horizontal,
       Math.max(minimumY, this.pivot.y + Math.sin(armPitch) * this.distance),
       this.pivot.z + Math.cos(this.yaw) * horizontal);

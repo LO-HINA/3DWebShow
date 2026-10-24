@@ -28,7 +28,9 @@ const spec = {
 
 ## 验证证据与限制
 
-- `npm run typecheck`、`node scripts/check-dependencies.mjs` 通过。
+- 2026-10-23 补充：在可运行环境重新执行 `npm run typecheck` 与 `npm run build` 均通过；下方“`spawn EPERM` 未完成 Vite 生产构建”只记录当时的受限会话。浏览器运行画面仍未采集。
+- 12m / 14m 建筑体量画幕的尺寸与摆放比较见 [proposal/README.md](proposal/README.md)；提案未接入本正式大屏。
+- `node scripts/check-dependencies.mjs` 通过。
 - 原生 esbuild 浏览器入口打包通过。运行中的 5173 服务返回的大屏模块、布局与宿主源码均与本地一致，图片地址返回 HTTP 200。标准 `npm run build` 在启动 esbuild 子进程时遇到 `spawn EPERM`，未完成 Vite 生产构建。
 - `scripts/check-plaza-screen.ts` 使用当前整张地图的真实 Rapier 碰撞查询：中央屏下与左右绕行路线通过，支撑阻挡角色、屏体阻挡相机；另检查了旋转/平移后的碰撞坐标与三种图片宽高比。结果为 `logic-checks.json`，不代表已取得运行画面。
 - 已执行 `python scripts/capture-plaza-screen.py`，Playwright 驱动启动阶段出现 `PermissionError: [WinError 5]`，尚未进入浏览器。失败见 `browser-checks.json`。未生成或伪造运行截图。

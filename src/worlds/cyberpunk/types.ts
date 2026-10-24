@@ -1,6 +1,6 @@
 import type { Accent, Vec3 } from '../../engine/contracts/types';
 
-export type BuildingVariant = 'towerA' | 'towerB' | 'gallery' | 'learning' | 'terminal';
+export type BuildingVariant = 'towerA' | 'towerB' | 'gallery' | 'learning' | 'terminal' | 'hero' | 'heroMedia';
 
 export interface BuildingSpec {
   id: string;

@@ -11,23 +11,34 @@ import {
   createSignTexture,
   createVerticalSignTexture,
 } from '../textures';
+import { createHeroBuilding } from './heroBuilding';
+import { createHeroMediaBuilding } from './heroMedia';
+import { applyCityStyle } from './cityStyle';
 
 export interface BuiltBuilding {
   spec: BuildingSpec;
   group: THREE.Group;
   posterSlots: Map<string, THREE.Mesh>;
+  /** 大型媒体立面独立登记，避免再次塞进海报槽。 */
+  mediaSlots?: Map<string, THREE.Mesh>;
   occluders: THREE.Mesh[];
-  fadeMaterials: THREE.MeshStandardMaterial[];
+  fadeMaterials: THREE.Material[];
   fadeMeshes: THREE.Mesh[];
 }
 
-interface BuildContext {
+export interface BuildContext {
   materials: WorldMaterials;
   anisotropy: number;
   geometryCache: Map<string, THREE.BufferGeometry>;
 }
 
 const LIGHT_SLOT = { thin: 0.035 } as const;
+
+/** 确定性 0–1 随机数：窗光状态必须跨刷新稳定。 */
+function seeded01(a: number, b: number, c = 0): number {
+  const value = Math.sin(a * 127.1 + b * 311.7 + c * 74.7) * 43758.5453;
+  return value - Math.floor(value);
+}
 
 function boxGeometry(ctx: BuildContext, width: number, height: number, depth: number): THREE.BufferGeometry {
   const key = `box:${width.toFixed(3)}:${height.toFixed(3)}:${depth.toFixed(3)}`;
@@ -165,6 +176,7 @@ function addPoster(
   depth: number,
   frameMaterial: THREE.Material,
   glowMaterial: THREE.Material,
+  surfaceZ?: number,
 ): THREE.Mesh {
   const artwork = getArtwork(artworkId);
   const texture = new THREE.CanvasTexture(artwork.canvas);
@@ -174,17 +186,18 @@ function addPoster(
   texture.wrapT = THREE.ClampToEdgeWrapping;
   texture.needsUpdate = true;
 
+  const baseZ = surfaceZ ?? depth / 2 + 0.02;
   const frame = new THREE.Mesh(
     boxGeometry(ctx, 3.62, 6.08, 0.1),
     frameMaterial,
   );
-  frame.position.set(localX, localY, depth / 2 + 0.02);
+  frame.position.set(localX, localY, baseZ);
   frame.name = `${slot}_Frame`;
   parent.add(frame);
 
   const imageMaterial = createPosterMaterial(texture);
   const image = new THREE.Mesh(new THREE.PlaneGeometry(3.15, 5.6), imageMaterial);
-  image.position.set(localX, localY, depth / 2 + 0.09);
+  image.position.set(localX, localY, baseZ + 0.07);
   image.name = slot;
   image.userData.slotName = slot;
   parent.add(image);
@@ -194,7 +207,7 @@ function addPoster(
     boxGeometry(ctx, 3.1, 0.045, 0.06),
     glowMaterial,
   );
-  bar.position.set(localX, localY + 2.93, depth / 2 + 0.07);
+  bar.position.set(localX, localY + 2.93, baseZ + 0.05);
   parent.add(bar);
 
   return image;
@@ -321,107 +334,450 @@ function towerB(ctx: BuildContext, spec: BuildingSpec): BuiltBuilding {
   const group = new THREE.Group();
   group.name = spec.id;
   const [width, , depth] = spec.size;
-  const shell = createShellMaterialPair(ctx);
   const posterSlots = new Map<string, THREE.Mesh>();
   const occluders: THREE.Mesh[] = [];
   const fadeMeshes: THREE.Mesh[] = [];
 
-  addRounded(ctx, group, ctx.materials.concreteDark, width + 0.34, 0.48, depth + 0.3, 0, 0.24, 0, 0.06, 1, {
-    receiveShadow: true,
+  // 媒体塔语言：深玻璃壳体 + 近黑金属网格 + 暖/青室内灯。
+  // 不依赖 Bloom 或反射，亮度全部由 emissive 与天空环境贴图承担。
+  const glassShell = ctx.materials.metal.clone();
+  glassShell.name = `${spec.id}_GlassShell`;
+  glassShell.color.setHex(0x0a1420);
+  glassShell.roughness = 0.2;
+  glassShell.metalness = 0.84;
+  glassShell.envMapIntensity = 1.45;
+
+  const frame = ctx.materials.metal.clone();
+  frame.name = `${spec.id}_Frame`;
+  frame.color.setHex(0x232c3a);
+  frame.roughness = 0.42;
+  frame.metalness = 0.72;
+  frame.envMapIntensity = 1.05;
+  // 自发光只用于在无 Bloom 的夜景里保住幕墙网格的可读性。
+  frame.emissive.setHex(0x16202e);
+  frame.emissiveIntensity = 0.55;
+
+  const panel = ctx.materials.metalSoft.clone();
+  panel.name = `${spec.id}_Panel`;
+  panel.color.setHex(0x2b303c);
+  panel.roughness = 0.6;
+  panel.metalness = 0.42;
+  panel.envMapIntensity = 0.9;
+  panel.emissive.setHex(0x0c1018);
+  panel.emissiveIntensity = 0.5;
+
+  const podium = ctx.materials.concreteDark.clone();
+  podium.name = `${spec.id}_Podium`;
+  podium.color.setHex(0x232833);
+  podium.roughness = 0.72;
+  podium.metalness = 0.2;
+  podium.envMapIntensity = 0.75;
+  podium.emissive.setHex(0x080b12);
+  podium.emissiveIntensity = 0.4;
+
+  const reveal = ctx.materials.frameBack.clone();
+  reveal.name = `${spec.id}_Reveal`;
+  reveal.color.setHex(0x0f151f);
+  reveal.roughness = 0.85;
+  reveal.metalness = 0.1;
+  reveal.emissive.setHex(0x05080d);
+  reveal.emissiveIntensity = 0.5;
+
+  const darkPane = glassShell.clone();
+  darkPane.name = `${spec.id}_WindowDark`;
+  darkPane.color.setHex(0x142436);
+  darkPane.roughness = 0.16;
+  darkPane.metalness = 0.8;
+  darkPane.envMapIntensity = 1.9;
+
+  const warmWindow = ctx.materials.warmWindow.clone();
+  warmWindow.name = `${spec.id}_WindowWarm`;
+  warmWindow.emissiveIntensity = 1.35;
+
+  const cyanWindow = ctx.materials.warmWindow.clone();
+  cyanWindow.name = `${spec.id}_WindowCyan`;
+  cyanWindow.color.setHex(0x04141a);
+  cyanWindow.emissive.setHex(0x6fe6ff);
+  cyanWindow.emissiveIntensity = 1.2;
+
+  const doorGlass = ctx.materials.glass.clone();
+  doorGlass.name = `${spec.id}_DoorGlass`;
+  doorGlass.color.setHex(0x5f8498);
+  doorGlass.transparent = true;
+  doorGlass.opacity = 0.22;
+  doorGlass.depthWrite = false;
+  doorGlass.roughness = 0.08;
+  doorGlass.metalness = 0.15;
+  doorGlass.envMapIntensity = 1.2;
+
+  const lobbyGlow = warmWindow.clone();
+  lobbyGlow.name = `${spec.id}_LobbyGlow`;
+  lobbyGlow.color.setHex(0x041014);
+  lobbyGlow.emissive.setHex(0xbfe8ff);
+  lobbyGlow.emissiveIntensity = 0.85;
+
+  const bayWash = cyanWindow.clone();
+  bayWash.name = `${spec.id}_BayWash`;
+  bayWash.color.setHex(0x02080c);
+  bayWash.emissiveIntensity = 0.26;
+
+  const beacon = new THREE.MeshStandardMaterial({
+    color: 0x2a0505,
+    emissive: 0xff2a18,
+    emissiveIntensity: 3,
+    roughness: 0.4,
+    metalness: 0.1,
   });
+  beacon.name = `${spec.id}_Beacon`;
 
-  const bodyHeight = 17.2;
-  const body = addRounded(
-    ctx,
-    group,
-    shell.warm,
-    width - 0.5,
-    bodyHeight,
-    depth - 0.2,
-    0,
-    0.48 + bodyHeight / 2,
-    0,
-    0.12,
-    2,
-    { castShadow: true, receiveShadow: true, name: `${spec.id}_Occluder_Shell` },
-  );
-  occluders.push(body);
-  fadeMeshes.push(body);
+  const podiumBase = 0.45;
+  const podiumH = 5.4;
+  const podiumTop = podiumBase + podiumH;
+  const podiumW = width - 0.2;
+  const podiumD = depth - 0.2;
 
-  const upperHeight = 6.4;
-  const upper = addRounded(
-    ctx,
-    group,
-    shell.light,
-    width - 2.0,
-    upperHeight,
-    depth - 1.2,
-    0.7,
-    17.68 + upperHeight / 2,
-    -0.35,
-    0.1,
-    2,
-    { castShadow: true, receiveShadow: true },
-  );
-  occluders.push(upper);
-  fadeMeshes.push(upper);
-
-  addBox(ctx, group, shell.dark, width - 1.4, 0.26, depth - 0.75, 0.7, 24.18, -0.35, {
+  // 基座与裙房：深色石材，保留一点暖色街区的材质记忆。
+  addRounded(ctx, group, podium, width + 0.5, podiumBase, depth + 0.5, 0, podiumBase / 2, 0, 0.05, 1, {
+    receiveShadow: true,
+    name: `${spec.id}_Plinth`,
+  });
+  const podiumBox = addRounded(ctx, group, podium, podiumW, podiumH, podiumD, 0, podiumBase + podiumH / 2, 0, 0.1, 2, {
     castShadow: true,
     receiveShadow: true,
+    name: `${spec.id}_Podium_Shell`,
   });
-  addRounded(ctx, group, shell.dark, 4.4, 1.1, 3.1, -0.3, 24.85, -0.7, 0.06, 1, {
-    castShadow: true,
-  });
+  occluders.push(podiumBox);
+  fadeMeshes.push(podiumBox);
 
-  for (const finX of [-4.7, 0, 4.7]) {
-    addBox(ctx, group, shell.dark, 0.22, 16.6, 0.3, finX, 8.9, depth / 2 + 0.02, {
+  // 入口：深门洞、暖门厅、透明玻璃、青色灯线与雨棚。
+  const doorZ = podiumD / 2;
+  addBox(ctx, group, reveal, 5.4, 3.9, 0.2, 0, 2.45, doorZ + 0.03);
+  addBox(ctx, group, lobbyGlow, 4.2, 2.7, 0.04, 0, 2.2, doorZ + 0.16);
+  addBox(ctx, group, doorGlass, 4.6, 3.15, 0.04, 0, 2.2, doorZ + 0.22);
+  addBox(ctx, group, frame, 0.07, 3.15, 0.07, 0, 2.2, doorZ + 0.26);
+  for (const dx of [-2.26, -1.08, 1.08, 2.26]) {
+    addBox(ctx, group, frame, 0.07, 3.15, 0.07, dx, 2.2, doorZ + 0.26);
+  }
+  addBox(ctx, group, frame, 4.66, 0.07, 0.07, 0, 2.62, doorZ + 0.26);
+  addBox(ctx, group, frame, 4.66, 0.08, 0.08, 0, 3.78, doorZ + 0.26);
+  addBox(ctx, group, frame, 4.66, 0.08, 0.08, 0, 0.63, doorZ + 0.26);
+  addBox(ctx, group, ctx.materials.emissiveCyanSoft, 4.72, 0.035, 0.05, 0, 3.76, doorZ + 0.3);
+  for (const dx of [-2.36, 2.36]) {
+    addBox(ctx, group, ctx.materials.emissiveCyanSoft, 0.035, 3.1, 0.05, dx, 2.2, doorZ + 0.3);
+  }
+  addBox(ctx, group, frame, 6.4, 0.18, 1.5, 0, 4.35, doorZ + 0.75, { castShadow: true });
+  addBox(ctx, group, ctx.materials.emissiveCyanSoft, 5.9, 0.03, 0.06, 0, 4.24, doorZ + 1.32);
+
+  // 裙房侧墙分缝与顶部灯圈。
+  for (const side of [-1, 1]) {
+    for (const seamZ of [-2.4, 0, 2.4]) {
+      addBox(ctx, group, frame, 0.03, 4.6, 0.14, side * (podiumW / 2 + 0.015), 2.95, seamZ);
+    }
+  }
+  addBox(ctx, group, ctx.materials.emissiveCyanSoft, podiumW - 0.4, 0.035, 0.05, 0, podiumTop + 0.04, doorZ + 0.02);
+  addBox(ctx, group, ctx.materials.emissiveGoldSoft, 0.05, 0.035, podiumD - 0.4, podiumW / 2 + 0.02, podiumTop + 0.04, 0);
+
+  // 裙房背面服务门与百叶。
+  addBox(ctx, group, frame, 1.6, 2.5, 0.08, 0, 1.7, -podiumD / 2 - 0.04);
+  for (let i = 0; i < 4; i += 1) {
+    addBox(ctx, group, ctx.materials.metalSoft, 1.35, 0.04, 0.04, 0, 3.4 + i * 0.16, -podiumD / 2 - 0.1);
+  }
+
+  // 塔身：整块玻璃壳体由竖向幕墙框和 3.9m 楼层压带切开。
+  const shaftBase = podiumTop;
+  const shaftTop = 24.3;
+  const shaftH = shaftTop - shaftBase;
+  const shaftW = width - 0.4;
+  const shaftD = depth - 0.4;
+  const shaft = addRounded(ctx, group, glassShell, shaftW, shaftH, shaftD, 0, shaftBase + shaftH / 2, 0, 0.08, 2, {
+    castShadow: true,
+    receiveShadow: true,
+    name: `${spec.id}_Occluder_Shell`,
+  });
+  occluders.push(shaft);
+  fadeMeshes.push(shaft);
+
+  const bandYs = [9.6, 13.5, 17.4, 21.3];
+  for (const y of bandYs) {
+    addBox(ctx, group, panel, shaftW + 0.1, 0.55, shaftD + 0.1, 0, y, 0, {
       castShadow: true,
+      receiveShadow: true,
     });
+    // 压带下沿的细 LED 线：没有 Bloom 时也把楼层节奏读出来。
+    addBox(ctx, group, ctx.materials.emissiveCyanSoft, shaftW - 0.5, 0.035, 0.04, 0, y - 0.31, shaftD / 2 + 0.09);
+    addBox(ctx, group, ctx.materials.emissiveGoldSoft, shaftW - 0.5, 0.035, 0.04, 0, y - 0.31, -shaftD / 2 - 0.09);
+    addBox(ctx, group, ctx.materials.emissiveCyanSoft, 0.04, 0.035, shaftD - 0.5, shaftW / 2 + 0.09, y - 0.31, 0);
+    addBox(ctx, group, ctx.materials.emissiveGoldSoft, 0.04, 0.035, shaftD - 0.5, -shaftW / 2 - 0.09, y - 0.31, 0);
   }
-  for (const bandY of [10.0, 18.1]) {
-    addBox(ctx, group, shell.dark, width - 0.24, 0.1, depth, 0, bandY, 0);
+  for (const x of [-5.3, -3.18, -1.06, 1.06, 3.18, 5.3]) {
+    addBox(ctx, group, frame, 0.14, shaftH, 0.16, x, shaftBase + shaftH / 2, shaftD / 2 + 0.02);
+    addBox(ctx, group, frame, 0.14, shaftH, 0.16, x, shaftBase + shaftH / 2, -shaftD / 2 - 0.02);
+  }
+  for (const z of [-3.8, -1.267, 1.267, 3.8]) {
+    addBox(ctx, group, frame, 0.16, shaftH, 0.14, shaftW / 2 + 0.02, shaftBase + shaftH / 2, z);
+    addBox(ctx, group, frame, 0.16, shaftH, 0.14, -shaftW / 2 - 0.02, shaftBase + shaftH / 2, z);
   }
 
-  addBox(ctx, group, ctx.materials.frameBack, 3.3, 2.9, 0.18, 0, 1.7, depth / 2 + 0.01);
-  addBox(ctx, group, ctx.materials.glass, 2.2, 2.5, 0.08, 0, 1.48, depth / 2 + 0.12);
-  addBox(ctx, group, ctx.materials.emissiveCyanSoft, 2.4, 0.05, 0.06, 0, 2.8, depth / 2 + 0.16);
-  addBox(ctx, group, ctx.materials.emissiveCyanSoft, 0.05, 2.5, 0.06, -1.15, 1.55, depth / 2 + 0.16);
-  addBox(ctx, group, ctx.materials.emissiveCyanSoft, 0.05, 2.5, 0.06, 1.15, 1.55, depth / 2 + 0.16);
-  addBox(ctx, group, shell.dark, 4.0, 0.16, 1.05, 0, 3.25, depth / 2 + 0.45, { castShadow: true });
-  addBox(ctx, group, ctx.materials.metal, 0.09, 2.7, 0.09, -1.72, 1.5, depth / 2 + 0.88);
-  addBox(ctx, group, ctx.materials.metal, 0.09, 2.7, 0.09, 1.72, 1.5, depth / 2 + 0.88);
+  // 逐窗明暗：按楼层成片偏亮，避免整面墙均匀发光。
+  const floors = [
+    { center: 7.55, height: 3.15 },
+    { center: 11.55, height: 3.15 },
+    { center: 15.45, height: 3.15 },
+    { center: 19.35, height: 3.15 },
+    { center: 22.85, height: 2.5 },
+  ];
+  const faces = [
+    { key: 0, centers: [-4.24, -2.12, 0, 2.12, 4.24], width: 1.55 },
+    { key: 1, centers: [-4.24, -2.12, 0, 2.12, 4.24], width: 1.55 },
+    { key: 2, centers: [-2.533, 0, 2.533], width: 1.9 },
+    { key: 3, centers: [-2.533, 0, 2.533], width: 1.9 },
+  ] as const;
+  for (const face of faces) {
+    for (let floorIndex = 0; floorIndex < floors.length; floorIndex += 1) {
+      // 正面中段留给海报媒体舱，不再重复开窗。
+      if (face.key === 0 && floorIndex >= 1 && floorIndex <= 3) continue;
+      const floor = floors[floorIndex];
+      const windowH = Math.min(2.3, floor.height - 0.7);
+      const floorBias = seeded01(floorIndex, 11) < 0.45 ? 0.18 : 0;
+      for (let bayIndex = 0; bayIndex < face.centers.length; bayIndex += 1) {
+        const lit = seeded01(bayIndex + face.key * 17, floorIndex + 3) < 0.3 + floorBias;
+        const cyan = seeded01(bayIndex + 7, floorIndex + face.key * 5) < 0.36;
+        const center = face.centers[bayIndex];
+        if (face.key === 0 || face.key === 1) {
+          const sign = face.key === 0 ? 1 : -1;
+          const zReveal = sign * (shaftD / 2 + 0.012);
+          const zPane = sign * (shaftD / 2 + 0.026);
+          const zLit = sign * (shaftD / 2 + 0.042);
+          addBox(ctx, group, reveal, face.width + 0.18, windowH + 0.18, 0.012, center, floor.center, zReveal);
+          addBox(ctx, group, darkPane, face.width, windowH, 0.02, center, floor.center, zPane);
+          if (lit) {
+            addBox(
+              ctx,
+              group,
+              cyan ? cyanWindow : warmWindow,
+              face.width - 0.12,
+              windowH - 0.12,
+              0.02,
+              center,
+              floor.center,
+              zLit,
+            );
+            // 亮窗内的竖向中梃：把整块光板切成两扇窗，避免像贴片。
+            addBox(
+              ctx,
+              group,
+              frame,
+              0.05,
+              windowH - 0.12,
+              0.02,
+              center,
+              floor.center,
+              zLit + sign * 0.012,
+            );
+          }
+        } else {
+          const sign = face.key === 2 ? 1 : -1;
+          const xReveal = sign * (shaftW / 2 + 0.012);
+          const xPane = sign * (shaftW / 2 + 0.026);
+          const xLit = sign * (shaftW / 2 + 0.042);
+          addBox(ctx, group, reveal, 0.012, windowH + 0.18, face.width + 0.18, xReveal, floor.center, center);
+          addBox(ctx, group, darkPane, 0.02, windowH, face.width, xPane, floor.center, center);
+          if (lit) {
+            addBox(
+              ctx,
+              group,
+              cyan ? cyanWindow : warmWindow,
+              0.02,
+              windowH - 0.12,
+              face.width - 0.12,
+              xLit,
+              floor.center,
+              center,
+            );
+            addBox(
+              ctx,
+              group,
+              frame,
+              0.02,
+              windowH - 0.12,
+              0.05,
+              xLit + sign * 0.012,
+              floor.center,
+              center,
+            );
+          }
+        }
+      }
+    }
+  }
 
-  const label = createSignTexture(spec.sign, spec.subSign, {
-    color: '#edf5ff',
-    subColor: 'rgba(0,240,255,0.68)',
-    width: 1024,
-    height: 256,
+  // 塔身四角 LED 轮廓：正面青、背面金，给暗色体块建立可读边线。
+  const stripH = shaftH - 0.4;
+  const stripY = (shaftBase + shaftTop) / 2;
+  for (const x of [-1, 1]) {
+    addBox(
+      ctx,
+      group,
+      ctx.materials.emissiveCyan,
+      0.06,
+      stripH,
+      0.06,
+      x * (shaftW / 2 + 0.1),
+      stripY,
+      shaftD / 2 + 0.11,
+    );
+    addBox(
+      ctx,
+      group,
+      ctx.materials.emissiveGoldSoft,
+      0.06,
+      stripH,
+      0.06,
+      x * (shaftW / 2 + 0.1),
+      stripY,
+      -(shaftD / 2 + 0.11),
+    );
+  }
+
+  // 正面海报媒体舱：双幅海报嵌在 0.6m 深的金属框内。
+  const bayW = 9.4;
+  const bayH = 7.4;
+  const bayD = 0.62;
+  const bayY = 15;
+  const bayFrame = 0.35;
+  const bayCenterZ = shaftD / 2 + bayD / 2 - 0.02;
+  const bayFront = bayCenterZ + bayD / 2;
+  addBox(ctx, group, frame, bayW, bayFrame, bayD, 0, bayY + bayH / 2 - bayFrame / 2, bayCenterZ, {
+    castShadow: true,
   });
-  addSign(group, label, 4.3, 1.06, 0, 3.9, depth / 2 + 0.07);
-
-  const vertical = createVerticalSignTexture(spec.sign);
-  addSign(group, vertical, 1.45, 5.8, -width / 2 - 0.04, 13.2, 0.6, -Math.PI / 2);
-
-  // 低频灯槽，沿立面只出现两段。
-  addBox(ctx, group, ctx.materials.emissiveCyanSoft, 0.05, 4.1, 0.06, -width / 2 + 0.4, 6.4, depth / 2 + 0.03);
-  addBox(ctx, group, ctx.materials.emissiveGoldSoft, 0.05, 2.4, 0.06, width / 2 - 0.35, 5.2, depth / 2 + 0.03);
+  addBox(ctx, group, frame, bayW, bayFrame, bayD, 0, bayY - bayH / 2 + bayFrame / 2, bayCenterZ, {
+    castShadow: true,
+  });
+  for (const side of [-1, 1]) {
+    addBox(
+      ctx,
+      group,
+      frame,
+      bayFrame,
+      bayH - bayFrame * 2,
+      bayD,
+      side * (bayW / 2 - bayFrame / 2),
+      bayY,
+      bayCenterZ,
+      { castShadow: true },
+    );
+  }
+  addBox(ctx, group, reveal, bayW - bayFrame * 2, bayH - bayFrame * 2, 0.08, 0, bayY, shaftD / 2 + 0.04);
+  // 舱内极暗的冷色洗墙，让海报不再悬在纯黑洞里。
+  addBox(ctx, group, bayWash, bayW - 1.0, bayH - 1.3, 0.02, 0, bayY, shaftD / 2 + 0.1);
+  addBox(ctx, group, frame, 0.14, bayH - bayFrame * 2 - 0.3, 0.14, 0, bayY, shaftD / 2 + 0.22);
+  addBox(ctx, group, ctx.materials.emissiveCyanSoft, bayW - 0.7, 0.05, 0.04, 0, bayY + bayH / 2 - 0.14, bayFront + 0.01);
+  addBox(ctx, group, ctx.materials.emissiveCyanSoft, bayW - 0.7, 0.05, 0.04, 0, bayY - bayH / 2 + 0.14, bayFront + 0.01);
+  // 舱口两侧的竖向灯槽，勾出媒体舱的边界。
+  for (const side of [-1, 1]) {
+    addBox(
+      ctx,
+      group,
+      ctx.materials.emissiveCyanSoft,
+      0.05,
+      bayH - 0.8,
+      0.05,
+      side * (bayW / 2 - bayFrame - 0.05),
+      bayY,
+      bayFront + 0.01,
+    );
+  }
 
   for (const poster of spec.posters ?? []) {
     posterSlots.set(
       poster.slot,
-      addPoster(ctx, group, poster.artworkId, poster.slot, poster.localX, poster.localY, depth, ctx.materials.frame, ctx.materials.emissiveCyanSoft),
+      addPoster(
+        ctx,
+        group,
+        poster.artworkId,
+        poster.slot,
+        poster.localX,
+        poster.localY,
+        depth,
+        frame,
+        ctx.materials.emissiveCyanSoft,
+        shaftD / 2 + 0.22,
+      ),
     );
   }
 
-  addBox(ctx, group, ctx.materials.metal, 0.06, 2.0, 0.06, 0.4, 26.3, -0.7);
-  addBox(ctx, group, ctx.materials.emissiveCyan, 0.1, 0.1, 0.1, 0.4, 27.32, -0.7);
+  // 裙房上沿的横向字标；高层品牌由西侧竖招承担。
+  const label = createSignTexture(spec.sign, spec.subSign, {
+    color: '#eaf9ff',
+    subColor: 'rgba(0,240,255,0.72)',
+    width: 1024,
+    height: 256,
+  });
+  addBox(ctx, group, frame, 6.6, 1.5, 0.12, 0, 4.95, doorZ + 0.07, { castShadow: true });
+  addSign(group, label, 6.2, 1.35, 0, 4.95, doorZ + 0.14);
+
+  const vertical = createVerticalSignTexture(spec.sign, {
+    accent: '#00f0ff',
+    color: '#e9f8ff',
+    panel: 'rgba(5,12,18,0.55)',
+    border: 'rgba(0,240,255,0.4)',
+  });
+  addBox(ctx, group, frame, 0.12, 6.8, 1.9, -shaftW / 2 - 0.12, 14, 0.6, { castShadow: true });
+  addSign(group, vertical, 1.45, 5.8, -shaftW / 2 - 0.19, 14, 0.6, -Math.PI / 2);
+  addBox(ctx, group, ctx.materials.emissiveCyanSoft, 0.04, 6.0, 0.03, -shaftW / 2 - 0.12, 14, 1.58);
+
+  // 冠顶：开放框架 + 金色 LED 环梁，剪影与 T-03 同族但更紧凑。
+  const crownBase = shaftTop;
+  addBox(ctx, group, panel, shaftW + 0.2, 0.5, shaftD + 0.2, 0, crownBase + 0.05, 0, { castShadow: true });
+  addRounded(ctx, group, panel, 7.8, 2.2, 5.6, 0, crownBase + 1.35, 0, 0.06, 1, { castShadow: true });
+  for (const x of [-4.9, 4.9]) {
+    for (const z of [-3.4, 3.4]) {
+      addBox(ctx, group, frame, 0.42, 3.4, 0.42, x, crownBase + 2.9, z, { castShadow: true });
+    }
+  }
+  addBox(ctx, group, ctx.materials.emissiveGold, 10.2, 0.24, 0.28, 0, crownBase + 4.2, 3.4);
+  addBox(ctx, group, ctx.materials.emissiveGold, 10.2, 0.24, 0.28, 0, crownBase + 4.2, -3.4);
+  addBox(ctx, group, ctx.materials.emissiveGold, 0.28, 0.24, 6.8, 4.9, crownBase + 4.2, 0);
+  addBox(ctx, group, ctx.materials.emissiveGold, 0.28, 0.24, 6.8, -4.9, crownBase + 4.2, 0);
+  addBox(ctx, group, frame, 0.16, 3.2, 0.16, 0, crownBase + 3.9, 0, { castShadow: true });
+
+  // 屋面设备压在冠顶四角，避免中心体块被穿透。
+  addBox(ctx, group, panel, 1.2, 0.7, 1.0, -4.5, crownBase + 0.65, -3.0, { castShadow: true });
+  addBox(ctx, group, panel, 1.2, 0.7, 1.0, 4.5, crownBase + 0.65, 3.0, { castShadow: true });
+
+  const beaconGeometry = new THREE.SphereGeometry(0.2, 8, 6);
+  const beaconPositions: Array<[number, number, number]> = [
+    [0, crownBase + 5.25, 0],
+    [-4.9, crownBase + 4.75, -3.4],
+    [4.9, crownBase + 4.75, 3.4],
+  ];
+  for (const position of beaconPositions) {
+    addMesh(group, beaconGeometry, beacon, position);
+  }
 
   addContactShadow(ctx, group, width + 2.8, depth + 2.8, 0.48);
 
   group.position.set(spec.position[0], spec.position[1], spec.position[2]);
   group.rotation.y = spec.yawRad;
-  return { spec, group, posterSlots, occluders, fadeMaterials: shell.fade, fadeMeshes };
+  return {
+    spec,
+    group,
+    posterSlots,
+    occluders,
+    fadeMaterials: [
+      glassShell,
+      frame,
+      panel,
+      podium,
+      reveal,
+      darkPane,
+      warmWindow,
+      cyanWindow,
+      bayWash,
+      lobbyGlow,
+    ],
+    fadeMeshes,
+  };
 }
 
 function gallery(ctx: BuildContext, spec: BuildingSpec): BuiltBuilding {
@@ -956,20 +1312,27 @@ export function createBuildings(
   };
 
   const buildings = specs.map((spec) => {
-    switch (spec.variant) {
-      case 'towerA':
-        return towerA(ctx, spec);
-      case 'towerB':
-        return towerB(ctx, spec);
-      case 'gallery':
-        return gallery(ctx, spec);
-      case 'learning':
-        return learning(ctx, spec);
-      case 'terminal':
-        return terminal(ctx, spec);
-      default:
-        return towerA(ctx, spec);
-    }
+    const buildLegacy = (): BuiltBuilding => {
+      switch (spec.variant) {
+        case 'towerA':
+          return towerA(ctx, spec);
+        case 'towerB':
+          return towerB(ctx, spec);
+        case 'gallery':
+          return gallery(ctx, spec);
+        case 'learning':
+          return learning(ctx, spec);
+        case 'terminal':
+          return terminal(ctx, spec);
+        case 'hero':
+          return createHeroBuilding(ctx, spec);
+        case 'heroMedia':
+          return createHeroMediaBuilding(ctx, spec);
+        default:
+          return towerA(ctx, spec);
+      }
+    };
+    return applyCityStyle(buildLegacy(), ctx);
   });
 
   return { buildings, geometryCache: ctx.geometryCache };

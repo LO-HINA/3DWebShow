@@ -205,12 +205,26 @@ export function createSignTexture(
   return texture;
 }
 
-export function createVerticalSignTexture(primary: string): THREE.CanvasTexture {
+export interface VerticalSignOptions {
+  /** 首字强调色；默认暖金。 */
+  accent?: string;
+  /** 其余字符颜色；默认暖白。 */
+  color?: string;
+  /** 底板颜色；默认半透明深色。 */
+  panel?: string;
+  /** 边框颜色；默认半透明暖金。 */
+  border?: string;
+}
+
+export function createVerticalSignTexture(
+  primary: string,
+  options: VerticalSignOptions = {},
+): THREE.CanvasTexture {
   const [canvas, ctx] = canvas2d(256, 1024);
   ctx.clearRect(0, 0, 256, 1024);
-  ctx.fillStyle = 'rgba(9,12,20,0.35)';
+  ctx.fillStyle = options.panel ?? 'rgba(9,12,20,0.35)';
   ctx.fillRect(22, 22, 212, 980);
-  ctx.strokeStyle = 'rgba(255,179,102,0.35)';
+  ctx.strokeStyle = options.border ?? 'rgba(255,179,102,0.35)';
   ctx.lineWidth = 2;
   ctx.strokeRect(22, 22, 212, 980);
   ctx.textAlign = 'center';
@@ -220,7 +234,7 @@ export function createVerticalSignTexture(primary: string): THREE.CanvasTexture 
   const step = Math.min(128, 860 / Math.max(characters.length, 1));
   const start = 512 - ((characters.length - 1) * step) / 2;
   characters.forEach((character, index) => {
-    ctx.fillStyle = index === 0 ? '#ffb366' : '#f0dfca';
+    ctx.fillStyle = index === 0 ? options.accent ?? '#ffb366' : options.color ?? '#f0dfca';
     ctx.fillText(character, 128, start + index * step);
   });
   const texture = new THREE.CanvasTexture(canvas);

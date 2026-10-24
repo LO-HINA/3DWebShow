@@ -1,0 +1,9 @@
+{
+  "images": [
+    "images/images1.jpg",
+    "images/w700d1q75cms.jpg"
+  ],
+  "videos": [],
+  "imageDuration": 8,
+  "videoFit": "cover"
+}

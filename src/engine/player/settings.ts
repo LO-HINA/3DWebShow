@@ -1,6 +1,5 @@
 export const PLAYER = {
-  speed: 6,
-  sprintSpeed: 10,
+  speed: 10,
   acceleration: 60,
   deceleration: 80,
   gravity: 24,

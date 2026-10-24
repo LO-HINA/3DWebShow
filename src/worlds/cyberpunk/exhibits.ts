@@ -1,6 +1,7 @@
 import { getArtwork } from '../../content/artworks';
 import type { ExhibitSpec, FrameExhibitSpec, ImageSpec, PortalSpec, Vec3 } from '../../engine/contracts/types';
-import { deg, frames } from './layout';
+import { deg, frames, landmark } from './layout';
+import {createOrreryPortal} from './props/orreryConfig';
 
 const frontNormal = (yawRad: number): Vec3 => [Math.sin(yawRad), 0, Math.cos(yawRad)];
 
@@ -64,6 +65,7 @@ function buildFrameExhibits(): FrameExhibitSpec[] {
 }
 
 export const portals: PortalSpec[] = [
+  createOrreryPortal(landmark),
   {
     id: 'E-01',
     kind: 'portal',

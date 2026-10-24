@@ -3,7 +3,6 @@ import type { FollowFraming } from '../engine/contracts/types';
 export interface WorldBridgeHandlers {
   resetCamera: () => void;
   jump: () => void;
-  setSprint: (enabled: boolean) => void;
   toggleLookUp: () => void;
   setFraming: (framing: FollowFraming) => void;
   interact: () => void;
@@ -16,7 +15,6 @@ let current: WorldBridgeHandlers | null = null;
 export const worldBridge = {
   resetCamera(): void { current?.resetCamera(); },
   jump(): void { current?.jump(); },
-  setSprint(enabled: boolean): void { current?.setSprint(enabled); },
   toggleLookUp(): void { current?.toggleLookUp(); },
   setFraming(framing: FollowFraming): void { current?.setFraming(framing); },
   register(handlers: WorldBridgeHandlers): void {

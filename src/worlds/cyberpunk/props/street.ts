@@ -5,6 +5,7 @@ import {
   frames,
   guideLines,
   lamps,
+  landmark,
   paths,
   planters,
 } from '../layout';
@@ -13,6 +14,8 @@ import type { WorldMaterials } from '../materials';
 import { createLabelMaterial, createPosterMaterial } from '../materials';
 import { createSignTexture } from '../textures';
 import { getArtwork } from '../../../content/artworks/index';
+import { createOrrery } from './orrery';
+import type { OrrerySpec } from './orreryConfig';
 
 export interface LandmarkHandle {
   group: THREE.Group;
@@ -234,7 +237,7 @@ export function createSky(materials: WorldMaterials): THREE.Group {
   const group = new THREE.Group();
   group.name = 'Sky';
 
-  const sky = new THREE.Mesh(new THREE.SphereGeometry(150, 32, 24), materials.sky);
+  const sky = new THREE.Mesh(new THREE.SphereGeometry(700, 32, 24), materials.sky);
   sky.name = 'SkyDome';
   group.add(sky);
 
@@ -245,7 +248,7 @@ export function createSky(materials: WorldMaterials): THREE.Group {
   for (let i = 0; i < starCount; i += 1) {
     const theta = rand() * Math.PI * 2;
     const phi = Math.acos(rand() * 0.92);
-    const radius = 108 + rand() * 24;
+    const radius = 520 + rand() * 40;
     positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
     positions[i * 3 + 1] = 8 + radius * Math.cos(phi) * 0.8;
     positions[i * 3 + 2] = radius * Math.sin(phi) * Math.sin(theta);
@@ -279,8 +282,15 @@ export interface VoidCityHandle {
   update: (feet: THREE.Vector3) => void;
 }
 
+export interface VoidKeepOut {
+  x: number;
+  z: number;
+  radius: number;
+}
+
 const VOID_CELL = 46;
-const VOID_CELLS = 7;
+// 雾在 580m 收敛；23×23 格刚好铺到雾的尽头，避免露出虚空城市边界。
+const VOID_CELLS = 23;
 const VOID_PER_CELL = 4;
 const VOID_CLEAR = 48;
 
@@ -292,15 +302,16 @@ function hashCell(x: number, z: number): number {
 
 /**
  * 中心街区之外的黑色建筑群。
- * 建筑按世界网格确定性生成，只渲染玩家周围 7×7 个格子；
+ * 建筑按世界网格确定性生成，只渲染玩家周围 23×23 个格子；
  * 玩家跨格时复用旧格、补新格，因此画面看起来无限重复，但实例数量与 draw call 恒定。
  */
-export function createVoidCity(): VoidCityHandle {
+export function createVoidCity(keepOut: readonly VoidKeepOut[] = []): VoidCityHandle {
   const group = new THREE.Group();
   group.name = 'VoidCity';
 
   // 均匀暗色地面跟随玩家；尺寸远大于雾距，地平线不会露出平面边缘。
-  const floorMaterial = new THREE.MeshBasicMaterial({ color: 0x090c14, fog: true });
+  const floorMaterial = new THREE.MeshStandardMaterial({ color: 0x111a23, roughness: 0.4, metalness: 0.03, envMapIntensity: 0.6, fog: true });
+  floorMaterial.name = 'CityOuterWetFloor';
   const floor = new THREE.Mesh(new THREE.PlaneGeometry(2400, 2400), floorMaterial);
   floor.name = 'VoidFloor';
   floor.rotation.x = -Math.PI / 2;
@@ -369,7 +380,9 @@ export function createVoidCity(): VoidCityHandle {
           const depth = 3.2 + rand() * 5.8;
           const height = 8 + Math.pow(rand(), 1.7) * 44;
           const yaw = rand() * Math.PI;
-          const hidden = Math.max(Math.abs(x), Math.abs(z)) < VOID_CLEAR;
+          const inClearZone = Math.max(Math.abs(x), Math.abs(z)) < VOID_CLEAR;
+          const inKeepOut = keepOut.some((zone) => Math.hypot(x - zone.x, z - zone.z) < zone.radius);
+          const hidden = inClearZone || inKeepOut;
 
           dummy.position.set(x, height / 2 - 0.04, z);
           dummy.rotation.set(0, yaw, 0);
@@ -394,118 +407,9 @@ export function createVoidCity(): VoidCityHandle {
   return { group, update };
 }
 
-export function createLandmark(materials: WorldMaterials): LandmarkHandle {
-  const group = new THREE.Group();
-  group.name = 'LM-01';
-
-  const baseMaterial = materials.metal.clone();
-  baseMaterial.color.setHex(0x2c2f3b);
-  const base = new THREE.Mesh(new THREE.CylinderGeometry(1.86, 1.96, 0.5, 72), baseMaterial);
-  base.position.y = 0.25;
-  base.castShadow = true;
-  base.receiveShadow = true;
-  group.add(base);
-
-  const inlay = new THREE.Mesh(
-    new THREE.RingGeometry(1.5, 1.72, 72),
-    new THREE.MeshBasicMaterial({
-      color: PALETTE.emissiveCyan,
-      transparent: true,
-      opacity: 0.5,
-      toneMapped: false,
-      side: THREE.DoubleSide,
-    }),
-  );
-  inlay.rotation.x = -Math.PI / 2;
-  inlay.position.y = 0.505;
-  group.add(inlay);
-
-  const monolithMaterial = materials.concreteWarm.clone();
-  monolithMaterial.name = 'Landmark_Stone';
-  const monolith = new THREE.Mesh(new RoundedBoxGeometry(0.78, 3.7, 0.78, 2, 0.06), monolithMaterial);
-  monolith.position.y = 2.35;
-  monolith.castShadow = true;
-  monolith.receiveShadow = true;
-  group.add(monolith);
-
-  const slit = new THREE.Mesh(
-    new THREE.BoxGeometry(0.045, 2.55, 0.03),
-    materials.emissiveGold,
-  );
-  slit.position.set(0, 2.38, 0.4);
-  group.add(slit);
-
-  const pivotA = new THREE.Group();
-  pivotA.position.y = 3.12;
-  const ringMaterial = materials.metal.clone();
-  ringMaterial.color.setHex(0x343848);
-  const ringA = new THREE.Mesh(new THREE.TorusGeometry(2.36, 0.075, 14, 120), ringMaterial);
-  ringA.castShadow = true;
-  ringA.rotation.x = Math.PI / 2.6;
-  ringA.rotation.z = 0.16;
-  pivotA.add(ringA);
-
-  const nodeMaterial = materials.emissiveCyan;
-  for (let i = 0; i < 4; i += 1) {
-    const angle = (i / 4) * Math.PI * 2;
-    const node = new THREE.Mesh(new THREE.SphereGeometry(0.085, 12, 10), nodeMaterial);
-    node.position.set(Math.cos(angle) * 2.36, Math.sin(angle) * 2.36, 0);
-    ringA.add(node);
-  }
-  group.add(pivotA);
-
-  const pivotB = new THREE.Group();
-  pivotB.position.y = 3.12;
-  const innerRingMaterial = materials.metalSoft.clone();
-  innerRingMaterial.color.setHex(0x454957);
-  const ringB = new THREE.Mesh(new THREE.TorusGeometry(1.62, 0.055, 12, 100), innerRingMaterial);
-  ringB.castShadow = true;
-  ringB.rotation.x = -Math.PI / 3.1;
-  ringB.rotation.z = -0.62;
-  pivotB.add(ringB);
-  for (let i = 0; i < 3; i += 1) {
-    const angle = (i / 3) * Math.PI * 2 + 0.4;
-    const node = new THREE.Mesh(new THREE.SphereGeometry(0.06, 12, 10), materials.emissiveGold);
-    node.position.set(Math.cos(angle) * 1.62, Math.sin(angle) * 1.62, 0);
-    ringB.add(node);
-  }
-  group.add(pivotB);
-
-  const coreGlowMaterial = materials.glow.clone();
-  coreGlowMaterial.color.setHex(0x66ecff);
-  coreGlowMaterial.opacity = 0.2;
-  const coreGlow = new THREE.Sprite(coreGlowMaterial);
-  coreGlow.position.y = 3.12;
-  coreGlow.scale.set(6.2, 6.2, 1);
-  group.add(coreGlow);
-
-  // 四枚基座小灯，为雕塑建立接地层次。
-  for (let i = 0; i < 4; i += 1) {
-    const angle = (i / 4) * Math.PI * 2 + Math.PI / 4;
-    const lightBase = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.12, 0.26, 12), baseMaterial);
-    lightBase.position.set(Math.cos(angle) * 2.35, 0.13, Math.sin(angle) * 2.35);
-    group.add(lightBase);
-    const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.075, 0.03, 12), materials.emissiveGoldSoft);
-    cap.position.set(Math.cos(angle) * 2.35, 0.28, Math.sin(angle) * 2.35);
-    group.add(cap);
-  }
-
-  addGlowPool(group, materials, 0, 0, PALETTE.emissiveCyan, 9.5, 9.5, 0.16);
-  addGlowPool(group, materials, 0, 0, PALETTE.emissiveGold, 3.4, 3.4, 0.18);
-
-  const update = (time: number, reducedMotion: boolean): void => {
-    if (reducedMotion) {
-      pivotA.rotation.y = 0.35;
-      pivotB.rotation.y = -0.2;
-      return;
-    }
-    pivotA.rotation.y = time * 0.12;
-    pivotB.rotation.y = -time * 0.085;
-    pivotA.rotation.z = Math.sin(time * 0.22) * 0.035;
-    pivotB.rotation.z = Math.sin(time * 0.18 + 1.4) * 0.045;
-  };
-
-  return { group, update };
+/** Stable scene/proposal interface; LM-01 geometry lives in its own prop module. */
+export function createLandmark(materials: WorldMaterials, spec: OrrerySpec = landmark): LandmarkHandle {
+  return createOrrery(materials, spec);
 }
 
 export function createFrames(materials: WorldMaterials, anisotropy: number): FrameHandle {

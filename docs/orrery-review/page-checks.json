@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "evidence": "React server render only; no browser navigation or visual claim",
+  "existingRouteVisible": true,
+  "configuredIndependentPageUsesNewTab": true,
+  "emptyAndInvalidSlotsDoNotNavigate": true,
+  "returnLinkPresent": true
+}

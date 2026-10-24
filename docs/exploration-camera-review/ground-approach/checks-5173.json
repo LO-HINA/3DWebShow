@@ -1,0 +1,746 @@
+{
+  "status": "passed",
+  "samples": [
+    {
+      "name": "initial",
+      "camera": {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": 0.22689280275926285,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": -13,
+        "actualPitchUpDeg": -13,
+        "viewPitchUpDeg": -13,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0.00010023106226242362,
+          4.171494545302139,
+          14.487473190549037
+        ],
+        "cameraHeight": 4.171494545302139,
+        "lookAt": [
+          0.00010023106226242362,
+          1.921984001863489,
+          4.743772542696686
+        ],
+        "pivot": [
+          0.00010023106226242362,
+          1.2643233270339551,
+          6.500085913868816
+        ],
+        "viewDirection": [
+          -0.0,
+          -0.22495105434386498,
+          -0.9743700647852352
+        ],
+        "solverViewDirection": [
+          -0.0,
+          -0.22495105434386498,
+          -0.9743700647852352
+        ],
+        "boomLength": 8.5,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": 1.3764833006746358e-07,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          0.6770276176012591
+        ]
+      },
+      "fade": {
+        "fading": false,
+        "reason": "none",
+        "targetOpacity": 1,
+        "opacity": 1,
+        "nearFading": false,
+        "centerFading": false,
+        "upLookFactor": 0,
+        "upLookPitchDeg": -13,
+        "nearDistance": 8.43369026658513,
+        "centerDistance": 0.8410154059866928,
+        "screenHeight": 0.1897335146259529,
+        "materialOpacity": 1,
+        "transparentMaterials": 1,
+        "materialCount": 9,
+        "meshCount": 28
+      }
+    },
+    {
+      "name": "approach-1",
+      "camera": {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": 0.017892802759262895,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": -1.0251820817657977,
+        "actualPitchUpDeg": -1.0252923186673093,
+        "viewPitchUpDeg": -1.0252923186673082,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          -0.0015088125897726457,
+          2.451027147690596,
+          14.915123544146335
+        ],
+        "cameraHeight": 2.451027147690596,
+        "lookAt": [
+          -0.0015088125897726457,
+          2.2720894304289914,
+          4.916724607649492
+        ],
+        "pivot": [
+          -0.0015088125897726457,
+          1.2643402299672744,
+          6.498367983997024
+        ],
+        "viewDirection": [
+          -0.0,
+          -0.017893771726160468,
+          -0.9998398936496843
+        ],
+        "solverViewDirection": [
+          -0.0,
+          -0.01789377172616049,
+          -0.9998398936496843
+        ],
+        "boomLength": 8.5,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": 6.906205562984269e-08,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          0.6803722484449424
+        ]
+      },
+      "fade": {
+        "fading": false,
+        "reason": "none",
+        "targetOpacity": 1,
+        "opacity": 1,
+        "nearFading": false,
+        "centerFading": false,
+        "upLookFactor": 0,
+        "upLookPitchDeg": -1.0252923186673082,
+        "nearDistance": 8.474392322338558,
+        "centerDistance": 0.8359214402138173,
+        "screenHeight": 0.191505158322455,
+        "materialOpacity": 1,
+        "transparentMaterials": 1,
+        "materialCount": 9,
+        "meshCount": 28
+      }
+    },
+    {
+      "name": "approach-2",
+      "camera": {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -0.19110719724073708,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 10.949635836468406,
+        "actualPitchUpDeg": 10.94955112905388,
+        "viewPitchUpDeg": 10.949551129053882,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0.0030898592899131216,
+          0.6788748123759799,
+          14.982844227796164
+        ],
+        "cameraHeight": 0.6788748123759799,
+        "lookAt": [
+          0.0030898592899131216,
+          2.5783208110366695,
+          5.164896127598654
+        ],
+        "pivot": [
+          0.0030898592899131216,
+          1.264338600890626,
+          6.5030310133239215
+        ],
+        "viewDirection": [
+          -0.0,
+          0.18994459986606899,
+          -0.981794810019751
+        ],
+        "solverViewDirection": [
+          -0.0,
+          0.18994459986606896,
+          -0.981794810019751
+        ],
+        "boomLength": 8.5,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": -5.4581175579215824e-08,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          0.6813954820588594
+        ]
+      },
+      "fade": {
+        "fading": false,
+        "reason": "none",
+        "targetOpacity": 1,
+        "opacity": 1,
+        "nearFading": false,
+        "centerFading": false,
+        "upLookFactor": 0,
+        "upLookPitchDeg": 10.949551129053882,
+        "nearDistance": 8.479813214472243,
+        "centerDistance": 0.8395304569397957,
+        "screenHeight": 0.19338290448463916,
+        "materialOpacity": 1,
+        "transparentMaterials": 1,
+        "materialCount": 9,
+        "meshCount": 28
+      }
+    },
+    {
+      "name": "approach-3",
+      "camera": {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -0.40010719724073723,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 22.924453754702622,
+        "actualPitchUpDeg": 22.924367892370512,
+        "viewPitchUpDeg": 22.924367892370512,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0.003835505340715528,
+          0.40000521979605463,
+          14.531427921778942
+        ],
+        "cameraHeight": 0.40000521979605463,
+        "lookAt": [
+          0.003835505340715528,
+          4.295162170258997,
+          5.321229643171677
+        ],
+        "pivot": [
+          0.003835505340715528,
+          1.2644125542964928,
+          6.5027261092028725
+        ],
+        "viewDirection": [
+          -0.0,
+          0.38951569504629424,
+          -0.9210198278607266
+        ],
+        "solverViewDirection": [
+          -0.0,
+          0.38951569504629424,
+          -0.9210198278607266
+        ],
+        "boomLength": 8.075100794120184,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.0751496584431,
+        "groundHeight": -1.0934830374509374e-08,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          0.8725094555506673
+        ]
+      },
+      "fade": {
+        "fading": false,
+        "reason": "none",
+        "targetOpacity": 1,
+        "opacity": 1,
+        "nearFading": false,
+        "centerFading": false,
+        "upLookFactor": 0,
+        "upLookPitchDeg": 22.924367892370512,
+        "nearDistance": 8.02870181257607,
+        "centerDistance": 2.146965106849716,
+        "screenHeight": 0.20395650107363134,
+        "materialOpacity": 1,
+        "transparentMaterials": 1,
+        "materialCount": 9,
+        "meshCount": 28
+      }
+    },
+    {
+      "name": "approach-4",
+      "camera": {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -0.609107197240737,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 34.89927167293681,
+        "actualPitchUpDeg": 34.899160333460436,
+        "viewPitchUpDeg": 34.89916033346043,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0.0038360323556327833,
+          0.400035073204837,
+          13.164583506757811
+        ],
+        "cameraHeight": 0.400035073204837,
+        "lookAt": [
+          0.0038360323556327833,
+          6.121373614233264,
+          4.962980901233529
+        ],
+        "pivot": [
+          0.0038360323556327833,
+          1.2648838444915733,
+          6.50272241071716
+        ],
+        "viewDirection": [
+          -0.0,
+          0.5721338541028427,
+          -0.8201602605524283
+        ],
+        "solverViewDirection": [
+          -0.0,
+          0.5721338541028428,
+          -0.8201602605524283
+        ],
+        "boomLength": 6.717764260536099,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 6.718037270641915,
+        "groundHeight": -7.427063364318087e-08,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          1.124180473272442
+        ]
+      },
+      "fade": {
+        "fading": false,
+        "reason": "none",
+        "targetOpacity": 1,
+        "opacity": 1,
+        "nearFading": false,
+        "centerFading": false,
+        "upLookFactor": 0,
+        "upLookPitchDeg": 34.89916033346043,
+        "nearDistance": 6.661861096040651,
+        "centerDistance": 2.9381296186680634,
+        "screenHeight": 0.2456167233061654,
+        "materialOpacity": 1,
+        "transparentMaterials": 1,
+        "materialCount": 9,
+        "meshCount": 28
+      }
+    },
+    {
+      "name": "approach-5",
+      "camera": {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -0.8181071972407364,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 46.874089591170986,
+        "actualPitchUpDeg": 46.8738565472121,
+        "viewPitchUpDeg": 46.87385654721211,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0.003835453104469977,
+          0.40002396741768853,
+          11.281789028129438
+        ],
+        "cameraHeight": 0.40002396741768853,
+        "lookAt": [
+          0.003835453104469977,
+          7.698528268317572,
+          4.445720350172356
+        ],
+        "pivot": [
+          0.003835453104469977,
+          1.2645686382574242,
+          6.502721647060155
+        ],
+        "viewDirection": [
+          -0.0,
+          0.7298504300899885,
+          -0.6836068677957083
+        ],
+        "solverViewDirection": [
+          -0.0,
+          0.7298504300899884,
+          -0.6836068677957082
+        ],
+        "boomLength": 4.856636955824246,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 4.856772106383734,
+        "groundHeight": -9.114321053438346e-08,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          1.4203437229260176
+        ]
+      },
+      "fade": {
+        "fading": false,
+        "reason": "none",
+        "targetOpacity": 1,
+        "opacity": 1,
+        "nearFading": false,
+        "centerFading": false,
+        "upLookFactor": 0,
+        "upLookPitchDeg": 46.87385654721211,
+        "nearDistance": 4.779067381069283,
+        "centerDistance": 2.760274335441085,
+        "screenHeight": 0.3416040004917492,
+        "materialOpacity": 1,
+        "transparentMaterials": 1,
+        "materialCount": 9,
+        "meshCount": 28
+      }
+    },
+    {
+      "name": "approach-6",
+      "camera": {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -1.027107197240736,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 58.848907509405166,
+        "actualPitchUpDeg": 58.84872809279859,
+        "viewPitchUpDeg": 58.84872809279859,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0.003835371750964711,
+          0.40003712434211336,
+          9.323745239646556
+        ],
+        "cameraHeight": 0.40003712434211336,
+        "lookAt": [
+          0.003835371750964711,
+          8.958082273837912,
+          4.150751597741374
+        ],
+        "pivot": [
+          0.003835371750964711,
+          1.2644922852618488,
+          6.502720186540212
+        ],
+        "viewDirection": [
+          -0.0,
+          0.8558045149495799,
+          -0.5172993641905183
+        ],
+        "solverViewDirection": [
+          -0.0,
+          0.8558045149495799,
+          -0.5172993641905181
+        ],
+        "boomLength": 2.950502512368769,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 2.950629735405739,
+        "groundHeight": -1.501934734360333e-07,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          1.7432029884424916
+        ]
+      },
+      "fade": {
+        "fading": true,
+        "reason": "\u4ef0\u89c6\u6784\u56fe",
+        "targetOpacity": 0.6853325726042098,
+        "opacity": 0.6853325726042098,
+        "nearFading": false,
+        "centerFading": false,
+        "upLookFactor": 0.41403608867867137,
+        "upLookPitchDeg": 58.84872809279859,
+        "nearDistance": 2.821025053106344,
+        "centerDistance": 1.863603999281192,
+        "screenHeight": 0.5737114627215179,
+        "materialOpacity": 0.6853325726042098,
+        "transparentMaterials": 9,
+        "materialCount": 9,
+        "meshCount": 28
+      }
+    },
+    {
+      "name": "approach-7",
+      "camera": {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -1.2361071972407354,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 70.82372542763933,
+        "actualPitchUpDeg": 70.82358316302964,
+        "viewPitchUpDeg": 70.82358316302965,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0.0038348806097570076,
+          0.40013280695268305,
+          7.731099414969143
+        ],
+        "cameraHeight": 0.40013280695268305,
+        "lookAt": [
+          0.0038348806097570076,
+          9.845249337074808,
+          4.446320315484096
+        ],
+        "pivot": [
+          0.0038348806097570076,
+          1.264712329971416,
+          6.502719727377233
+        ],
+        "viewDirection": [
+          -0.0,
+          0.9445116530122125,
+          -0.3284779099485048
+        ],
+        "solverViewDirection": [
+          -0.0,
+          0.9445116530122125,
+          -0.3284779099485047
+        ],
+        "boomLength": 1.5021366144634443,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 1.5023672296314425,
+        "groundHeight": 7.258616219196767e-08,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          1.8203796153743834
+        ]
+      },
+      "fade": {
+        "fading": true,
+        "reason": "\u9760\u8fd1\u4eba\u7269",
+        "targetOpacity": 0.2051944042124411,
+        "opacity": 0.2051944042124411,
+        "nearFading": false,
+        "centerFading": false,
+        "upLookFactor": 1,
+        "upLookPitchDeg": 70.82358316302965,
+        "nearDistance": 1.22837968759191,
+        "centerDistance": 0.8105280725588901,
+        "screenHeight": 1.2489499533799244,
+        "materialOpacity": 0.2051944042124411,
+        "transparentMaterials": 9,
+        "materialCount": 9,
+        "meshCount": 28
+      }
+    },
+    {
+      "name": "approach-8",
+      "camera": {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": -1.4451071972407348,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": 82.79854334587351,
+        "actualPitchUpDeg": 82.7983258487063,
+        "viewPitchUpDeg": 82.79832584870634,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0.003837343113939871,
+          0.4000986664425771,
+          6.944654688396984
+        ],
+        "cameraHeight": 0.4000986664425771,
+        "lookAt": [
+          0.003837343113939871,
+          10.321209053667804,
+          5.691032462807582
+        ],
+        "pivot": [
+          0.003837343113939871,
+          1.2643644205172628,
+          6.502721263449166
+        ],
+        "viewDirection": [
+          -0.0,
+          0.9921110387225227,
+          -0.12536222255893992
+        ],
+        "solverViewDirection": [
+          -0.0,
+          0.9921110387225226,
+          -0.1253622225589402
+        ],
+        "boomLength": 0.9707010073922834,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 0.9708118069234463,
+        "groundHeight": 1.5838918177024652e-08,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          1.3495622647777452
+        ]
+      },
+      "fade": {
+        "fading": true,
+        "reason": "\u8fd1\u8ddd",
+        "targetOpacity": 0,
+        "opacity": 0,
+        "nearFading": true,
+        "centerFading": true,
+        "upLookFactor": 1,
+        "upLookPitchDeg": 82.79832584870634,
+        "nearDistance": 0.44193342494781795,
+        "centerDistance": 0.30502830894701316,
+        "screenHeight": 2.558984804837766,
+        "materialOpacity": 0,
+        "transparentMaterials": 9,
+        "materialCount": 9,
+        "meshCount": 28
+      }
+    },
+    {
+      "name": "restored",
+      "camera": {
+        "orientationVersion": 2,
+        "mode": "follow",
+        "yaw": 0,
+        "pitch": 0.22689280275926277,
+        "distance": 8.5,
+        "framing": "medium",
+        "lookUpPitch": -0.42,
+        "lookUpHeight": 6,
+        "lookUpYaw": 0,
+        "lookUpDistance": 8.5,
+        "targetPitchUpDeg": -12.999999999999996,
+        "actualPitchUpDeg": -12.99999999659378,
+        "viewPitchUpDeg": -12.999999996593779,
+        "actualYaw": 0,
+        "yawDeg": 0,
+        "position": [
+          0.00383713340219181,
+          4.171701174162548,
+          14.490108701989058
+        ],
+        "cameraHeight": 4.171701174162548,
+        "lookAt": [
+          0.00383713340219181,
+          1.9221906313031587,
+          4.746408054002973
+        ],
+        "pivot": [
+          0.00383713340219181,
+          1.2645300022201262,
+          6.502721551110356
+        ],
+        "viewDirection": [
+          -0.0,
+          -0.22495105428593892,
+          -0.9743700647986085
+        ],
+        "solverViewDirection": [
+          -0.0,
+          -0.22495105428593895,
+          -0.9743700647986085
+        ],
+        "boomLength": 8.499999865940897,
+        "desiredDistance": 8.5,
+        "targetDistance": 8.5,
+        "desiredLength": 8.5,
+        "groundHeight": -1.3496700645987403e-07,
+        "clearance": 0.4,
+        "sweepRadius": 0.28,
+        "characterScreen": [
+          0.5,
+          0.6770276183997523
+        ]
+      },
+      "fade": {
+        "fading": false,
+        "reason": "none",
+        "targetOpacity": 1,
+        "opacity": 1,
+        "nearFading": false,
+        "centerFading": false,
+        "upLookFactor": 0,
+        "upLookPitchDeg": -12.999999996593779,
+        "nearDistance": 8.433690132570575,
+        "centerDistance": 0.8410153896463339,
+        "screenHeight": 0.1897335175658799,
+        "materialOpacity": 1,
+        "transparentMaterials": 1,
+        "materialCount": 9,
+        "meshCount": 28
+      }
+    }
+  ],
+  "errors": []
+}

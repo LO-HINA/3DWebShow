@@ -1,28 +1,29 @@
 {
   "cameraRelativeMovement": "four headings, diagonal normalization and analog magnitude passed",
   "response": {
-    "speed": 6,
-    "sprintSpeed": 10,
-    "fullSpeedWithinSeconds": 0.1,
-    "stoppedWithinSeconds": 0.08333333333333333,
-    "stopDistanceMeters": 0.17796063077376428
+    "speed": 10,
+    "fullSpeedWithinSeconds": 0.16666666666666666,
+    "stoppedWithinSeconds": 0.13333333333333333,
+    "stopDistanceMeters": 0.5444289502911619
   },
   "lowFpsTravel": {
     "seconds": 2,
     "distances": {
-      "1": 11.750053631141782,
-      "2": 11.750053631141782,
-      "5": 11.750053631141782,
-      "10": 11.750053631141782,
-      "20": 11.750053631141782,
-      "30": 11.750053631141782,
-      "60": 11.750053631141782,
-      "144": 11.750053631141782
+      "1": 19.250006744638085,
+      "2": 19.250006744638085,
+      "5": 19.250006744638085,
+      "10": 19.250006744638085,
+      "20": 19.250006744638085,
+      "30": 19.250006744638085,
+      "60": 19.250006744638085,
+      "144": 19.250006744638085
     },
     "longStallSteps": 60
   },
-  "sprint": {
+  "singleMovementSpeed": {
     "speed": 10,
+    "legacySprintIgnored": true,
+    "diagonalNotFaster": true,
     "oneSecondDistance": 9.249896639958024
   },
   "jump": {
@@ -34,11 +35,11 @@
   "framingMathOnly": [
     {
       "preset": "low",
-      "screenY": 0.6906161365057527,
+      "screenY": 0.6906161365057528,
       "camera": [
         0,
-        2.824657380407055,
-        13.320590453496647
+        2.8246573804070554,
+        13.32059045349665
       ]
     },
     {
@@ -52,11 +53,11 @@
     },
     {
       "preset": "high",
-      "screenY": 0.6661450021300588,
+      "screenY": 0.6661449499470868,
       "camera": [
         0,
-        6.098089813814168,
-        15.246185545965709
+        6.098096202463367,
+        15.246197071393956
       ]
     }
   ],

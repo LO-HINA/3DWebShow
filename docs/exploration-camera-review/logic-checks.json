@@ -122,19 +122,19 @@
         "lookUpDistance": 8.5,
         "targetPitchUpDeg": 16.30679122094162,
         "actualPitchUpDeg": 13.604861440061494,
-        "viewPitchUpDeg": 13.6048614400615,
+        "viewPitchUpDeg": 13.604861440061498,
         "actualYaw": 0,
         "yawDeg": 0,
         "position": [
           0,
-          0.40000007629394563,
-          8.457393223074098
+          0.4000000762939455,
+          8.4539602187714
         ],
-        "cameraHeight": 0.40000007629394563,
+        "cameraHeight": 0.4000000762939455,
         "lookAt": [
           0,
-          2.752245889641077,
-          -1.2620172340262137
+          2.7522458896410766,
+          -1.2654502383289117
         ],
         "pivot": [
           0,
@@ -143,7 +143,7 @@
         ],
         "viewDirection": [
           0,
-          0.23522458133471322,
+          0.2352245813347132,
           -0.9719410457100314
         ],
         "solverViewDirection": [
@@ -151,16 +151,16 @@
           0.23522458133471313,
           -0.9719410457100311
         ],
-        "boomLength": 8.499999999999998,
+        "boomLength": 8.496584210779627,
         "desiredDistance": 8.5,
         "targetDistance": 8.5,
-        "desiredLength": 8.5,
+        "desiredLength": 8.496584210779627,
         "groundHeight": 7.629394538355427e-8,
         "clearance": 0.4,
         "sweepRadius": 0.28,
         "characterScreen": [
           0.5,
-          0.6973579319299531
+          0.6973375587774013
         ]
       },
       {
@@ -181,14 +181,14 @@
         "yawDeg": 0,
         "position": [
           0,
-          0.40000007629394563,
-          8.457393223074098
+          0.4000000762939455,
+          7.557110762090834
         ],
-        "cameraHeight": 0.40000007629394563,
+        "cameraHeight": 0.4000000762939455,
         "lookAt": [
           0,
           5.06160030013882,
-          -0.3896109790866209
+          -1.2898934400698847
         ],
         "pivot": [
           0,
@@ -205,16 +205,16 @@
           0.4661600223844874,
           -0.8847004202160719
         ],
-        "boomLength": 8.499999999999998,
+        "boomLength": 7.604763174538008,
         "desiredDistance": 8.5,
         "targetDistance": 8.5,
-        "desiredLength": 8.5,
+        "desiredLength": 7.604763174538008,
         "groundHeight": 7.629394538355427e-8,
         "clearance": 0.4,
         "sweepRadius": 0.28,
         "characterScreen": [
           0.5,
-          0.9797251136369703
+          0.9727201586502776
         ]
       },
       {
@@ -235,14 +235,14 @@
         "yawDeg": 0,
         "position": [
           0,
-          0.40000007629394563,
-          8.457393223074098
+          0.4000000762939454,
+          5.576478373378289
         ],
-        "cameraHeight": 0.40000007629394563,
+        "cameraHeight": 0.4000000762939454,
         "lookAt": [
           0,
           7.086898333151193,
-          1.0219785270104325
+          -1.8589363226853761
         ],
         "pivot": [
           0,
@@ -259,16 +259,16 @@
           0.6686898256857248,
           -0.7435414696063665
         ],
-        "boomLength": 8.499999999999998,
+        "boomLength": 5.640887423008553,
         "desiredDistance": 8.5,
         "targetDistance": 8.5,
-        "desiredLength": 8.5,
+        "desiredLength": 5.640887423008553,
         "groundHeight": 7.629394538355427e-8,
         "clearance": 0.4,
         "sweepRadius": 0.28,
         "characterScreen": [
           0.5,
-          1.3378285889653343
+          1.2970030580674559
         ]
       },
       {
@@ -289,14 +289,14 @@
         "yawDeg": 0,
         "position": [
           0,
-          0.40000007629394563,
-          8.457393223074098
+          0.4000000762939453,
+          3.240986236327578
         ],
-        "cameraHeight": 0.40000007629394563,
+        "cameraHeight": 0.4000000762939453,
         "lookAt": [
           0,
           8.704669159198763,
-          2.8867136035442815
+          -2.329693383202238
         ],
         "pivot": [
           0,
@@ -313,16 +313,16 @@
           0.8304669082904818,
           -0.5570679619529816
         ],
-        "boomLength": 8.499999999999998,
+        "boomLength": 3.3505957163413638,
         "desiredDistance": 8.5,
         "targetDistance": 8.5,
-        "desiredLength": 8.5,
+        "desiredLength": 3.3505957163413638,
         "groundHeight": 7.629394538355427e-8,
         "clearance": 0.4,
         "sweepRadius": 0.28,
         "characterScreen": [
           0.5,
-          1.8823276297653235
+          1.6839232636777501
         ]
       },
       {
@@ -338,19 +338,19 @@
         "lookUpDistance": 8.5,
         "targetPitchUpDeg": 73.02961293889302,
         "actualPitchUpDeg": 70.32743611357712,
-        "viewPitchUpDeg": 70.32743611357714,
+        "viewPitchUpDeg": 70.32743611357712,
         "actualYaw": 0,
         "yawDeg": 0,
         "position": [
           0,
-          0.40000007629394563,
-          8.457393223074098
+          0.4000000762939454,
+          1.2795567620518795
         ],
-        "cameraHeight": 0.40000007629394563,
+        "cameraHeight": 0.4000000762939454,
         "lookAt": [
           0,
           9.816318627350894,
-          5.090949261707628
+          -2.0868871993145905
         ],
         "pivot": [
           0,
@@ -359,24 +359,24 @@
         ],
         "viewDirection": [
           0,
-          0.941631855105695,
-          -0.3366443961366467
+          0.9416318551056949,
+          -0.3366443961366469
         ],
         "solverViewDirection": [
           0,
           0.9416318551056948,
           -0.336644396136647
         ],
-        "boomLength": 8.499999999999998,
+        "boomLength": 1.5361527845930523,
         "desiredDistance": 8.5,
         "targetDistance": 8.5,
-        "desiredLength": 8.5,
+        "desiredLength": 1.5361527845930523,
         "groundHeight": 7.629394538355427e-8,
         "clearance": 0.4,
         "sweepRadius": 0.28,
         "characterScreen": [
           0.5,
-          2.9896218648827606
+          1.858831246271514
         ]
       },
       {
@@ -397,14 +397,14 @@
         "yawDeg": 0,
         "position": [
           0,
-          0.40000007629394563,
-          8.457393223074098
+          0.4000000762939454,
+          0.4283485594610251
         ],
-        "cameraHeight": 0.40000007629394563,
+        "cameraHeight": 0.4000000762939454,
         "lookAt": [
           0,
           10.338589080108875,
-          7.350845161194726
+          -0.6781995024183468
         ],
         "pivot": [
           0,
@@ -421,16 +421,16 @@
           0.9938589003814928,
           -0.11065480618793719
         ],
-        "boomLength": 8.499999999999998,
+        "boomLength": 0.9518310557512998,
         "desiredDistance": 8.5,
         "targetDistance": 8.5,
-        "desiredLength": 8.5,
+        "desiredLength": 0.9518310557512998,
         "groundHeight": 7.629394538355427e-8,
         "clearance": 0.4,
         "sweepRadius": 0.28,
         "characterScreen": [
           0.5,
-          6.928324444267465
+          1.3788790331226686
         ]
       },
       {
@@ -451,14 +451,14 @@
         "yawDeg": 0,
         "position": [
           0,
-          0.40000007629394563,
-          8.457393223074098
+          0.4000000762939455,
+          0.4200010431732947
         ],
-        "cameraHeight": 0.40000007629394563,
+        "cameraHeight": 0.4000000762939455,
         "lookAt": [
           0,
           10.361718066916257,
-          7.583222372889892
+          -0.4541698070109105
         ],
         "pivot": [
           0,
@@ -475,16 +475,16 @@
           0.9961717990622312,
           -0.08741708501842052
         ],
-        "boomLength": 8.499999999999998,
+        "boomLength": 0.9481037636076308,
         "desiredDistance": 8.5,
         "targetDistance": 8.5,
-        "desiredLength": 8.5,
+        "desiredLength": 0.9481037636076308,
         "groundHeight": 7.629394538355427e-8,
         "clearance": 0.4,
         "sweepRadius": 0.28,
         "characterScreen": [
           0.5,
-          8.059462562432188
+          1.4032279630910103
         ]
       },
       {
@@ -505,14 +505,14 @@
         "yawDeg": 0,
         "position": [
           0,
-          0.40000007629394563,
-          8.457393223074098
+          0.4000000762939454,
+          0.42000000012875605
         ],
-        "cameraHeight": 0.40000007629394563,
+        "cameraHeight": 0.4000000762939454,
         "lookAt": [
           0,
           10.36194451712496,
-          7.585806762763893
+          -0.4515864601814492
         ],
         "pivot": [
           0,
@@ -529,16 +529,16 @@
           0.9961944440831013,
           -0.08715864603102053
         ],
-        "boomLength": 8.499999999999998,
+        "boomLength": 0.9481033015491791,
         "desiredDistance": 8.5,
         "targetDistance": 8.5,
-        "desiredLength": 8.5,
+        "desiredLength": 0.9481033015491791,
         "groundHeight": 7.629394538355427e-8,
         "clearance": 0.4,
         "sweepRadius": 0.28,
         "characterScreen": [
           0.5,
-          8.07421821574427
+          1.4036982209711324
         ]
       }
     ],
@@ -675,13 +675,13 @@
         "position": [
           0,
           2.4000000762939453,
-          8.4573932230741
+          8.4539602187714
         ],
         "cameraHeight": 2.4000000762939453,
         "lookAt": [
           0,
           4.752245889641077,
-          -1.262017234026212
+          -1.2654502383289117
         ],
         "pivot": [
           0,
@@ -698,16 +698,16 @@
           0.23522458133471313,
           -0.9719410457100311
         ],
-        "boomLength": 8.5,
+        "boomLength": 8.496584210779627,
         "desiredDistance": 8.5,
         "targetDistance": 8.5,
-        "desiredLength": 8.5,
+        "desiredLength": 8.496584210779627,
         "groundHeight": 2.0000000762939454,
         "clearance": 0.4,
         "sweepRadius": 0.28,
         "characterScreen": [
           0.5,
-          0.6973579319299531
+          0.6973375587774013
         ]
       },
       {
@@ -729,13 +729,13 @@
         "position": [
           0,
           2.4000000762939453,
-          8.4573932230741
+          7.5571107620908355
         ],
         "cameraHeight": 2.4000000762939453,
         "lookAt": [
           0,
           7.061600300138819,
-          -0.3896109790866191
+          -1.289893440069883
         ],
         "pivot": [
           0,
@@ -752,16 +752,16 @@
           0.4661600223844874,
           -0.8847004202160719
         ],
-        "boomLength": 8.5,
+        "boomLength": 7.604763174538009,
         "desiredDistance": 8.5,
         "targetDistance": 8.5,
-        "desiredLength": 8.5,
+        "desiredLength": 7.604763174538009,
         "groundHeight": 2.0000000762939454,
         "clearance": 0.4,
         "sweepRadius": 0.28,
         "characterScreen": [
           0.5,
-          0.9797251136369703
+          0.9727201586502776
         ]
       },
       {
@@ -783,13 +783,13 @@
         "position": [
           0,
           2.4000000762939453,
-          8.4573932230741
+          5.576478373378289
         ],
         "cameraHeight": 2.4000000762939453,
         "lookAt": [
           0,
           9.086898333151193,
-          1.0219785270104342
+          -1.8589363226853761
         ],
         "pivot": [
           0,
@@ -806,16 +806,16 @@
           0.6686898256857248,
           -0.7435414696063665
         ],
-        "boomLength": 8.5,
+        "boomLength": 5.640887423008553,
         "desiredDistance": 8.5,
         "targetDistance": 8.5,
-        "desiredLength": 8.5,
+        "desiredLength": 5.640887423008553,
         "groundHeight": 2.0000000762939454,
         "clearance": 0.4,
         "sweepRadius": 0.28,
         "characterScreen": [
           0.5,
-          1.3378285889653347
+          1.2970030580674559
         ]
       },
       {
@@ -837,13 +837,13 @@
         "position": [
           0,
           2.4000000762939453,
-          8.4573932230741
+          3.2409862363275783
         ],
         "cameraHeight": 2.4000000762939453,
         "lookAt": [
           0,
           10.704669159198763,
-          2.8867136035442833
+          -2.3296933832022377
         ],
         "pivot": [
           0,
@@ -860,16 +860,16 @@
           0.8304669082904818,
           -0.5570679619529816
         ],
-        "boomLength": 8.5,
+        "boomLength": 3.350595716341364,
         "desiredDistance": 8.5,
         "targetDistance": 8.5,
-        "desiredLength": 8.5,
+        "desiredLength": 3.350595716341364,
         "groundHeight": 2.0000000762939454,
         "clearance": 0.4,
         "sweepRadius": 0.28,
         "characterScreen": [
           0.5,
-          1.8823276297653235
+          1.6839232636777506
         ]
       },
       {
@@ -885,19 +885,19 @@
         "lookUpDistance": 8.5,
         "targetPitchUpDeg": 73.02961293889302,
         "actualPitchUpDeg": 70.32743611357712,
-        "viewPitchUpDeg": 70.32743611357714,
+        "viewPitchUpDeg": 70.32743611357712,
         "actualYaw": 0,
         "yawDeg": 0,
         "position": [
           0,
           2.4000000762939453,
-          8.4573932230741
+          1.2795567620518795
         ],
         "cameraHeight": 2.4000000762939453,
         "lookAt": [
           0,
           11.816318627350894,
-          5.09094926170763
+          -2.0868871993145905
         ],
         "pivot": [
           0,
@@ -906,24 +906,24 @@
         ],
         "viewDirection": [
           0,
-          0.941631855105695,
-          -0.3366443961366467
+          0.9416318551056949,
+          -0.3366443961366469
         ],
         "solverViewDirection": [
           0,
           0.9416318551056948,
           -0.336644396136647
         ],
-        "boomLength": 8.5,
+        "boomLength": 1.5361527845930525,
         "desiredDistance": 8.5,
         "targetDistance": 8.5,
-        "desiredLength": 8.5,
+        "desiredLength": 1.5361527845930525,
         "groundHeight": 2.0000000762939454,
         "clearance": 0.4,
         "sweepRadius": 0.28,
         "characterScreen": [
           0.5,
-          2.98962186488276
+          1.858831246271514
         ]
       },
       {
@@ -945,13 +945,13 @@
         "position": [
           0,
           2.4000000762939453,
-          8.4573932230741
+          0.4283485594610251
         ],
         "cameraHeight": 2.4000000762939453,
         "lookAt": [
           0,
           12.338589080108875,
-          7.350845161194727
+          -0.6781995024183468
         ],
         "pivot": [
           0,
@@ -968,16 +968,16 @@
           0.9938589003814928,
           -0.11065480618793719
         ],
-        "boomLength": 8.5,
+        "boomLength": 0.9518310557512999,
         "desiredDistance": 8.5,
         "targetDistance": 8.5,
-        "desiredLength": 8.5,
+        "desiredLength": 0.9518310557512999,
         "groundHeight": 2.0000000762939454,
         "clearance": 0.4,
         "sweepRadius": 0.28,
         "characterScreen": [
           0.5,
-          6.928324444267465
+          1.378879033122669
         ]
       },
       {
@@ -999,13 +999,13 @@
         "position": [
           0,
           2.4000000762939453,
-          8.4573932230741
+          0.42000104317329473
         ],
         "cameraHeight": 2.4000000762939453,
         "lookAt": [
           0,
           12.361718066916257,
-          7.583222372889894
+          -0.4541698070109104
         ],
         "pivot": [
           0,
@@ -1022,16 +1022,16 @@
           0.9961717990622312,
           -0.08741708501842052
         ],
-        "boomLength": 8.5,
+        "boomLength": 0.9481037636076309,
         "desiredDistance": 8.5,
         "targetDistance": 8.5,
-        "desiredLength": 8.5,
+        "desiredLength": 0.9481037636076309,
         "groundHeight": 2.0000000762939454,
         "clearance": 0.4,
         "sweepRadius": 0.28,
         "characterScreen": [
           0.5,
-          8.059462562432184
+          1.4032279630910103
         ]
       },
       {
@@ -1053,13 +1053,13 @@
         "position": [
           0,
           2.4000000762939453,
-          8.4573932230741
+          0.42000000012875605
         ],
         "cameraHeight": 2.4000000762939453,
         "lookAt": [
           0,
           12.36194451712496,
-          7.5858067627638945
+          -0.4515864601814492
         ],
         "pivot": [
           0,
@@ -1076,16 +1076,16 @@
           0.9961944440831013,
           -0.08715864603102053
         ],
-        "boomLength": 8.5,
+        "boomLength": 0.9481033015491792,
         "desiredDistance": 8.5,
         "targetDistance": 8.5,
-        "desiredLength": 8.5,
+        "desiredLength": 0.9481033015491792,
         "groundHeight": 2.0000000762939454,
         "clearance": 0.4,
         "sweepRadius": 0.28,
         "characterScreen": [
           0.5,
-          8.074218215744269
+          1.4036982209711328
         ]
       }
     ],
@@ -1098,11 +1098,302 @@
     "radius": 0.6273078094375011,
     "clearance": 0.6673078094375011
   },
+  "groundApproach": [
+    {
+      "height": 0,
+      "fps": 30,
+      "samples": [
+        {
+          "degrees": 15,
+          "distance": 8.43428257804966,
+          "opacity": 1
+        },
+        {
+          "degrees": 25,
+          "distance": 7.841738896059124,
+          "opacity": 1
+        },
+        {
+          "degrees": 35,
+          "distance": 6.639051006292608,
+          "opacity": 1
+        },
+        {
+          "degrees": 45,
+          "distance": 5.081834667583816,
+          "opacity": 1
+        },
+        {
+          "degrees": 55,
+          "distance": 3.425705638766455,
+          "opacity": 0.8812499999999994
+        },
+        {
+          "degrees": 65,
+          "distance": 1.9262796786742293,
+          "opacity": 0.3587499999999998
+        },
+        {
+          "degrees": 75,
+          "distance": 0.8391725461408419,
+          "opacity": 0.05022397739521806
+        },
+        {
+          "degrees": 85,
+          "distance": 0.42,
+          "opacity": 0
+        }
+      ],
+      "restored": true
+    },
+    {
+      "height": 0,
+      "fps": 60,
+      "samples": [
+        {
+          "degrees": 15,
+          "distance": 8.43428257804966,
+          "opacity": 1
+        },
+        {
+          "degrees": 25,
+          "distance": 7.841738896059124,
+          "opacity": 1
+        },
+        {
+          "degrees": 35,
+          "distance": 6.639051006292608,
+          "opacity": 1
+        },
+        {
+          "degrees": 45,
+          "distance": 5.081834667583816,
+          "opacity": 1
+        },
+        {
+          "degrees": 55,
+          "distance": 3.425705638766455,
+          "opacity": 0.8812499999999994
+        },
+        {
+          "degrees": 65,
+          "distance": 1.9262796786742293,
+          "opacity": 0.3587499999999998
+        },
+        {
+          "degrees": 75,
+          "distance": 0.8391725461408419,
+          "opacity": 0.05022397739521806
+        },
+        {
+          "degrees": 85,
+          "distance": 0.42,
+          "opacity": 0
+        }
+      ],
+      "restored": true
+    },
+    {
+      "height": 0,
+      "fps": 120,
+      "samples": [
+        {
+          "degrees": 15,
+          "distance": 8.43428257804966,
+          "opacity": 1
+        },
+        {
+          "degrees": 25,
+          "distance": 7.841738896059124,
+          "opacity": 1
+        },
+        {
+          "degrees": 35,
+          "distance": 6.639051006292608,
+          "opacity": 1
+        },
+        {
+          "degrees": 45,
+          "distance": 5.081834667583816,
+          "opacity": 1
+        },
+        {
+          "degrees": 55,
+          "distance": 3.425705638766455,
+          "opacity": 0.8812499999999994
+        },
+        {
+          "degrees": 65,
+          "distance": 1.9262796786742293,
+          "opacity": 0.3587499999999998
+        },
+        {
+          "degrees": 75,
+          "distance": 0.8391725461408419,
+          "opacity": 0.05022397739521806
+        },
+        {
+          "degrees": 85,
+          "distance": 0.42,
+          "opacity": 0
+        }
+      ],
+      "restored": true
+    },
+    {
+      "height": 2,
+      "fps": 30,
+      "samples": [
+        {
+          "degrees": 15,
+          "distance": 8.43428257804966,
+          "opacity": 1
+        },
+        {
+          "degrees": 25,
+          "distance": 7.841738896059124,
+          "opacity": 1
+        },
+        {
+          "degrees": 35,
+          "distance": 6.6390510062926085,
+          "opacity": 1
+        },
+        {
+          "degrees": 45,
+          "distance": 5.081834667583816,
+          "opacity": 1
+        },
+        {
+          "degrees": 55,
+          "distance": 3.425705638766455,
+          "opacity": 0.8812499999999994
+        },
+        {
+          "degrees": 65,
+          "distance": 1.9262796786742293,
+          "opacity": 0.3587499999999998
+        },
+        {
+          "degrees": 75,
+          "distance": 0.8391725461408419,
+          "opacity": 0.05022397739521806
+        },
+        {
+          "degrees": 85,
+          "distance": 0.42,
+          "opacity": 0
+        }
+      ],
+      "restored": true
+    },
+    {
+      "height": 2,
+      "fps": 60,
+      "samples": [
+        {
+          "degrees": 15,
+          "distance": 8.43428257804966,
+          "opacity": 1
+        },
+        {
+          "degrees": 25,
+          "distance": 7.841738896059124,
+          "opacity": 1
+        },
+        {
+          "degrees": 35,
+          "distance": 6.6390510062926085,
+          "opacity": 1
+        },
+        {
+          "degrees": 45,
+          "distance": 5.081834667583816,
+          "opacity": 1
+        },
+        {
+          "degrees": 55,
+          "distance": 3.425705638766455,
+          "opacity": 0.8812499999999994
+        },
+        {
+          "degrees": 65,
+          "distance": 1.9262796786742293,
+          "opacity": 0.3587499999999998
+        },
+        {
+          "degrees": 75,
+          "distance": 0.8391725461408419,
+          "opacity": 0.05022397739521806
+        },
+        {
+          "degrees": 85,
+          "distance": 0.42,
+          "opacity": 0
+        }
+      ],
+      "restored": true
+    },
+    {
+      "height": 2,
+      "fps": 120,
+      "samples": [
+        {
+          "degrees": 15,
+          "distance": 8.43428257804966,
+          "opacity": 1
+        },
+        {
+          "degrees": 25,
+          "distance": 7.841738896059124,
+          "opacity": 1
+        },
+        {
+          "degrees": 35,
+          "distance": 6.6390510062926085,
+          "opacity": 1
+        },
+        {
+          "degrees": 45,
+          "distance": 5.081834667583816,
+          "opacity": 1
+        },
+        {
+          "degrees": 55,
+          "distance": 3.425705638766455,
+          "opacity": 0.8812499999999994
+        },
+        {
+          "degrees": 65,
+          "distance": 1.9262796786742293,
+          "opacity": 0.3587499999999998
+        },
+        {
+          "degrees": 75,
+          "distance": 0.8391725461408419,
+          "opacity": 0.05022397739521806
+        },
+        {
+          "degrees": 85,
+          "distance": 0.42,
+          "opacity": 0
+        }
+      ],
+      "restored": true
+    }
+  ],
   "cornerVolume": {
     "hitFrames": 109,
     "temporalFrames": 2,
     "contractedLength": 2.365570268630981,
     "nextRecoveryLength": 2.9493384407450316
+  },
+  "movingCollision": {
+    "frames": 720,
+    "movingStalls": 0,
+    "movingTemporal": 59,
+    "movingMaxGap": 8.007235933252677,
+    "recoveredLength": 8.499999999999666
   },
   "avatarFade": {
     "nearAndCenterTriggers": true,

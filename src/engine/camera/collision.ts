@@ -15,10 +15,12 @@ const START_OVERLAP_EPSILON = 1e-4;
  * 朝外或沿墙则可正常恢复，旋转不再被起点重叠卡死。
  */
 export class CameraCollision {
-  private readonly previousPosition = new THREE.Vector3();
+  private readonly previousOffset = new THREE.Vector3();
   private readonly previousPivot = new THREE.Vector3();
   private readonly direction = new THREE.Vector3();
   private readonly temporalDirection = new THREE.Vector3();
+  private readonly temporalStart = new THREE.Vector3();
+  private readonly temporalPoint = new THREE.Vector3();
   private readonly armDirection = new THREE.Vector3();
   private readonly origin = new THREE.Vector3();
   private readonly safePosition = new THREE.Vector3();
@@ -103,31 +105,35 @@ export class CameraCollision {
 
     this.lastTemporalHit = null;
     const reset = this.revision !== follow.revision || this.previousPivot.distanceTo(follow.pivot) > 2;
-    if (!reset) {
-      // 防止一次快速拖拽的两个安全端点之间穿过墙角。
-      const pathLength = this.previousPosition.distanceTo(this.safePosition);
-      const temporal = this.cast(world, this.previousPosition, this.safePosition, exclude,
-        true, this.sphere, this.temporalDirection);
+    // 帧间扫掠只用于快速拖拽或移动中可能跨过墙角的少量帧：起点随角色平移，
+    // 修正结果也必须落回当前“角色→期望机位”的镜臂上。旧实现把上一帧的世界坐标
+    // 当作固定端点，角色贴墙时会被逐帧锁在同一处，最终离开画面。
+    if (!reset && !this.lastPrimaryStartOverlap) {
+      this.temporalStart.copy(follow.pivot).add(this.previousOffset);
+      const pathLength = this.temporalStart.distanceTo(this.safePosition);
+      const temporal = pathLength > 0.00001
+        ? this.cast(world, this.temporalStart, this.safePosition, exclude, true, this.sphere,
+          this.temporalDirection)
+        : null;
       if (temporal && temporal.time_of_impact < pathLength) {
         this.lastTemporalHit = temporal.time_of_impact;
-        this.safePosition.copy(this.previousPosition).addScaledVector(this.temporalDirection,
-          Math.max(0, this.lastTemporalHit - CAMERA.collisionSkin));
-        const arm = this.cast(world, follow.pivot, this.safePosition, exclude, false, this.sphere);
-        if (arm && arm.time_of_impact > START_OVERLAP_EPSILON) {
-          // 帧间安全点不一定落在当前期望臂方向上，沿实际“人物→安全点”方向回缩。
-          this.armDirection.copy(this.safePosition).sub(follow.pivot);
-          const armLength = this.armDirection.length();
-          if (armLength > 0.00001) {
-            this.armDirection.divideScalar(armLength);
-            this.safePosition.copy(follow.pivot).addScaledVector(this.armDirection,
-              Math.max(0, arm.time_of_impact - CAMERA.collisionSkin));
-          }
+        this.temporalPoint.copy(this.temporalStart).addScaledVector(this.temporalDirection,
+          Math.max(0, this.lastTemporalHit));
+        // 只允许沿当前镜臂缩短，不把相机放到角色当前解之外的旧世界位置。
+        this.armDirection.copy(follow.desiredPosition).sub(follow.pivot);
+        const armLength = this.armDirection.length();
+        if (armLength > 0.00001) {
+          this.armDirection.divideScalar(armLength);
+          const projected = this.temporalPoint.sub(follow.pivot).dot(this.armDirection) -
+            CAMERA.collisionSkin;
+          const limited = THREE.MathUtils.clamp(projected, 0, length);
+          if (limited < length) follow.positionAtLength(limited, this.safePosition);
         }
       }
     }
     follow.commit(this.safePosition);
-    this.previousPosition.copy(follow.camera.position);
     this.previousPivot.copy(follow.pivot);
+    this.previousOffset.copy(follow.camera.position).sub(follow.pivot);
     this.revision = follow.revision;
   }
 

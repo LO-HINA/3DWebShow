@@ -1,0 +1,35 @@
+{
+  "cameraRelativeMovement": "four headings, diagonal normalization and analog magnitude passed",
+  "response": {
+    "speed": 10,
+    "fullSpeedWithinSeconds": 0.16666666666666666,
+    "stoppedWithinSeconds": 0.13333333333333333,
+    "stopDistanceMeters": 0.5444289502911619
+  },
+  "lowFpsTravel": {
+    "seconds": 2,
+    "distances": {
+      "1": 19.250006744638085,
+      "2": 19.250006744638085,
+      "5": 19.250006744638085,
+      "10": 19.250006744638085,
+      "20": 19.250006744638085,
+      "30": 19.250006744638085,
+      "60": 19.250006744638085,
+      "144": 19.250006744638085
+    },
+    "longStallSteps": 60
+  },
+  "singleMovementSpeed": {
+    "speed": 10,
+    "legacySprintIgnored": true,
+    "diagonalNotFaster": true,
+    "oneSecondDistance": 9.249896639958024
+  },
+  "jump": {
+    "heightMeters": 1.2667666703273426,
+    "ceilingLimitedHeightMeters": 0.4849473686699639,
+    "checks": "takeoff, air steering, no double jump, landing, repeat after landing, ceiling collision"
+  },
+  "wallSlide": "capsule blocked; actual speed zero; diagonal input slides along wall"
+}

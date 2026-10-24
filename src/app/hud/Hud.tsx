@@ -81,7 +81,7 @@ export function Hud(): React.JSX.Element {
       <div className="hud__bottom">
         <div className="hud__legend">
           <span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> 行走</span>
-          <span><kbd>Shift</kbd> 冲刺 · <kbd>空格</kbd> 跳跃</span>
+          <span><kbd>空格</kbd> 跳跃</span>
           <span className="hud__legend-divider" aria-hidden="true" />
           <span>拖动 自由环视 · 滚轮 调距离 · R 复位</span>
           <span className="hud__legend-divider" aria-hidden="true" />

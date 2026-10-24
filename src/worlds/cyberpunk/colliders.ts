@@ -1,6 +1,7 @@
-import type { ColliderSpec, CylinderColliderSpec } from '../../engine/contracts/types';
-import { buildings, frames, benches, planters, lamps, plazaScreen } from './layout';
+import type { ColliderSpec } from '../../engine/contracts/types';
+import { buildings, frames, benches, planters, lamps, landmark, plazaScreen, MEDIA_TOWER } from './layout';
 import { createPlazaScreenColliders } from './props/plazaScreenConfig';
+import { createOrreryColliders } from './props/orreryConfig';
 
 function colliders(): ColliderSpec[] {
   const list: ColliderSpec[] = [];
@@ -25,15 +26,28 @@ function colliders(): ColliderSpec[] {
     });
   }
 
-  const sculpture: CylinderColliderSpec = {
-    kind: 'cylinder',
-    id: 'LM-01:base',
-    center: [0, 0.52, 0],
-    radius: 1.9,
-    halfHeight: 0.52,
-  };
-  list.push(sculpture);
+  list.push(...createOrreryColliders(landmark));
   list.push(...createPlazaScreenColliders(plazaScreen));
+
+  // 媒体塔：裙房与塔身分别给碰撞体，塔身高出街区但仍可绕行。
+  list.push({
+    kind: 'box',
+    id: `${MEDIA_TOWER.id}:podium`,
+    center: [MEDIA_TOWER.position[0], MEDIA_TOWER.podium.height / 2, MEDIA_TOWER.position[2]],
+    size: [MEDIA_TOWER.podium.width, MEDIA_TOWER.podium.height, MEDIA_TOWER.podium.depth],
+    yawRad: MEDIA_TOWER.yawRad,
+  });
+  list.push({
+    kind: 'box',
+    id: `${MEDIA_TOWER.id}:shaft`,
+    center: [
+      MEDIA_TOWER.position[0],
+      MEDIA_TOWER.shaft.base + MEDIA_TOWER.shaft.height / 2,
+      MEDIA_TOWER.position[2],
+    ],
+    size: [MEDIA_TOWER.shaft.width, MEDIA_TOWER.shaft.height, MEDIA_TOWER.shaft.depth],
+    yawRad: MEDIA_TOWER.yawRad,
+  });
 
   for (const bench of benches) {
     list.push({

@@ -1,0 +1,13 @@
+{
+  "status": "failed",
+  "url": "http://127.0.0.1:5173/world",
+  "viewport": [
+    1600,
+    900
+  ],
+  "backend": "Edge headless / SwiftShader (not physical GPU)",
+  "captures": [],
+  "errors": [],
+  "samples": [],
+  "error": "PermissionError: [WinError 5] 拒绝访问。"
+}

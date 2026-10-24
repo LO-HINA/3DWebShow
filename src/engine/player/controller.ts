@@ -9,7 +9,6 @@ export interface MovementBounds { min: number; max: number }
 export interface MoveInput {
   x: number;
   z: number;
-  sprint?: boolean;
 }
 
 /** 物理按真实经过时间补步，渲染阻尼的 delta 限制不影响移动速度。 */
@@ -209,7 +208,7 @@ export class PlayerController {
     if (active) {
       // 归一化后保持恒定速度，斜向不会更快。
       this.moveDir.set(input.x / length, 0, input.z / length);
-      this.moveDir.multiplyScalar((input.sprint ? PLAYER.sprintSpeed : PLAYER.speed) * Math.min(1, length));
+      this.moveDir.multiplyScalar(PLAYER.speed * Math.min(1, length));
     }
     const maxChange = (active ? PLAYER.acceleration : PLAYER.deceleration) * delta;
     const change = this.desired.copy(this.moveDir).sub(this.velocity);
@@ -263,7 +262,7 @@ export class PlayerController {
       const turn = shortestAngle(this.yawRad, targetYaw) * (1 - Math.exp(-delta * turnLambda));
       this.yawRad += THREE.MathUtils.clamp(turn, -12 * delta, 12 * delta);
     }
-    this.speedRatio = Math.min(PLAYER.sprintSpeed / PLAYER.speed, speed / PLAYER.speed);
+    this.speedRatio = Math.min(1, speed / PLAYER.speed);
     this.moving = this.speedRatio > 0.015;
   }
 

@@ -90,8 +90,8 @@ export function SettingsPanel(): React.JSX.Element {
           </button>
         </div>
         <p className="setting-note">
-          精细模式：DPR ≤ {QUALITY.high.dprCap}、{QUALITY.high.shadowMapSize}px 阴影；
-          流畅模式关闭实时阴影并降低像素比。
+          精细模式：DPR ≤ {QUALITY.high.dprCap}、{QUALITY.high.shadowMapSize}px 阴影，并开启窗光辉光与湿地面反射；
+          流畅模式关闭这些光影增强并降低像素比。
         </p>
       </section>
 

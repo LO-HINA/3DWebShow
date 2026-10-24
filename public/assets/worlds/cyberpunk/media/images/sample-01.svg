@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#050a14"/>
+      <stop offset="0.55" stop-color="#0a1626"/>
+      <stop offset="1" stop-color="#04070d"/>
+    </linearGradient>
+    <radialGradient id="orb" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#bff8ff" stop-opacity="0.95"/>
+      <stop offset="0.35" stop-color="#39d7ff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#00a6ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="beam" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#00f0ff" stop-opacity="0"/>
+      <stop offset="0.55" stop-color="#00f0ff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#d8fbff" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <g opacity="0.28" stroke="#3ba9d8" stroke-width="1">
+    <path d="M0 150H1600M0 300H1600M0 450H1600M0 600H1600M0 750H1600"/>
+    <path d="M200 0V900M400 0V900M600 0V900M800 0V900M1000 0V900M1200 0V900M1400 0V900"/>
+  </g>
+  <circle cx="1160" cy="330" r="310" fill="url(#orb)"/>
+  <g stroke="url(#beam)" stroke-width="3">
+    <path d="M420 900V250"/>
+    <path d="M520 900V360"/>
+    <path d="M640 900V190"/>
+    <path d="M760 900V420"/>
+    <path d="M900 900V300"/>
+  </g>
+  <g fill="#d9f7ff">
+    <rect x="418" y="240" width="6" height="26"/>
+    <rect x="638" y="180" width="6" height="26"/>
+    <rect x="898" y="290" width="6" height="26"/>
+  </g>
+  <text x="120" y="160" fill="#8fe9ff" font-family="Segoe UI, Arial, sans-serif" font-size="26" letter-spacing="14">LOHINA MEDIA FACADE</text>
+  <text x="116" y="290" fill="#f2fbff" font-family="Segoe UI, Arial, sans-serif" font-size="110" font-weight="600">媒体立面</text>
+  <text x="120" y="360" fill="#6fdcff" font-family="Segoe UI, Arial, sans-serif" font-size="34" letter-spacing="6">REPLACE THIS IMAGE IN images/</text>
+  <text x="120" y="820" fill="#9db8c9" font-family="Segoe UI, Arial, sans-serif" font-size="24">示例图片 01 · 1600 × 900 · 可在 manifest.json 中替换</text>
+  <rect x="24" y="24" width="1552" height="852" fill="none" stroke="#2f7fa8" stroke-width="2" opacity="0.7"/>
+</svg>

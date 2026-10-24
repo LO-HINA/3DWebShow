@@ -7,6 +7,7 @@ export const frameLocations: Record<string, string> = {
 };
 
 export const portalLocations: Record<string, string> = {
+  'LM-01-CONSOLE':'中央广场 · 天体仪出生庭',
   'E-01': '西侧 · 视觉与摄影馆',
   'E-02': '西侧 · 前端与算法学习馆',
   'E-03': '东侧 · AI 终端亭',

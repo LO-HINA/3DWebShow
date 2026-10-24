@@ -78,6 +78,47 @@ for (const x of [-1, 1]) for (const y of [-1, 1]) {
 report.wideNearPlane = { aspect: 12, radius: wide.follow.sweepRadius, clearance: wide.follow.clearance };
 wide.world.free();
 
+// 真实地面碰撞下逐步抬头：触地后连续靠近、保持净空，反拖恢复原取景。
+const approachSamples: object[] = [];
+for (const height of [0, 2]) for (const fps of [30, 60, 120]) {
+  const t = setup(height);
+  const avatar = new THREE.Group();
+  const material = new THREE.MeshStandardMaterial();
+  avatar.add(new THREE.Mesh(new THREE.CapsuleGeometry(0.3, 1), material));
+  const fading = new AvatarFade(avatar);
+  let previousDistance = Infinity;
+  let previousOpacity = 1;
+  const samples: object[] = [];
+  for (const degrees of [15, 25, 35, 45, 55, 65, 75, 85]) {
+    const saved = t.follow.snapshot();
+    t.follow.reset(t.feet, { ...saved, pitch: -degrees * Math.PI / 180 });
+    for (let i = 0; i < fps; i++) {
+      t.frame(1 / fps); t.safe();
+      fading.update(1 / fps, t.follow.camera, t.feet);
+    }
+    const distance = Math.hypot(t.follow.camera.position.x, t.follow.camera.position.z);
+    const opacity = (fading.diagnostics() as { opacity: number }).opacity;
+    assert.ok(distance <= previousDistance + 1e-5, 'ground approach moved away from the feet');
+    assert.ok(opacity <= previousOpacity + 0.001, 'avatar became opaque while approaching');
+    close(t.follow.camera.position.y, height + CAMERA.groundClearance, 0.015);
+    previousDistance = distance; previousOpacity = opacity;
+    samples.push({ degrees, distance, opacity });
+  }
+  close(previousDistance, CAMERA.groundApproachDistance, 0.01);
+  assert.ok(previousOpacity < 0.01, 'avatar did not fade at the feet');
+  t.follow.orbit(0, 1000);
+  t.follow.setFraming('medium');
+  for (let i = 0; i < fps * 3; i++) {
+    t.frame(1 / fps); t.safe(); fading.update(1 / fps, t.follow.camera, t.feet);
+  }
+  close(t.follow.snapshot().distance, CAMERA.framings.medium.distance);
+  close((fading.diagnostics() as { opacity: number }).opacity, 1, 0.001);
+  approachSamples.push({ height, fps, samples, restored: true });
+  fading.dispose(); material.dispose();
+  t.world.free();
+}
+report.groundApproach = approachSamples;
+
 const corner = setup();
 corner.world.createCollider(RAPIER.ColliderDesc.cuboid(0.35, 4, 5).setTranslation(-3, 4, 0));
 corner.world.createCollider(RAPIER.ColliderDesc.cuboid(4, 4, 0.35).setTranslation(0, 4, -3));
@@ -108,6 +149,55 @@ for (let i = 0; i < 100; i++) { corner.frame(); corner.safe(); }
 close(corner.follow.resolvedLength, 8.5, 0.001);
 report.cornerVolume = { hitFrames, temporalFrames, contractedLength: before, nextRecoveryLength: recovery };
 corner.world.free();
+
+// 移动中的碰撞回归：角色贴着建筑外墙走、绕过墙角，再离开障碍。
+// 相机必须在每一帧跟随角色当前位置，不能停留在上一帧的世界坐标。
+const moving = setup();
+moving.world.createCollider(RAPIER.ColliderDesc.cuboid(4, 4, 4).setTranslation(0, 4, 0));
+moving.world.step();
+const movingFeet = new THREE.Vector3(4.28, 0, 0);
+moving.follow.reset(movingFeet);
+// 镜臂朝东，正对建筑；角色绕到哪一面，都对着一堵墙或墙角。
+moving.follow.snapTo(Math.PI / 2, 0.22, CAMERA.framings.medium.distance, movingFeet);
+const previousCamera = moving.follow.camera.position.clone();
+const previousFeet = movingFeet.clone();
+let movingStalls = 0, movingTemporal = 0, movingMaxGap = 0;
+const radius = 4.28;
+const perimeter = radius * 8;
+for (let i = 0; i < 720; i++) {
+  // 逆时针绕建筑一周，距墙面 0.28m（与角色胶囊半径一致）。
+  const s = (i * 0.03) % perimeter;
+  const side = Math.min(3, Math.floor(s / (radius * 2)));
+  const t = s % (radius * 2);
+  if (side === 0) movingFeet.set(radius, 0, -radius + t);
+  else if (side === 1) movingFeet.set(radius - t, 0, radius);
+  else if (side === 2) movingFeet.set(-radius, 0, radius - t);
+  else movingFeet.set(-radius + t, 0, -radius);
+  moving.follow.update(1 / 60, movingFeet, { reducedMotion: false });
+  moving.collision.update(moving.world, moving.follow, moving.exclude, 1 / 60);
+  const stats = moving.collision.diagnostics() as { temporalHit: number | null };
+  if (stats.temporalHit !== null) movingTemporal++;
+  const feetMoved = Math.hypot(movingFeet.x - previousFeet.x, movingFeet.z - previousFeet.z);
+  const cameraMoved = Math.hypot(moving.follow.camera.position.x - previousCamera.x,
+    moving.follow.camera.position.z - previousCamera.z);
+  if (feetMoved > 0.005 && cameraMoved < 1e-5) movingStalls++;
+  movingMaxGap = Math.max(movingMaxGap, Math.hypot(moving.follow.camera.position.x - moving.follow.pivot.x,
+    moving.follow.camera.position.z - moving.follow.pivot.z));
+  previousCamera.copy(moving.follow.camera.position);
+  previousFeet.copy(movingFeet);
+}
+assert.equal(movingStalls, 0, 'camera stayed at a fixed world position while the character moved');
+assert.ok(movingMaxGap <= CAMERA.framings.medium.distance + 0.01, 'moving camera left the current arm');
+// 离开建筑后，镜臂应平滑恢复到用户设定的距离。
+for (let i = 0; i < 420; i++) {
+  movingFeet.z += 0.04;
+  moving.follow.update(1 / 60, movingFeet, { reducedMotion: false });
+  moving.collision.update(moving.world, moving.follow, moving.exclude, 1 / 60);
+}
+close(moving.follow.resolvedLength, CAMERA.framings.medium.distance, 0.05);
+report.movingCollision = { frames: 720, movingStalls, movingTemporal, movingMaxGap,
+  recoveredLength: moving.follow.resolvedLength };
+moving.world.free();
 
 const root = new THREE.Group();
 const source = new THREE.MeshStandardMaterial();
@@ -145,7 +235,7 @@ for (const distance of [0.72, 0.95, 0.73, 0.9]) {
   state = tickFade(new THREE.Vector3(distance, 0.8, 0), new THREE.Vector3(distance, 0.8, 10), 1);
   assert.equal(state.fading, true, 'hysteresis did not hold');
 }
-state = tickFade(new THREE.Vector3(1.1, 0.8, 0), new THREE.Vector3(1.1, 0.8, 10));
+state = tickFade(new THREE.Vector3(3.2, 0.8, 0), new THREE.Vector3(3.2, 0.8, 10));
 assert.equal(state.fading, false); assert.ok(state.opacity > 0.99);
 close(source.opacity, 1); assert.equal(source.transparent, false); assert.equal(source.depthWrite, true);
 assert.equal(sharedCityMesh.material, source);

@@ -1,6 +1,6 @@
 /** 几何投影方案图，不是 WebGL 截图；两档共用当前出生相机。 */
 import * as THREE from 'three';
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { ART_CURTAIN_CANDIDATES, PROPOSED_SCULPTURE_POSITION, createArtCurtainProposal } from '../src/worlds/cyberpunk/props/artCurtainProposal';
 import { buildings, paths, SPAWN } from '../src/worlds/cyberpunk/layout';
 import { FollowCamera } from '../src/engine/camera/follow';
@@ -13,7 +13,8 @@ const out = 'docs/plaza-screen-review/proposal';
 mkdirSync(out, { recursive: true });
 const follow = new FollowCamera(1440 / 900); follow.reset(new THREE.Vector3(...SPAWN.feet));
 const camera = follow.camera;
-const project = (v: THREE.Vector3) => { const p = v.clone().project(camera); return [720 * (1 + p.x), 450 * (1 - p.y), p.z]; };
+const project = (v: THREE.Vector3) => { const p = v.clone().project(camera); return [720 * (1 + p.x), 450 * (1 - p.y), p.z,
+  -v.clone().applyMatrix4(camera.matrixWorldInverse).z]; };
 const point = (p: number[]) => `${p[0].toFixed(2)},${p[1].toFixed(2)}`;
 const report: object[] = [];
 for (const spec of ART_CURTAIN_CANDIDATES) {
@@ -39,6 +40,7 @@ for (const spec of ART_CURTAIN_CANDIDATES) {
   avatar.position.set(SPAWN.feet[0], 0.8, SPAWN.feet[2]);scene.add(avatar);
   scene.updateMatrixWorld(true);
   const faces: { z: number; svg: string }[] = [];
+  const triangles: { points: number[][]; color: string }[] = [];
   scene.traverse(object => {
     if (!(object instanceof THREE.Mesh) || !object.visible) return;
     const material = object.material as THREE.MeshStandardMaterial;
@@ -48,16 +50,20 @@ for (const spec of ART_CURTAIN_CANDIDATES) {
     for (let i = 0; i < count; i += 3) {
       const v = [0, 1, 2].map(k => new THREE.Vector3().fromBufferAttribute(p, index ? index.getX(i + k) : i + k).applyMatrix4(object.matrixWorld));
       const normal = v[1].clone().sub(v[0]).cross(v[2].clone().sub(v[0])).normalize();
+      if (object.matrixWorld.determinant() < 0) normal.negate();
       if (normal.dot(camera.position.clone().sub(v[0])) <= 0) continue;
       const ps = v.map(project); if (ps.some(p => p[2] < -1 || p[2] > 1)) continue;
       if (ps.every(p => p[0] < 0 || p[0] > 1440 || p[1] < 0 || p[1] > 900)) continue;
       const lit = material instanceof THREE.MeshBasicMaterial ? 1 : 0.48 + 0.5 * Math.max(0, normal.dot(new THREE.Vector3(-0.4, 0.8, 0.6).normalize()));
       const color = material.color.clone().multiplyScalar(lit).getHexString();
+      triangles.push({ points: ps, color });
       faces.push({ z: ps.reduce((a, p) => a + p[2], 0) / 3, svg: `<path d="M${ps.map(point).join('L')}Z" fill="#${color}" stroke="#${color}" stroke-width=".35"/>` });
     }
   });
   const cover = readFileSync(`public${spec.imageUrl}`, 'utf8');
-  const href = `data:image/svg+xml;base64,${Buffer.from(cover).toString('base64')}`;
+  const raster = `${out}/cover.png`;
+  const href = existsSync(raster) ? `data:image/png;base64,${readFileSync(raster).toString('base64')}` :
+    `data:image/svg+xml;base64,${Buffer.from(cover).toString('base64')}`;
   const yTop = (spec.bottom ?? 1.2) + spec.height;
   const worldZ = spec.position[2] + (spec.depth ?? 0.64) / 2 + 0.035;
   const pos = (u: number, v: number) => project(new THREE.Vector3(spec.position[0] - spec.width / 2 + u / 1920 * spec.width,
@@ -73,6 +79,7 @@ for (const spec of ART_CURTAIN_CANDIDATES) {
   faces.push({ z: pos(960, 540)[2], svg: strips });
   faces.sort((a, b) => b.z - a.z);
   const corners = [pos(0, 0), pos(1920, 0), pos(1920, 1080), pos(0, 1080)];
+  writeFileSync(`.camera-preview/curtain-${spec.width}-triangles.json`, JSON.stringify({ triangles, cover: corners }));
   writeFileSync(`${out}/${spec.width}m.svg`, `<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900"><defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#141829"/><stop offset="1" stop-color="#394565"/></linearGradient></defs><rect width="1440" height="900" fill="url(#sky)"/><path d="M0 340H1440V900H0Z" fill="#232b3b"/>${faces.map(f=>f.svg).join('')}<g font-family="sans-serif" fill="#eee0cc"><rect x="24" y="794" width="660" height="78" fill="#101725"/><text x="44" y="825" font-size="22">${spec.width}m × ${spec.height}m / 同出生机位</text><text x="44" y="852" font-size="15">几何投影方案图 · 非运行截图 · 建筑仅表示现有包围体</text></g></svg>`);
   report.push({ width: spec.width, camera: camera.position.toArray(), quaternion: camera.quaternion.toArray(), fov: camera.fov,
     corners, fullScreenInsideFrame: corners.every(p=>p[0]>=0&&p[0]<=1440&&p[1]>=0&&p[1]<=900),

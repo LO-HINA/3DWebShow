@@ -5,6 +5,8 @@ export * from './exhibits';
 export * from './colliders';
 export { createMaterials, type MaterialBundle } from './materials';
 export { createBuildings } from './buildings/buildings';
+export { createMediaTower, type MediaTowerHandle } from './buildings/mediaTower';
+export { loadMediaManifest, type MediaManifest } from './media';
 export { createFrames, createGround, createLandmark, createMotes, createProps, createSky, createVoidCity,
   type LandmarkHandle, type VoidCityHandle } from './props/street';
 export * from './presentation';

@@ -1,6 +1,6 @@
 export type Vec3 = [number, number, number];
 
-export type RoutePath = '/world/gallery' | '/world/learning' | '/world/ai-lab';
+export type RoutePath = '/world/gallery' | '/world/learning' | '/world/ai-lab' | '/world/observatory';
 
 
 export type Accent = 'gold' | 'cyan';

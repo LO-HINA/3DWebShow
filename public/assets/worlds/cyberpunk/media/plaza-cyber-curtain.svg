@@ -1,16 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
  <defs>
-  <linearGradient id="night" x2="0" y2="1"><stop stop-color="#121b36"/><stop offset="1" stop-color="#36415b"/></linearGradient>
-  <linearGradient id="portal"><stop stop-color="#d7f5f0"/><stop offset=".48" stop-color="#9eb8be"/><stop offset="1" stop-color="#eeb68c"/></linearGradient>
-  <linearGradient id="road" x2="0" y2="1"><stop stop-color="#9f897a"/><stop offset="1" stop-color="#28394a"/></linearGradient>
+  <linearGradient id="night" x1="0%" y1="0%" x2="0%" y2="100%"><stop stop-color="#121b36"/><stop offset="1" stop-color="#36415b"/></linearGradient>
+  <linearGradient id="portal" x1="0%" y1="0%" x2="100%" y2="0%"><stop stop-color="#d7f5f0"/><stop offset=".48" stop-color="#9eb8be"/><stop offset="1" stop-color="#eeb68c"/></linearGradient>
+  <linearGradient id="road" x1="0%" y1="0%" x2="0%" y2="100%"><stop stop-color="#9f897a"/><stop offset="1" stop-color="#28394a"/></linearGradient>
  </defs>
- <path fill="url(#night)" d="M0 0h1920v1080H0z"/>
+ <path fill="#22314b" d="M0 0h1920v1080H0z"/>
  <circle cx="1215" cy="430" r="253" fill="#e7ad81" opacity=".83"/>
  <path d="M1020 214h390v486h-390z" fill="#233648"/>
- <path d="M1080 275h270v425h-270z" fill="url(#portal)"/>
+ <path d="M1080 275h270v425h-270z" fill="#b3ced0"/>
  <path d="M-50 1080 758 460h132L360 1080Z" fill="#556779"/>
  <path d="m1920 1080-584-620h-110l378 620Z" fill="#60747d"/>
- <path d="m610 1080 510-450h140l240 450Z" fill="url(#road)"/>
+ <path d="m610 1080 510-450h140l240 450Z" fill="#4d6471"/>
  <path d="M90 880V320h240v560M400 720V145h180v575M685 600V280h124v320" fill="#172538" stroke="#67737d" stroke-width="3"/>
  <path d="M1490 720V110h155v610M1700 900V260h220v640" fill="#1b2a3c" stroke="#7b7c7d" stroke-width="3"/>
  <path d="M140 390v330m48-330v330m270-500v300m42-300v300m1040-335v330m45-330v330m180-180v360m45-360v360" stroke="#dca985" stroke-width="5" opacity=".65"/>

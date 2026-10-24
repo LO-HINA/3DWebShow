@@ -1,5 +1,7 @@
 # 角色运动打磨记录
 
+> 2026-10-23 补记：下文的 `spawn EPERM` 构建失败只属于当时受限会话；当前工作树 `npm run build` 已通过。连续录屏、真实 GPU 手感与移动端体验仍未验收。
+
 本轮保留现有风衣、围巾、护目镜和简洁几何风格。没有修改建筑、地形、地图布局，也没有提高既有的 6m/s 默认速度或 10m/s 冲刺速度。镜头跟随参数保持原值。
 
 ## 问题定位与改动
@@ -12,7 +14,7 @@
 | 高低帧率下动画节奏不统一 | 在每个物理子步调用动画，部分渲染帧不更新动画，低帧率一帧又更新多次 | 物理子步只记录位移、速度、朝向、累计路程和着地事件；每个渲染帧插值根节点，再调用一次角色动画 |
 | 镜头似乎拖延 | 角色根插值与动画更新节奏不一致，容易把脚滑误认为镜头滞后 | 验证相机锚点严格使用插值根节点，不使用骨盆晃动，也不新增位置跟随缓动；固定侧面机位用于隔离镜头影响 |
 
-核心实现是 [gait.ts](../../src/world/engine/gait.ts)、[player.ts](../../src/world/engine/player.ts) 和 [controller.ts](../../src/world/engine/controller.ts)。
+核心实现是 [gait.ts](../../src/engine/player/gait.ts)、[controller.ts](../../src/engine/player/controller.ts) 和 [avatar.ts](../../src/engine/player/avatar.ts)；本轮早期路径中的 `player.ts` 已在目录迁移时拆分，对应关系见 [PROJECT_STRUCTURE.md](../PROJECT_STRUCTURE.md)。
 
 ## 步态与衔接
 

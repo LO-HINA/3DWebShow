@@ -1,6 +1,10 @@
 import type { BuildingSpec } from './types';
 import type { Vec3, ZoneSpec } from '../../engine/contracts/types';
 import type { PlazaScreenSpec } from './props/plazaScreenConfig';
+import type { OrrerySpec } from './props/orreryConfig';
+
+// LM-01 trial size; position intentionally retained until the user's layout pass.
+export const landmark: OrrerySpec = {id:'LM-01',position:[0,0,0],width:14,height:11.8};
 
 // 暂定整合位置：雕塑北侧，正面朝南；两支撑间保留约 4.9m 的通行空间。
 export const plazaScreen: PlazaScreenSpec = {
@@ -11,18 +15,24 @@ export const plazaScreen: PlazaScreenSpec = {
 };
 
 export const WORLD_NAME = 'LOHINA WORLD';
-export const LAYOUT_VERSION = 'lohina-block-v1-2026-10-22';
+export const LAYOUT_VERSION = 'lohina-block-v1-2026-10-24-observatory-workshop';
 export const SNAPSHOT_KEY = 'lohina-world:snapshot:v1';
 
 export const WORLD_BOUNDS = { min: -900, max: 900 } as const;
 
 export const SPAWN = {
-  feet: [0, 0, 6.5] as Vec3,
+  feet: [0, 0, 1] as Vec3,
   yawRad: Math.PI,
   returnAnchorId: 'SPAWN',
 };
 
 export const deg = (value: number): number => (value * Math.PI) / 180;
+
+/** Temporary same-world polishing yard. The original B-01 instance moves here. */
+export const BUILDING_WORKSHOP = {
+  buildingId:'B-01',position:[-55,0,3] as Vec3,backgroundClearRadius:32,
+  standingOffset:[0,0,14] as Vec3,
+};
 
 export const buildings: BuildingSpec[] = [
   {
@@ -54,6 +64,28 @@ export const buildings: BuildingSpec[] = [
       { slot: 'Poster_Slot_01', artworkId: 'P3', localX: -2.4, localY: 15 },
       { slot: 'Poster_Slot_02', artworkId: 'P4', localX: 2.4, localY: 15 },
     ],
+  },
+  {
+    id: 'H-01',
+    name: 'LOHINA 母版媒体楼',
+    variant: 'hero',
+    position: [0, 0, -34],
+    size: [19, 24, 7.2],
+    yawRad: 0,
+    sign: 'LOHINA',
+    subSign: '母版媒体楼 · H-01',
+    accent: 'cyan',
+  },
+  {
+    id: 'B-01',
+    name: '北岸媒体楼',
+    variant: 'heroMedia',
+    position: BUILDING_WORKSHOP.position,
+    size: [14, 40, 12],
+    yawRad: 0,
+    sign: 'NORTH',
+    subSign: '北岸媒体楼 · B-01',
+    accent: 'cyan',
   },
   {
     id: 'E-01',
@@ -89,6 +121,20 @@ export const buildings: BuildingSpec[] = [
     accent: 'cyan',
   },
 ];
+
+/**
+ * 媒体塔：广场东北侧的主视觉高楼。
+ * 正面朝向广场中心（yaw 由朝向反推），下半部为程序化霓虹流光，
+ * 上半部为视频墙与图片带。塔基不占用人行与展位。
+ */
+export const MEDIA_TOWER = {
+  id: 'T-03',
+  name: 'LOHINA 媒体塔',
+  position: [44, 0, -38] as Vec3,
+  yawRad: deg(-49),
+  podium: { width: 40, height: 16, depth: 32 },
+  shaft: { width: 30, height: 112, depth: 22, base: 16 },
+} as const;
 
 export const frames = [
   {
@@ -173,6 +219,7 @@ export const guideLines = [
 ];
 
 export const zones: ZoneSpec[] = [
+  {id:'building-workshop',label:'B-01 建筑打磨区',center:[BUILDING_WORKSHOP.position[0],BUILDING_WORKSHOP.position[2]],radius:21},
   { id: 'plaza', label: '中央广场', center: [0, 0], radius: 9 },
   { id: 'south', label: '南侧入口', center: [0, 10.5], radius: 6.5 },
   { id: 'west', label: '西侧图片街', center: [-10.5, 2], radius: 7.5 },

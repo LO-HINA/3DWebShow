@@ -1,15 +1,19 @@
 import { PLAYER } from '../engine/player/settings';
 import { QUALITY } from '../engine/core/quality';
+import { CityLook } from '../engine/core/cityLook';
 import * as THREE from 'three';
 import RAPIER from '@dimforge/rapier3d-compat';
 import {
   LAYOUT_VERSION,
   PALETTE,
+  CITY_LOOK,
   WORLD_BOUNDS,
   worldColliders,
   SPAWN,
   buildings,
+  BUILDING_WORKSHOP,
   zones,
+  MEDIA_TOWER,
 } from '../worlds/cyberpunk';
 import type {
   CameraDebugSnapshot,
@@ -22,6 +26,7 @@ import type {
 import { createMaterials, type MaterialBundle } from '../worlds/cyberpunk';
 import { mergeStaticGroup, mergeStaticScene } from '../engine/primitives/merge';
 import { createBuildings } from '../worlds/cyberpunk';
+import { createMediaTower, loadMediaManifest, type MediaTowerHandle } from '../worlds/cyberpunk';
 import {
   createFrames,
   createGround,
@@ -56,7 +61,7 @@ export interface EngineCallbacks {
 }
 
 interface FadeState {
-  materials: THREE.MeshStandardMaterial[];
+  materials: THREE.Material[];
   opacity: number;
   target: number;
 }
@@ -111,6 +116,8 @@ export class WorldEngine {
   private materialBundle!: MaterialBundle;
   private landmark!: LandmarkHandle;
   private plazaScreen?: PlazaScreenHandle;
+  private mediaTower?: MediaTowerHandle;
+  private cityLook?: CityLook;
   private sky!: THREE.Group;
   private voidCity!: VoidCityHandle;
   private rig!: PlayerRig;
@@ -132,7 +139,6 @@ export class WorldEngine {
   private lastSnapshotSave = 0;
   private lastCameraDebugCheck = 0;
   private readonly physicsStepper = new PhysicsStepper();
-  private touchSprint = false;
   private readonly stats: RenderStats = {
     frames: 0,
     elapsed: 0,
@@ -188,7 +194,7 @@ export class WorldEngine {
   async init(onProgress: (progress: number) => void): Promise<void> {
     onProgress(6);
     this.scene.background = new THREE.Color(PALETTE.skyTop);
-    this.scene.fog = new THREE.Fog(PALETTE.fogColor, 34, 112);
+    this.scene.fog = new THREE.Fog(PALETTE.fogColor, 90, 580);
 
     this.setupCamera();
 
@@ -211,6 +217,13 @@ export class WorldEngine {
         mesh.userData.buildingId = building.spec.id;
         this.occluderMeshes.push(mesh);
       }
+      for (const material of building.fadeMaterials) {
+        if (material.userData.fadeBaseTransparent === undefined) {
+          material.userData.fadeBaseTransparent = material.transparent;
+          material.userData.fadeBaseDepthWrite = material.depthWrite;
+          material.userData.fadeBaseOpacity = material.opacity;
+        }
+      }
       this.fadeStates.set(building.spec.id, {
         materials: building.fadeMaterials,
         opacity: 1,
@@ -223,7 +236,10 @@ export class WorldEngine {
     // 天空球与星空跟随玩家，离开中心很远时不会看到天空球外侧的空白。
     this.sky = createSky(this.materialBundle.materials);
     this.scene.add(this.sky);
-    this.voidCity = createVoidCity();
+    this.voidCity = createVoidCity([
+      { x: MEDIA_TOWER.position[0], z: MEDIA_TOWER.position[2], radius: 34 },
+      {x:BUILDING_WORKSHOP.position[0],z:BUILDING_WORKSHOP.position[2],radius:BUILDING_WORKSHOP.backgroundClearRadius},
+    ]);
     this.scene.add(this.voidCity.group);
     const ground = createGround(this.materialBundle.materials);
     mergeStaticGroup(ground);
@@ -236,6 +252,13 @@ export class WorldEngine {
     this.scene.add(this.landmark.group);
     this.plazaScreen = createPlazaScreen(plazaScreen, QUALITY[this.settings.quality].anisotropy);
     this.scene.add(this.plazaScreen.group);
+    const mediaManifest = await loadMediaManifest();
+    this.mediaTower = createMediaTower(
+      this.materialBundle.materials,
+      QUALITY[this.settings.quality].anisotropy,
+      mediaManifest,
+    );
+    this.scene.add(this.mediaTower.group);
     const frames = createFrames(
       this.materialBundle.materials,
       QUALITY[this.settings.quality].anisotropy,
@@ -262,12 +285,18 @@ export class WorldEngine {
     const staticExclusions = new Set<THREE.Object3D>([
       this.landmark.group,
       this.plazaScreen.group,
+      this.mediaTower.group,
       this.rig.group,
       this.sky,
       this.voidCity.group,
     ]);
     for (const mesh of this.occluderMeshes) staticExclusions.add(mesh);
     mergeStaticScene(this.scene, staticExclusions);
+    const groundMaterials=[this.materialBundle.materials.ground,this.materialBundle.materials.walkway,this.materialBundle.materials.plaza];
+    const outerFloor=this.voidCity.group.getObjectByName('VoidFloor');
+    if(outerFloor instanceof THREE.Mesh&&outerFloor.material instanceof THREE.MeshStandardMaterial)groundMaterials.push(outerFloor.material);
+    this.cityLook=new CityLook(this.renderer,this.scene,groundMaterials,CITY_LOOK);
+    this.cityLook.setQuality(this.settings.quality==='high');
 
     const snapshot = loadSnapshot();
     const spawnFeet = snapshot?.player.feet ?? SPAWN.feet;
@@ -334,7 +363,6 @@ export class WorldEngine {
     }
     this.drag = null;
     this.physicsStepper.reset();
-    this.touchSprint = false;
   }
 
   private setupEnvironment(): void {
@@ -347,38 +375,38 @@ export class WorldEngine {
     const pmrem = new THREE.PMREMGenerator(this.renderer);
     this.environmentRT = pmrem.fromEquirectangular(source);
     this.scene.environment = this.environmentRT.texture;
-    this.scene.environmentIntensity = 0.9;
+    this.scene.environmentIntensity = 0.75;
     source.dispose();
     pmrem.dispose();
   }
 
   private setupLights(): void {
-    const hemisphere = new THREE.HemisphereLight(0x677fb5, 0x2a211d, 1.35);
+    const hemisphere = new THREE.HemisphereLight(0x8baecf, 0x20232a, 0.82);
     this.scene.add(hemisphere);
 
-    const ambient = new THREE.AmbientLight(0x38446a, 0.72);
+    const ambient = new THREE.AmbientLight(0x38446a, 0.18);
     this.scene.add(ambient);
 
     // 南侧暖色补光：让面向出生点的立面在暮色里仍然可读。
-    const fill = new THREE.DirectionalLight(0xffd8b0, 0.42);
+    const fill = new THREE.DirectionalLight(0xffc79a, 0.62);
     fill.position.set(18, 20, 36);
     fill.target.position.set(0, 4, 0);
     this.scene.add(fill);
     this.scene.add(fill.target);
 
     const moon = new THREE.DirectionalLight(0xa9c2ff, 2.0);
-    moon.position.set(-26, 38, -30);
+    moon.position.set(-36, 54, 32);
     moon.target.position.set(0, 0, 0);
     moon.castShadow = true;
     moon.shadow.mapSize.set(QUALITY.high.shadowMapSize, QUALITY.high.shadowMapSize);
-    moon.shadow.camera.left = -36;
-    moon.shadow.camera.right = 36;
-    moon.shadow.camera.top = 36;
-    moon.shadow.camera.bottom = -36;
+    moon.shadow.camera.left = -120;
+    moon.shadow.camera.right = 120;
+    moon.shadow.camera.top = 120;
+    moon.shadow.camera.bottom = -120;
     moon.shadow.camera.near = 2;
-    moon.shadow.camera.far = 96;
+    moon.shadow.camera.far = 400;
     moon.shadow.bias = -0.0004;
-    moon.shadow.normalBias = 0.035;
+    moon.shadow.normalBias = 0.05;
     this.scene.add(moon);
     this.scene.add(moon.target);
     this.moonLight = moon;
@@ -434,10 +462,6 @@ export class WorldEngine {
           event.preventDefault();
           if (!event.repeat && !this.follow.inspecting) this.player.requestJump();
           return;
-        }
-        if ((event.code === 'ShiftLeft' || event.code === 'ShiftRight') &&
-            useWorldStore.getState().mode === 'exploring' && !this.follow.inspecting) {
-          this.keys.add(event.code);
         }
         if (MOVE_KEYS.has(event.code)) {
           if (useWorldStore.getState().mode === 'exploring') {
@@ -509,7 +533,6 @@ export class WorldEngine {
       jump: () => {
         if (useWorldStore.getState().mode === 'exploring' && !this.follow.inspecting) this.player.requestJump();
       },
-      setSprint: (enabled: boolean) => { this.touchSprint = enabled; },
       toggleLookUp: () => {
         this.clearInput();
         this.follow.toggleLookUp();
@@ -553,6 +576,7 @@ export class WorldEngine {
   }
 
   private applyQuality(quality: QualityLevel): void {
+    this.cityLook?.setQuality(quality==='high');
     const config = QUALITY[quality];
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, config.dprCap));
     this.renderer.shadowMap.enabled = config.shadows;
@@ -581,6 +605,7 @@ export class WorldEngine {
     const width = Math.max(1, this.container.clientWidth);
     const height = Math.max(1, this.container.clientHeight);
     this.renderer.setSize(width, height);
+    this.cityLook?.resize();
     this.follow.resize(width / height);
     if (this.reviewCamera) {
       this.reviewCamera.aspect = width / height;
@@ -594,14 +619,50 @@ export class WorldEngine {
     if (import.meta.env.DEV) {
       (window as unknown as { __lohina?: unknown }).__lohina = {
         feet: () => [this.player.position.x, this.player.position.y, this.player.position.z],
+        buildingWorkshop: () => {
+          const spec=buildings.find(building=>building.id===BUILDING_WORKSHOP.buildingId)!;
+          const position=spec.position.map((value,index)=>value+BUILDING_WORKSHOP.standingOffset[index]) as [number,number,number];
+          if(!isSafeFeet(position))return false;
+          this.clearInput();this.reviewCamera=null;
+          this.player.teleport(position,Math.PI);
+          this.follow.snapTo(0,-0.2,8.5,this.player.position);
+          return {id:spec.id,position:spec.position,standingPoint:position};
+        },
+        landmarkState: () => {
+          this.landmark.group.updateMatrixWorld(true);
+          const stars:object[]=[];
+          this.landmark.group.traverse(object=>{if(object.userData.orbitingStar)stars.push({name:object.name,position:object.getWorldPosition(new THREE.Vector3()).toArray()});});
+          const camera=this.reviewCamera??this.follow.camera;
+          return {...this.landmark.group.userData.orrery,stars,camera:{position:camera.position.toArray(),quaternion:camera.quaternion.toArray()}};
+        },
+        landmarkReview: (view:'spawn'|'side'|'close') => {
+          this.clearInput();this.reviewCamera=null;
+          if(view==='spawn'){
+            this.player.teleport(SPAWN.feet,SPAWN.yawRad);
+            this.follow.reset(this.player.position);
+            this.follow.snapTo(0,0.12,8.5,this.player.position);
+          }else{
+            const root=this.landmark.group.position;
+            this.reviewCamera=new THREE.PerspectiveCamera(52,this.follow.camera.aspect,0.1,900);
+            const spec=this.landmark.group.userData.orrery.spec as {width:number;height:number};
+            this.reviewCamera.position.copy(root).add(view==='side'?new THREE.Vector3(spec.width*1.1,spec.height*0.38,spec.width*0.35):new THREE.Vector3(4.5,2.4,5.5));
+            this.reviewCamera.lookAt(root.x,root.y+(view==='side'?spec.height*0.48:2.6),root.z);
+          }
+        },
         keys: () => [...this.keys],
+        lookEffects: (options:{bloom?:boolean;reflection?:boolean}) => this.cityLook?.setEffects(options),
+        buildingStyles: () => {
+          const entries:object[]=[];
+          this.scene.traverse(object=>{if(object.userData.cityStyle)entries.push({id:object.name,...object.userData.cityStyle});});
+          return {buildings:entries,look:this.cityLook?.diagnostics()};
+        },
         review: (view: 'side' | 'follow', analogScale = 1) => {
           this.clearInput();
           this.reviewInputScale = THREE.MathUtils.clamp(analogScale, 0.05, 1);
           this.reviewCamera = null;
           if (view === 'side') {
             const root = this.player.position;
-            this.reviewCamera = new THREE.PerspectiveCamera(52, this.follow.camera.aspect, 0.1, 200);
+            this.reviewCamera = new THREE.PerspectiveCamera(52, this.follow.camera.aspect, 0.1, 900);
             // 固定世界坐标，不追随角色或身体摆动；只供开发录屏复核。
             this.reviewCamera.position.copy(root).add(new THREE.Vector3(7.5, 2.0, 1.5));
             this.reviewCamera.lookAt(root.x - 1.2, root.y + 0.85, root.z - 0.8);
@@ -659,6 +720,13 @@ export class WorldEngine {
           };
         },
       };
+      const landmarkView=new URLSearchParams(window.location.search).get('lm01');
+      if(landmarkView==='spawn'||landmarkView==='side'||landmarkView==='close'){
+        (window as unknown as {__lohina:{landmarkReview:(view:'spawn'|'side'|'close')=>void}}).__lohina.landmarkReview(landmarkView);
+      }
+      if(new URLSearchParams(window.location.search).get('workshop')===BUILDING_WORKSHOP.buildingId){
+        (window as unknown as {__lohina:{buildingWorkshop:()=>unknown}}).__lohina.buildingWorkshop();
+      }
     }
     this.clock.start();
     this.renderer.setAnimationLoop(() => this.frame());
@@ -669,7 +737,8 @@ export class WorldEngine {
     const rawDelta = this.clock.getDelta();
     const delta = Math.min(PLAYER.maxSimulationDelta, Math.max(0, rawDelta));
     this.update(delta);
-    this.renderer.render(this.scene, this.reviewCamera ?? this.follow.camera);
+    const camera=this.reviewCamera ?? this.follow.camera;
+    if(this.cityLook)this.cityLook.render(camera);else this.renderer.render(this.scene,camera);
     this.measure(rawDelta);
   }
 
@@ -692,6 +761,8 @@ export class WorldEngine {
     this.avatarFade.update(delta, this.reviewCamera ?? this.follow.camera, this.rig.group.position);
 
     this.landmark.update(performance.now() / 1000, this.settings.reducedMotion);
+    const mediaTime = performance.now() / 1000;
+    this.mediaTower?.update(mediaTime, delta, this.settings.reducedMotion);
 
     this.lastFocusCheck += delta;
     if (this.lastFocusCheck > 0.1) {
@@ -801,8 +872,7 @@ export class WorldEngine {
     if (this.keys.has('KeyS') || this.keys.has('ArrowDown')) z += 1;
     x += this.touch.x;
     z += this.touch.z;
-    return { ...cameraRelativeInput(x * this.reviewInputScale, z * this.reviewInputScale, this.follow.movementYaw),
-      sprint: this.touchSprint || this.keys.has('ShiftLeft') || this.keys.has('ShiftRight') };
+    return cameraRelativeInput(x * this.reviewInputScale, z * this.reviewInputScale, this.follow.movementYaw);
   }
 
   private evaluateFocus(): void {
@@ -921,14 +991,19 @@ export class WorldEngine {
     for (const state of this.fadeStates.values()) {
       if (Math.abs(state.opacity - state.target) < 0.005) continue;
       state.opacity = THREE.MathUtils.damp(state.opacity, state.target, 7, delta);
+      const fading = state.opacity < 0.985;
       for (const material of state.materials) {
-        const shouldBeTransparent = state.opacity < 0.985;
-        if (material.transparent !== shouldBeTransparent) {
+        const baseTransparent = material.userData.fadeBaseTransparent as boolean | undefined;
+        const baseDepthWrite = material.userData.fadeBaseDepthWrite as boolean | undefined;
+        const baseOpacity = material.userData.fadeBaseOpacity as number | undefined;
+        const shouldBeTransparent = fading ? true : (baseTransparent ?? false);
+        const shouldWriteDepth = fading ? false : (baseDepthWrite ?? true);
+        if (material.transparent !== shouldBeTransparent || material.depthWrite !== shouldWriteDepth) {
           material.transparent = shouldBeTransparent;
-          material.depthWrite = !shouldBeTransparent;
+          material.depthWrite = shouldWriteDepth;
           material.needsUpdate = true;
         }
-        material.opacity = state.opacity;
+        material.opacity = (baseOpacity ?? 1) * state.opacity;
       }
     }
   }
@@ -987,7 +1062,9 @@ export class WorldEngine {
     this.storageUnsubscribe?.();
     this.storageUnsubscribe = null;
     this.avatarFade?.dispose();
+    this.cityLook?.dispose();
     this.plazaScreen?.dispose();
+    this.mediaTower?.dispose();
     this.player?.dispose();
     this.physics?.free();
     this.rig?.dispose();
@@ -997,6 +1074,7 @@ export class WorldEngine {
     const textures = new Set<THREE.Texture>();
     this.scene.traverse((object) => {
       if (object instanceof THREE.Mesh || object instanceof THREE.Points || object instanceof THREE.Line) {
+        if(object instanceof THREE.InstancedMesh)object.dispose();
         geometries.add(object.geometry);
         const list = Array.isArray(object.material) ? object.material : [object.material];
         for (const material of list) materials.add(material);

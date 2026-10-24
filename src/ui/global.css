@@ -1086,8 +1086,7 @@ kbd {
   -webkit-backdrop-filter: blur(10px);
 }
 
-.touch__jump,
-.touch__sprint {
+.touch__jump {
   position: absolute;
   bottom: 42px;
   width: 70px;
@@ -1107,9 +1106,6 @@ kbd {
 }
 
 .touch__jump { right: 22px; }
-.touch__sprint { right: 104px; }
-.touch__sprint small { font-size: 9px; color: var(--muted); }
-.touch__sprint.is-active { background: rgba(139, 92, 31, 0.8); }
 
 .touch__interact-key {
   font-family: var(--font-mono);

@@ -1,7 +1,7 @@
 export const CAMERA = {
   fov: 52,
   near: 0.1,
-  far: 200,
+  far: 900,
   orbitLambda: 18,
   recoveryLambda: 6,
   // 水平旋转保持细腻；垂直拖拽略快，普通屏幕行程内可从俯视连续抬到 85°。
@@ -13,6 +13,7 @@ export const CAMERA = {
   collisionSkin: 0.04,
   collisionProbeRadius: 0.08,
   groundClearance: 0.4,
+  groundApproachDistance: 0.42,
   minPitch: -85 * Math.PI / 180,
   maxPitch: 85 * Math.PI / 180,
   compositionTilt: 7 * Math.PI / 180,
@@ -23,6 +24,8 @@ export const CAMERA = {
     high: { pitch: 22 * Math.PI / 180, distance: 10 },
   },
   avatarFade: {
+    approachStart: 3,
+    approachEnd: 0.5,
     // 近镜头 / 身体轴遮挡的进入、退出阈值，滞回避免边缘抖动。
     nearEnter: 0.7,
     nearExit: 1.02,

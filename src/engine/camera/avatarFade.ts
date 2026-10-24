@@ -94,6 +94,14 @@ export class AvatarFade {
       target = 1 - this.upLookFactor * (1 - settings.upLookOpacity);
       reason = '仰视构图';
     }
+    // 距离连续驱动淡出，避免触地靠近过程中一直不透明，到近距阈值才突然消失。
+    const approach = THREE.MathUtils.smoothstep(
+      this.nearDistance, settings.approachEnd, settings.approachStart,
+    );
+    if (approach < target) {
+      target = approach;
+      reason = '靠近人物';
+    }
     this.targetOpacity = target;
     this.reason = reason;
     this.fading = target < 0.999;

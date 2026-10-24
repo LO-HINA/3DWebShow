@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d0a06"/>
+      <stop offset="0.5" stop-color="#1a120b"/>
+      <stop offset="1" stop-color="#060504"/>
+    </linearGradient>
+    <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe9c9"/>
+      <stop offset="0.55" stop-color="#ffb366"/>
+      <stop offset="1" stop-color="#c25f2c"/>
+    </linearGradient>
+    <radialGradient id="halo2" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffcf9a" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#ff8c3a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg2)"/>
+  <circle cx="1120" cy="430" r="380" fill="url(#halo2)"/>
+  <rect x="860" y="250" width="520" height="360" fill="url(#sun)" opacity="0.92"/>
+  <g fill="#0a0806" opacity="0.94">
+    <rect x="80" y="360" width="130" height="540"/>
+    <rect x="240" y="470" width="96" height="430"/>
+    <rect x="360" y="300" width="150" height="600"/>
+    <rect x="540" y="520" width="110" height="380"/>
+    <rect x="680" y="400" width="80" height="500"/>
+    <rect x="1420" y="330" width="140" height="570"/>
+  </g>
+  <g stroke="#ffcf9a" stroke-width="2" opacity="0.55">
+    <path d="M80 420H210M360 370H510M1420 400H1560"/>
+  </g>
+  <text x="112" y="190" fill="#ffd9ab" font-family="Segoe UI, Arial, sans-serif" font-size="26" letter-spacing="12">MEDIA TOWER / WALLPAPER</text>
+  <text x="108" y="300" fill="#fff3e2" font-family="Segoe UI, Arial, sans-serif" font-size="104" font-weight="600">把你的图片</text>
+  <text x="108" y="400" fill="#ffc58c" font-family="Segoe UI, Arial, sans-serif" font-size="104" font-weight="600">放进来</text>
+  <text x="108" y="800" fill="#c9a887" font-family="Segoe UI, Arial, sans-serif" font-size="26">示例图片 02 · 16:9 · 建议 1920 × 1080</text>
+  <rect x="24" y="24" width="1552" height="852" fill="none" stroke="#8a5a32" stroke-width="2" opacity="0.7"/>
+</svg>

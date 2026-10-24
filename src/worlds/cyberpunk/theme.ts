@@ -14,3 +14,10 @@ export const PALETTE = {
   skyGlow: 0x33406e,
 } as const;
 
+/** Shared by the city lighting pipeline; geometry/contents keep their own materials. */
+export const CITY_LOOK = {
+  groundTint:0x8792a0,plainGroundTint:0x1c2835,groundRoughness:0.38,plainGroundRoughness:0.30,
+  groundEnvironment:0.6,bloomStrength:0.32,bloomRadius:0.42,bloomThreshold:0.78,
+  reflectionScale:0.4,reflectionMaxSize:768,wetMin:0.12,wetMax:0.44,
+} as const;
+

@@ -38,12 +38,12 @@ function simulate(fps: number, speed = 0.2, turns = false) {
   let blockedPhase = 0, phaseAtEnd = 0;
   for (let frame = 0; frame < fps * 8; frame++) {
     const t = frame / fps;
-    let input = { x: 0, z: 0, sprint: speed > 1 };
+    let input = { x: 0, z: 0 };
     if (t > 0.3 && t < 5.5) input.z = -Math.min(1, speed);
-    if (turns && t > 1.4 && t < 2.3) input = { x: speed, z: 0, sprint: false };
-    if (turns && t >= 2.3 && t < 3.2) input = { x: -speed, z: 0, sprint: false };
-    if (turns && t >= 3.2 && t < 3.6) input = { x: 0, z: 0, sprint: false };
-    if (turns && t >= 3.6 && t < 6.9) input = { x: 0, z: -speed, sprint: false };
+    if (turns && t > 1.4 && t < 2.3) input = { x: speed, z: 0 };
+    if (turns && t >= 2.3 && t < 3.2) input = { x: -speed, z: 0 };
+    if (turns && t >= 3.2 && t < 3.6) input = { x: 0, z: 0 };
+    if (turns && t >= 3.6 && t < 6.9) input = { x: 0, z: -speed };
     if (speed > 1 && frame === fps) player.requestJump();
     const alpha = stepper.advance(1 / fps, () => { player.update(1 / 60, input, false); world.step(); });
     player.render(alpha, 1 / fps);

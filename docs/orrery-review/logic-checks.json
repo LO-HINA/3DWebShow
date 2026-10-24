@@ -1,0 +1,389 @@
+{
+  "status": "passed",
+  "evidence": "geometry, deterministic motion, ground-clearance graph and Rapier shape casts; no browser/GPU claim",
+  "candidate": {
+    "id": "LM-01",
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "width": 14,
+    "height": 11.8
+  },
+  "dimensions": {
+    "outerRadius": 6.222222222222222,
+    "innerRadius": 4.542222222222223,
+    "outerBallRadius": 0.7777777777777778,
+    "innerBallRadius": 0.3422222222222222,
+    "outerTilt": 0.4886921905584123,
+    "innerTilt": 0.6806784082777885,
+    "centerY": 8.051065831554457,
+    "sweptBottom": 4.272131663108914,
+    "baseRadius": 4.8999999999999995,
+    "baseHeight": 0.28,
+    "supportRadius": 3.7800000000000002,
+    "sweptRadius": 7.08,
+    "sweptTop": 11.83
+  },
+  "rangeChecks": [
+    {
+      "width": 10,
+      "height": 9,
+      "measuredBounds": {
+        "min": [
+          -4.968097397217832,
+          -5.9604643443123e-10,
+          -4.515458613560436
+        ],
+        "max": [
+          4.968073592102908,
+          8.948234652858684,
+          4.51122478944495
+        ]
+      },
+      "groundClearance": 3.585808330792082
+    },
+    {
+      "width": 10,
+      "height": 11.8,
+      "measuredBounds": {
+        "min": [
+          -4.968097397217832,
+          -5.9604643443123e-10,
+          -4.515458613560436
+        ],
+        "max": [
+          4.968073592102908,
+          11.748234652858683,
+          4.51122478944495
+        ]
+      },
+      "groundClearance": 6.3858083307920825
+    },
+    {
+      "width": 10,
+      "height": 13,
+      "measuredBounds": {
+        "min": [
+          -4.968097397217832,
+          -5.9604643443123e-10,
+          -4.515458613560436
+        ],
+        "max": [
+          4.968073592102908,
+          12.948234652858682,
+          4.51122478944495
+        ]
+      },
+      "groundClearance": 7.585808330792082
+    },
+    {
+      "width": 14,
+      "height": 9,
+      "measuredBounds": {
+        "min": [
+          -6.980790110737229,
+          -5.9604643443123e-10,
+          -6.729237434151663
+        ],
+        "max": [
+          6.9786013234707145,
+          8.950033559375008,
+          6.723010640009001
+        ]
+      },
+      "groundClearance": 3.5200000000000005
+    },
+    {
+      "width": 14,
+      "height": 11.8,
+      "measuredBounds": {
+        "min": [
+          -6.955336332321742,
+          -5.9604643443123e-10,
+          -6.321642034958165
+        ],
+        "max": [
+          6.955303031977293,
+          11.747528491731922,
+          6.315714682034019
+        ]
+      },
+      "groundClearance": 4.272131663108914
+    },
+    {
+      "width": 14,
+      "height": 13,
+      "measuredBounds": {
+        "min": [
+          -6.955336332321742,
+          -5.9604643443123e-10,
+          -6.321642034958165
+        ],
+        "max": [
+          6.955303031977293,
+          12.947528491731921,
+          6.315714682034019
+        ]
+      },
+      "groundClearance": 5.472131663108914
+    },
+    {
+      "width": 16,
+      "height": 9,
+      "measuredBounds": {
+        "min": [
+          -7.984263597993003,
+          -5.9604643443123e-10,
+          -7.795279338965696
+        ],
+        "max": [
+          7.983404027216194,
+          8.954666652412287,
+          7.787581801331835
+        ]
+      },
+      "groundClearance": 3.519999999999999
+    },
+    {
+      "width": 16,
+      "height": 11.8,
+      "measuredBounds": {
+        "min": [
+          -7.953443479678174,
+          -5.9604643443123e-10,
+          -7.299520199972533
+        ],
+        "max": [
+          7.952763333790089,
+          11.747902699143388,
+          7.291877678965371
+        ]
+      },
+      "groundClearance": 3.5199999999999982
+    },
+    {
+      "width": 16,
+      "height": 13,
+      "measuredBounds": {
+        "min": [
+          -7.948955799873695,
+          -5.9604643443123e-10,
+          -7.2247337522275075
+        ],
+        "max": [
+          7.948917748122957,
+          12.947175409775285,
+          7.2179596276666365
+        ]
+      },
+      "groundClearance": 4.41529332926733
+    }
+  ],
+  "colliders": [
+    {
+      "kind": "cylinder",
+      "id": "LM-01:foot--1--1",
+      "radius": 0.6,
+      "center": [
+        -3.7800000000000002,
+        0.14,
+        -2.3800000000000003
+      ],
+      "halfHeight": 0.14
+    },
+    {
+      "kind": "box",
+      "id": "LM-01:support--1--1",
+      "center": [
+        -3.6726032903833534,
+        2.3063937082346593,
+        -2.301139411012321
+      ],
+      "size": [
+        0.8058673025744425,
+        4.472787416469318,
+        0.6974728963141619
+      ],
+      "yawRad": 0
+    },
+    {
+      "kind": "cylinder",
+      "id": "LM-01:foot--1-1",
+      "radius": 0.6,
+      "center": [
+        -3.7800000000000002,
+        0.14,
+        2.3800000000000003
+      ],
+      "halfHeight": 0.14
+    },
+    {
+      "kind": "box",
+      "id": "LM-01:support--1-1",
+      "center": [
+        -3.6726032903833534,
+        2.3063937082346593,
+        2.301139411012321
+      ],
+      "size": [
+        0.8058673025744425,
+        4.472787416469318,
+        0.6974728963141619
+      ],
+      "yawRad": 0
+    },
+    {
+      "kind": "cylinder",
+      "id": "LM-01:foot-1--1",
+      "radius": 0.6,
+      "center": [
+        3.7800000000000002,
+        0.14,
+        -2.3800000000000003
+      ],
+      "halfHeight": 0.14
+    },
+    {
+      "kind": "box",
+      "id": "LM-01:support-1--1",
+      "center": [
+        3.6726032903833534,
+        2.3063937082346593,
+        -2.301139411012321
+      ],
+      "size": [
+        0.8058673025744425,
+        4.472787416469318,
+        0.6974728963141619
+      ],
+      "yawRad": 0
+    },
+    {
+      "kind": "cylinder",
+      "id": "LM-01:foot-1-1",
+      "radius": 0.6,
+      "center": [
+        3.7800000000000002,
+        0.14,
+        2.3800000000000003
+      ],
+      "halfHeight": 0.14
+    },
+    {
+      "kind": "box",
+      "id": "LM-01:support-1-1",
+      "center": [
+        3.6726032903833534,
+        2.3063937082346593,
+        2.301139411012321
+      ],
+      "size": [
+        0.8058673025744425,
+        4.472787416469318,
+        0.6974728963141619
+      ],
+      "yawRad": 0
+    },
+    {
+      "kind": "box",
+      "id": "LM-01:console",
+      "center": [
+        0,
+        0.68,
+        -1.8
+      ],
+      "size": [
+        1.9,
+        1.36,
+        1
+      ],
+      "yawRad": 0
+    },
+    {
+      "kind": "cylinder",
+      "id": "LM-01:orbital-envelope",
+      "radius": 7.08,
+      "center": [
+        0,
+        8.051065831554457,
+        0
+      ],
+      "halfHeight": 3.778934168445543
+    }
+  ],
+  "passages": {
+    "capsuleRadius": 0.28,
+    "gridStep": 0.25,
+    "destinations": [
+      [
+        -4,
+        0
+      ],
+      [
+        4,
+        0
+      ],
+      [
+        0,
+        -4
+      ],
+      [
+        -4,
+        -4
+      ],
+      [
+        4,
+        -4
+      ]
+    ],
+    "allReachable": true
+  },
+  "screen": {
+    "spec": {
+      "id": "SCREEN-01",
+      "position": [
+        0,
+        0,
+        -6.4
+      ],
+      "yawRad": 0,
+      "width": 8,
+      "height": 4.5,
+      "bottom": 2.6,
+      "frameWidth": 0.12,
+      "depth": 0.34,
+      "imageUrl": "/assets/worlds/cyberpunk/media/plaza-screen.svg"
+    },
+    "occlusion": "expected from spawn; retained per latest user instruction, layout deferred"
+  },
+  "physics": {
+    "openSpawn": true,
+    "walkAcrossCourt": true,
+    "consoleBlocksCapsule": true,
+    "overheadProtected": true,
+    "cameraVolumeBlocks": true
+  },
+  "console": {
+    "route": "/world/observatory",
+    "returnFeet": [
+      0,
+      0,
+      -0.5
+    ],
+    "spawnInInteractionRange": true
+  },
+  "visual": {
+    "stablePlanes": true,
+    "flowLightsMove": true,
+    "bodySlots": [
+      "earth",
+      "moon"
+    ]
+  },
+  "limits": [
+    "orbital envelope is a conservative static cylinder, not exact moving-body physics",
+    "no actual screenshot, continuous walk, camera or GPU acceptance in this check"
+  ]
+}
