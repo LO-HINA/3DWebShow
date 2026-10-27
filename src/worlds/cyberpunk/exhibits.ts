@@ -1,9 +1,16 @@
 import { getArtwork } from '../../content/artworks';
 import type { ExhibitSpec, FrameExhibitSpec, ImageSpec, PortalSpec, Vec3 } from '../../engine/contracts/types';
-import { deg, frames, landmark } from './layout';
+import { deg, frames, landmark, buildings } from './layout';
 import {createOrreryPortal} from './props/orreryConfig';
 
 const frontNormal = (yawRad: number): Vec3 => [Math.sin(yawRad), 0, Math.cos(yawRad)];
+
+// Entrance and return anchors follow the source building, including its yaw.
+function doorFeet(id:string,clearance:number):Vec3 {
+  const spec=buildings.find(building=>building.id===id)!;
+  const distance=spec.size[2]/2+clearance;
+  return [spec.position[0]+Math.sin(spec.yawRad)*distance,0,spec.position[2]+Math.cos(spec.yawRad)*distance];
+}
 
 const frameTitles: Record<string, { title: string; description: string }> = {
   W1: {
@@ -77,13 +84,13 @@ export const portals: PortalSpec[] = [
     buildingId: 'E-01',
     accent: 'gold',
     interaction: {
-      anchor: [-12, 0, 4],
+      anchor: doorFeet('E-01',1),
       enterRadius: 1.8,
       exitRadius: 2.2,
       priority: 20,
       maxHeightDelta: 1,
       facingNormal: [1, 0, 0],
-      returnFeet: [-10.5, 0, 4],
+      returnFeet: doorFeet('E-01',2.5),
       returnYawRad: deg(90),
     },
   },
@@ -98,13 +105,13 @@ export const portals: PortalSpec[] = [
     buildingId: 'E-02',
     accent: 'cyan',
     interaction: {
-      anchor: [-19, 0, -3.5],
+      anchor: doorFeet('E-02',1.5),
       enterRadius: 1.8,
       exitRadius: 2.2,
       priority: 20,
       maxHeightDelta: 1,
       facingNormal: [0, 0, 1],
-      returnFeet: [-19, 0, -2.8],
+      returnFeet: doorFeet('E-02',2.2),
       returnYawRad: 0,
     },
   },
@@ -119,13 +126,13 @@ export const portals: PortalSpec[] = [
     buildingId: 'E-03',
     accent: 'cyan',
     interaction: {
-      anchor: [12.5, 0, -5],
+      anchor: doorFeet('E-03',1.5),
       enterRadius: 1.8,
       exitRadius: 2.2,
       priority: 20,
       maxHeightDelta: 1,
       facingNormal: [-1, 0, 0],
-      returnFeet: [11.5, 0, -5],
+      returnFeet: doorFeet('E-03',2.5),
       returnYawRad: deg(-90),
     },
   },

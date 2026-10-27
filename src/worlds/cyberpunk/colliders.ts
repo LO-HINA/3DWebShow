@@ -2,11 +2,18 @@ import type { ColliderSpec } from '../../engine/contracts/types';
 import { buildings, frames, benches, planters, lamps, landmark, plazaScreen, MEDIA_TOWER } from './layout';
 import { createPlazaScreenColliders } from './props/plazaScreenConfig';
 import { createOrreryColliders } from './props/orreryConfig';
+import { createCurvedColliders, isCurvedBuilding } from './buildings/junctionGeometry';
+import { createNwNightColliders } from './buildings/nwNightConfig';
 
 function colliders(): ColliderSpec[] {
   const list: ColliderSpec[] = [];
 
   for (const building of buildings) {
+    if(isCurvedBuilding(building)){
+      list.push(...createCurvedColliders(building));
+      list.push(...createNwNightColliders(building));
+      continue;
+    }
     list.push({
       kind: 'box',
       id: `${building.id}:footprint`,

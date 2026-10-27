@@ -70,7 +70,7 @@ export function createGround(materials: WorldMaterials): THREE.Group {
   const undersideMaterial = materials.concreteDark.clone();
   undersideMaterial.color.setHex(0x141823);
   undersideMaterial.roughness = 0.9;
-  const island = new THREE.Mesh(new RoundedBoxGeometry(63, 1.4, 63, 2, 0.22), undersideMaterial);
+  const island = new THREE.Mesh(new RoundedBoxGeometry(279, 1.4, 279, 2, 0.22), undersideMaterial);
   island.position.y = -0.72;
   island.receiveShadow = true;
   group.add(island);
@@ -80,7 +80,7 @@ export function createGround(materials: WorldMaterials): THREE.Group {
   lowerTier.receiveShadow = false;
   group.add(lowerTier);
 
-  const ground = planeRotated(64, 64, materials.ground, 0);
+  const ground = planeRotated(280, 280, materials.ground, 0);
   group.add(ground);
 
   const plazaMaterial = materials.plaza;
@@ -101,20 +101,20 @@ export function createGround(materials: WorldMaterials): THREE.Group {
   const cyanLine = new THREE.MeshBasicMaterial({
     color: PALETTE.emissiveCyan,
     transparent: true,
-    opacity: 0.42,
+    opacity: 0.05,
     toneMapped: false,
     depthWrite: false,
   });
   const goldLine = new THREE.MeshBasicMaterial({
     color: PALETTE.emissiveGold,
     transparent: true,
-    opacity: 0.46,
+    opacity: 0.045,
     toneMapped: false,
     depthWrite: false,
   });
   for (const line of guideLines) {
     const material = line.accent === 'cyan' ? cyanLine : goldLine;
-    group.add(lineBetween(line.from, line.to, 0.055, material));
+    group.add(lineBetween(line.from, line.to, 0.06, material));
   }
 
   const ring = new THREE.Mesh(
@@ -122,7 +122,7 @@ export function createGround(materials: WorldMaterials): THREE.Group {
     new THREE.MeshBasicMaterial({
       color: PALETTE.emissiveCyan,
       transparent: true,
-      opacity: 0.26,
+      opacity: 0.06,
       toneMapped: false,
       side: THREE.DoubleSide,
       depthWrite: false,
@@ -137,7 +137,7 @@ export function createGround(materials: WorldMaterials): THREE.Group {
     new THREE.MeshBasicMaterial({
       color: PALETTE.emissiveGold,
       transparent: true,
-      opacity: 0.18,
+      opacity: 0.055,
       toneMapped: false,
       side: THREE.DoubleSide,
       depthWrite: false,
@@ -147,22 +147,65 @@ export function createGround(materials: WorldMaterials): THREE.Group {
   goldInlay.position.y = 0.022;
   group.add(goldInlay);
 
+  // 导视收进局部路缘与入口：四向入口阈值和斜向短路缘，不再贯穿全城。
+  const entryCyan = new THREE.MeshBasicMaterial({
+    color: PALETTE.emissiveCyan,
+    transparent: true,
+    opacity: 0.3,
+    toneMapped: false,
+    depthWrite: false,
+  });
+  const entryGold = new THREE.MeshBasicMaterial({
+    color: PALETTE.emissiveGold,
+    transparent: true,
+    opacity: 0.26,
+    toneMapped: false,
+    depthWrite: false,
+  });
+  const entries: Array<{ axis: 'x' | 'z'; sign: 1 | -1; material: THREE.Material }> = [
+    { axis: 'z', sign: -1, material: entryCyan },
+    { axis: 'z', sign: 1, material: entryCyan },
+    { axis: 'x', sign: -1, material: entryGold },
+    { axis: 'x', sign: 1, material: entryGold },
+  ];
+  for (const entry of entries) {
+    const bar = new THREE.Mesh(
+      new THREE.PlaneGeometry(3.2, 0.05),
+      entry.material,
+    );
+    bar.rotation.x = -Math.PI / 2;
+    if (entry.axis === 'x') bar.rotation.z = Math.PI / 2;
+    const offset = 8.28 * entry.sign;
+    bar.position.set(entry.axis === 'x' ? offset : 0, 0.031, entry.axis === 'z' ? offset : 0);
+    group.add(bar);
+  }
+  for (let i = 0; i < 8; i += 1) {
+    const start = (i / 8) * Math.PI * 2 + Math.PI / 8 - 0.075;
+    const curb = new THREE.Mesh(
+      new THREE.RingGeometry(8.16, 8.2, 18, 1, start, 0.15),
+      i % 2 === 0 ? entryCyan : entryGold,
+    );
+    curb.rotation.x = -Math.PI / 2;
+    curb.position.y = 0.024;
+    group.add(curb);
+  }
+
   // 广场边缘的地灯：用无光照圆盘，不增加额外点光源。
   for (let i = 0; i < 12; i += 1) {
     const angle = (i / 12) * Math.PI * 2;
     const radius = 7.55;
     const disc = new THREE.Mesh(
       new THREE.CircleGeometry(0.075, 18),
-      i % 3 === 0 ? goldLine : cyanLine,
+      i % 3 === 0 ? entryGold : entryCyan,
     );
     disc.rotation.x = -Math.PI / 2;
     disc.position.set(Math.cos(angle) * radius, 0.032, Math.sin(angle) * radius);
     group.add(disc);
   }
 
-  // 中心地面在边缘逐渐沉入虚空，避免 64×64 广场与黑色地面之间出现硬切边。
+  // 新街区及外围保留建筑共用连续地面，边缘再渐隐到背景。
   const edgeFade = new THREE.Mesh(
-    new THREE.PlaneGeometry(160, 160),
+    new THREE.PlaneGeometry(300, 300),
     new THREE.ShaderMaterial({
       transparent: true,
       depthWrite: false,
@@ -179,7 +222,7 @@ export function createGround(materials: WorldMaterials): THREE.Group {
         varying vec2 vLocal;
         void main() {
           float d = max(abs(vLocal.x), abs(vLocal.y));
-          float a = smoothstep(23.0, 32.0, d) * (1.0 - smoothstep(32.0, 33.0, d));
+          float a = smoothstep(124.0, 140.0, d) * (1.0 - smoothstep(140.0, 141.0, d));
           gl_FragColor = vec4(uVoid, a);
           #include <tonemapping_fragment>
           #include <colorspace_fragment>

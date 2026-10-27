@@ -15,18 +15,23 @@
 
 ## 2. 视觉与建筑
 
-当前规划依据：[新街区布局与编号规划](block-plan/README.md)。用户手绘布局只确认 `M`、`SCREEN`、`NW(0)`、`SW(0)`、`NE(0)`、`SE(0)`，尚未替换当前运行布局，也未授权移动现有建筑。
+当前规划依据：[新街区布局与编号规划](block-plan/README.md)。用户已明确授权按文档更新建筑群，[第一版试做](block-plan/trial-1.md)已接入四个转角建筑、M与北侧SCREEN，原楼移至外围保留；视觉与性能尚未验收。
+
+当前单栋美术任务：[NW(0)夜景样板](nw-night-review/README.md)。仅NW接入，四视角截图采集受限，确认前不向其他三栋推广。
 
 并行实现记录：[LM-01 光轨出生庭与页面入口](orrery-review/2026-10-24.md)。14m×11.8m候选、下方出生与可交互仪表盘已接入，入口配置和模型位已明确；截图/录屏及完整浏览器往返待验收，不按大屏遮挡提前移动建筑。
 
+地面最新任务：[黑色湿镜面地坪](ground-review/README.md)。连续近黑蓝紫镜面、每帧平面反射、时间波纹与适度模糊已接入；14 张机位与反射/辉光对照来自 Edge + SwiftShader，真实 GPU 与连续录屏未验收。
+
 | 文档 / 目录 | 内容 | 当前状态 |
 | --- | --- | --- |
-| [`block-plan/README.md`](block-plan/README.md) | 新街区布局、M/SCREEN 与 NW/SW/NE/SE 编号、待定项、工程影响与分阶段计划 | 规划登记，未实施；不替换当前八栋布局 |
+| [`block-plan/README.md`](block-plan/README.md)、[`trial-1.md`](block-plan/trial-1.md) | 新街区规则、首轮建筑群、试做尺寸、原楼保留与检查 | 首轮已接入；运行视觉待验收 |
 | [`STYLE_REFERENCES.md`](STYLE_REFERENCES.md) | Neon Zenith、Threejs-Punk、Samsy 逆向研究、V4 夜景报告的拆解与可迁移原则 | 改造前诊断 + 第二轮实施状态；不把历史诊断当作当前缺失 |
 | [`building-workshop/README.md`](building-workshop/README.md) | B-01 同世界搬迁到西侧空地的打磨区、直达入口与检查 | 已搬迁；无搬迁后运行截图 |
 | [`orrery-review/2026-10-24.md`](orrery-review/2026-10-24.md) | LM-01 光轨出生庭、双轨双球、控制台与 `/world/observatory` | 构建/几何/物理/页面检查通过；浏览器往返待验收 |
 | [`references/buildings/README.md`](references/buildings/README.md) | 用户选定的三张建筑参考截图与下一轮改造简报 | 风格参考，不是运行截图或性能证据 |
 | [`city-style-review/README.md`](city-style-review/README.md) | 八栋实体窗与第二轮构造细化、调参表、复现命令、连续操作验收清单 | 几何/射线检查通过；真实 GPU 与主观视觉仍待验收 |
+| [`ground-review/README.md`](ground-review/README.md) | 黑色湿镜面地坪：实现范围、关键参数、14 张机位、反射/辉光对照与亮度统计 | 已接入；Edge + SwiftShader 截图，真实 GPU 与连续走动未验收 |
 | [`screenshots/b01/README.md`](screenshots/b01/README.md) | B-01 北岸媒体楼：四面错层漫画、流动光幕、结构审阅模式与证据边界 | 四面布局/材质第一轮完成；截图与录屏来自 Edge + SwiftShader，真实 GPU 未验收 |
 | [`E01_STYLE_GUIDE.md`](E01_STYLE_GUIDE.md) | E-01 视觉与摄影馆的体量、门窗、招牌、灯光与可复用构件 | E-01 专用样板规则；E-01 在媒体立面策略中保持暗面留白 |
 | [`zenith-building-review/README.md`](zenith-building-review/README.md) | Neon Zenith 单栋退台办公塔复现样板、许可与预览方式 | 独立 WebGPU/TSL 预览，不进入正式主场景 |
@@ -60,6 +65,7 @@
 | `screenshots/b01/diag/` | B-01 全高、俯仰与地面机位诊断图 | 浏览器运行截图 |
 | `references/buildings/` | 用户选定参考图与简报 | 设计参考，不是本项目运行画面 |
 | `city-style-review/` | 八栋实体窗与光影接入记录 | 本轮没有真实浏览器截图；只有逻辑/几何检查 |
+| `ground-review/` | 黑色湿镜面地坪 01–16：正常视角、屏幕倒影、反射/辉光对照、动态与波纹 | Edge + SwiftShader 浏览器截图；真实 GPU 未验收 |
 | `zenith-building-review/` | 单栋样板说明与几何检查 | 独立预览；浏览器采集曾受权限限制 |
 
 ## 5. 验证脚本
@@ -69,7 +75,7 @@
 | 脚本 | 用途 | 备注 |
 | --- | --- | --- |
 | `npm run typecheck` | TypeScript 类型检查 | 所有改动的底线 |
-| `npm run build` | 类型检查 + Vite 生产构建 | 2026-10-24 当前工作区通过；主 JS 5,451.67 kB / gzip 1,963.11 kB，仍有 chunk 体积警告 |
+| `npm run build` | 类型检查 + Vite 生产构建 | 2026-10-24 当前工作区通过；主 JS 5,483.78 kB / gzip 1,974.94 kB，仍有 chunk 体积警告 |
 | `node scripts/check-dependencies.mjs` | 源码分层依赖边界 | 不启动浏览器 |
 | `node scripts/verify.mjs` | 引导、出生点、灯箱、E-01 进入/返回、目录、设置、移动端 | 需开发服务器 |
 | `node scripts/e01-check.mjs after` | E-01 01–06 机位与渲染统计 | 会覆盖 `after/` 截图 |
@@ -85,6 +91,7 @@
 | `scripts/check-city-style.ts` | 八栋几何/媒体槽/实例矩阵与正视/斜视射线检查 | 先用 esbuild 打包，再执行生成的 mjs；命令见城市建筑记录 |
 | `scripts/check-city-look.ts` | 选择性辉光、反射与画质降级逻辑检查 | 先用 esbuild 打包到 `.camera-preview/` 再执行 |
 | `python scripts/capture-city-style.py` | 城市光影浏览器采集 | 本机曾遇 Playwright 驱动权限错误，未完成 |
+| `python scripts/capture-ground-mirror.py` | 黑色湿镜面地坪 14 张机位、反射/辉光对照、地面亮度与帧间差 | 需 5173 开发服务与 Edge + SwiftShader；输出 `docs/ground-review/` |
 | `python scripts/capture-zenith-study.py` | 单栋样板四视角采集 | 本机曾遇驱动权限错误，未完成 |
 
 脚本的完整命令、端口和已知失败见根 [`README.md`](../README.md) 与对应评审目录。

@@ -22,7 +22,7 @@ src/
   engine/
     contracts/types.ts             现有交互、物理、相机、快照等公共类型
     core/quality.ts                通用画质等级
-    core/cityLook.ts               共享湿地面反射、选择性辉光、OutputPass 与低画质降级
+    core/cityLook.ts               共享湿镜面地坪反射（时间波纹/模糊/高光压缩）、选择性辉光、OutputPass 与低画质降级
     player/
       settings.ts                  现有角色与固定步进参数，数值保持不变
       controller.ts                移动、跳跃、物理；地图碰撞与边界由宿主传入
@@ -93,7 +93,7 @@ T-03 的素材先由 `media.ts` 读取 `public/assets/worlds/cyberpunk/media/man
 
 建筑立面的实际调用关系为 `buildings.ts → 原有建筑工厂 → applyCityStyle()`；其中 `heroBuilding.ts`、`heroMedia.ts` 保留各自体量及内容槽，统一适配在工厂返回之后执行。T-03 由 `mediaTower.ts` 直接调用 `buildDeepFacades()`，不重复套用七栋适配器。两条路径共用 `cityStyle.ts`，修改它会影响八栋建筑，须逐栋检查。
 
-立面细节参数目前在 `cityStyle.ts` 内，尚未迁入独立配置文件；`FacadeProfile` 提供 `vertical`、`horizontal`、`boxed`，`far` 是 T-03 构建时选择的简化参数，不是随相机距离自动切换的 LOD。`theme.ts` 的 `CITY_LOOK` 管地面/辉光/反射参数，宿主环境灯在 `WorldEngine.ts`；不要为调窗框改角色控制器或在每栋建筑内重复建立后期。
+旧建筑立面细节参数在 `cityStyle.ts` 内；`FacadeProfile` 提供 `vertical`、`horizontal`、`boxed`，`far`不是动态LOD。新街区NW/SW/NE独立工厂在 `buildings/junctionBuilding.ts`，共享弧线/碰撞在 `junctionGeometry.ts`，由 `layout.ts` 的 `junctionBuildings` 注册；这三栋不经旧盒体适配二次包裹。SE首轮复用 `heroMedia.ts`。实现和文件归属见 [新街区试做](block-plan/trial-1.md)。`theme.ts` 的 `CITY_LOOK` 管地面/辉光/反射，宿主灯在 `WorldEngine.ts`。
 摄影馆等内容页由路由单独呈现，保持原有 `/world/gallery`、`/world/learning`、`/world/ai-lab`。
 
 依赖边界：

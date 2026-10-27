@@ -110,21 +110,21 @@ export function createMaterials(): MaterialBundle {
   const ground = new THREE.MeshStandardMaterial({
     color: 0xffffff,
     map: groundTexture,
-    roughness: 0.55,
-    metalness: 0.04,
-    envMapIntensity: 0.7,
+    roughness: 0.2,
+    metalness: 0.1,
+    envMapIntensity: 0.35,
   });
   const walkway = new THREE.MeshStandardMaterial({
     color: PALETTE.groundWalk,
-    roughness: 0.58,
-    metalness: 0.04,
-    envMapIntensity: 0.65,
+    roughness: 0.18,
+    metalness: 0.1,
+    envMapIntensity: 0.35,
   });
   const plaza = new THREE.MeshStandardMaterial({
-    color: 0x2d3142,
-    roughness: 0.46,
-    metalness: 0.06,
-    envMapIntensity: 0.8,
+    color: 0x191d2c,
+    roughness: 0.18,
+    metalness: 0.1,
+    envMapIntensity: 0.35,
   });
   const frame = new THREE.MeshStandardMaterial({
     color: 0x24262f,

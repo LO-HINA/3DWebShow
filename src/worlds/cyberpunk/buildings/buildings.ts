@@ -14,6 +14,8 @@ import {
 import { createHeroBuilding } from './heroBuilding';
 import { createHeroMediaBuilding } from './heroMedia';
 import { applyCityStyle } from './cityStyle';
+import { createCurvedBuilding, createComicCorner } from './junctionBuilding';
+import { addNwNightStudy } from './nwNightStudy';
 
 export interface BuiltBuilding {
   spec: BuildingSpec;
@@ -1312,6 +1314,9 @@ export function createBuildings(
   };
 
   const buildings = specs.map((spec) => {
+    // These envelopes already own their physical facades. Do not box-wrap the curves.
+    if(spec.variant==='curveConcave'||spec.variant==='curveConvex')return addNwNightStudy(createCurvedBuilding(ctx,spec),ctx);
+    if(spec.variant==='comicCorner')return createComicCorner(ctx,spec);
     const buildLegacy = (): BuiltBuilding => {
       switch (spec.variant) {
         case 'towerA':

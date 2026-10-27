@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "evidence": "generated geometry and interface checks only; no browser/GPU acceptance",
+  "reports": [
+    {
+      "mode": "media",
+      "installations": [
+        "b01-comic-front-installation"
+      ],
+      "comicPanels": 1,
+      "lightCurtains": 4,
+      "sideWindowRecesses": 22,
+      "fullHeightSideFins": 5
+    },
+    {
+      "mode": "structure",
+      "installations": [
+        "b01-comic-front-installation"
+      ],
+      "comicPanels": 0,
+      "lightCurtains": 0,
+      "sideWindowRecesses": 22,
+      "fullHeightSideFins": 5
+    }
+  ]
+}

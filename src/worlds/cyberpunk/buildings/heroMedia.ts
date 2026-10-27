@@ -714,7 +714,7 @@ function addFacadeBox(
 
 function addComicInstallation(
   ctx: BuildContext,
-  group: THREE.Group,
+  parent: THREE.Group,
   mats: B01Mats,
   frame: B01FacadeFrame,
   layout: B01PanelLayout,
@@ -722,6 +722,10 @@ function addComicInstallation(
   posterSlots: Map<string, THREE.Mesh>,
 ): void {
   const { config, height, centerY } = layout;
+  const group = new THREE.Group();
+  group.name = `${config.id}-installation`;
+  group.userData.comicInstallation = { facade: config.facade, panelId: config.id };
+  parent.add(group);
   const top = centerY + height / 2;
   const bottom = centerY - height / 2;
 
@@ -838,6 +842,7 @@ const lightCurtainFragmentShader = /* glsl */ `
   uniform vec2 uSize;
   uniform vec2 uComicCenter;
   uniform vec2 uComicHalf;
+  uniform float uHasComic;
   uniform vec3 uCyan;
   uniform vec3 uGold;
   varying vec2 vLocal;
@@ -874,7 +879,7 @@ const lightCurtainFragmentShader = /* glsl */ `
 
     float dx = abs(vLocal.x - uComicCenter.x) - uComicHalf.x;
     float dy = abs(vLocal.y - uComicCenter.y) - uComicHalf.y;
-    float clear = smoothstep(-0.02, 0.34, max(dx, dy));
+    float clear = mix(1.0, smoothstep(-0.02, 0.34, max(dx, dy)), uHasComic);
     float edge = smoothstep(0.0, 0.9, uSize.x * 0.5 - abs(vLocal.x)) *
       smoothstep(0.0, 1.0, uSize.y * 0.5 - abs(vLocal.y));
 
@@ -888,7 +893,7 @@ function addLightCurtain(
   group: THREE.Group,
   spec: BuildingSpec,
   frame: B01FacadeFrame,
-  layout: B01PanelLayout,
+  layout: B01PanelLayout | undefined,
   phase: number,
   speed: number,
   goldBias: number,
@@ -905,8 +910,9 @@ function addLightCurtain(
       uOpacity: { value: opacity },
       uGoldBias: { value: goldBias },
       uSize: { value: new THREE.Vector2(frame.width, height) },
-      uComicCenter: { value: new THREE.Vector2(layout.config.centerU, layout.centerY - frame.origin.y) },
-      uComicHalf: { value: new THREE.Vector2(layout.halfU, layout.halfV) },
+      uComicCenter: { value: layout ? new THREE.Vector2(layout.config.centerU, layout.centerY - frame.origin.y) : new THREE.Vector2() },
+      uComicHalf: { value: layout ? new THREE.Vector2(layout.halfU, layout.halfV) : new THREE.Vector2() },
+      uHasComic: { value: layout ? 1 : 0 },
       uCyan: { value: new THREE.Color(CYAN) },
       uGold: { value: new THREE.Color(AMBER) },
     },
@@ -929,12 +935,12 @@ function addLightCurtain(
     speed,
     goldBias,
     opacity,
-    comicMask: {
+    comicMask: layout ? {
       centerU: layout.config.centerU,
       centerY: layout.centerY,
       halfU: layout.halfU,
       halfV: layout.halfV,
-    },
+    } : null,
   };
   mesh.onBeforeRender = () => {
     material.uniforms.uTime.value = performance.now() * 0.001;
@@ -1516,7 +1522,7 @@ export function createHeroMediaBuilding(
   }
 
   // ————————————————————————————————————————————————
-  // 3b. 西立面：用同一套竖鳍语言托住漫画洞口
+  // 3b. 西立面：完整转角收边、竖鳍与服务管井
   // ————————————————————————————————————————————————
   const westFinX = -finX;
   for (const [z0, z1] of [
@@ -1661,7 +1667,7 @@ export function createHeroMediaBuilding(
   }
 
   // ————————————————————————————————————————————————
-  // 6. 四面错层漫画展位：结构框体在两种模式下都保留，媒体面板只在正式模式出现
+  // 6. 单一正面主屏：仅该面的框体在结构模式保留，其余三面完整制作建筑立面。
   // ————————————————————————————————————————————————
   for (const config of B01_COMIC_PANELS) {
     const layout = panelLayouts.get(config.facade);
@@ -1702,7 +1708,6 @@ export function createHeroMediaBuilding(
   if (!structureOnly) {
     for (const curtain of B01_LIGHT_CURTAINS) {
       const layout = panelLayouts.get(curtain.facade);
-      if (!layout) continue;
       addLightCurtain(
         group,
         spec,
@@ -1718,7 +1723,7 @@ export function createHeroMediaBuilding(
     }
     addCornerLightBands(ctx, group, spec, shaftBase, shaftTop);
 
-    const roofSignTexture = createSignTexture('LOHINA', 'NORTH · B-01', {
+    const roofSignTexture = createSignTexture('LOHINA', spec.id === 'B-01' ? 'NORTH · B-01' : spec.id, {
       color: '#e9fdff',
       subColor: 'rgba(255,196,107,0.78)',
       width: 1024,
@@ -1726,7 +1731,7 @@ export function createHeroMediaBuilding(
     });
     addPlane(group, createLabelMaterial(roofSignTexture), 6.55, 1.4, 0, 38.2, 3.17, 0, `${spec.id}_RoofSign`);
 
-    const entryLabel = createSignTexture('LOHINA', 'NORTH · B-01', {
+    const entryLabel = createSignTexture('LOHINA', spec.id === 'B-01' ? 'NORTH · B-01' : spec.id, {
       color: '#e9fdff',
       subColor: 'rgba(255,196,107,0.78)',
       width: 1024,

@@ -1,5 +1,5 @@
 /**
- * B-01 北岸媒体楼 · 四面立面媒体配置。
+ * B-01 北岸媒体楼 · 单一主展示面与四面建筑装饰配置。
  *
  * 只改这个文件即可替换漫画、调整展位尺寸/位置和光幕相位：
  * - image 相对 public/assets/worlds/cyberpunk/media/，也可写绝对 URL；
@@ -36,8 +36,8 @@ export const B01_USABLE_BOTTOM = 7.2;
 export const B01_USABLE_TOP = 32.4;
 
 /**
- * 四面错层：建议中心高度为 35% / 55% / 70% / 45%。
- * 背面让开楼梯核心，保持同一高度层但缩窄并左移。
+ * 最新要求：只保留正面一块主屏。侧背面不生成屏体、背板或专用支架，
+ * 其窗带、竖鳍、设备及转角构造继续完整制作。未来朝路口方向由整合布局确定。
  */
 export const B01_COMIC_PANELS: readonly B01ComicPanelConfig[] = [
   {
@@ -50,39 +50,6 @@ export const B01_COMIC_PANELS: readonly B01ComicPanelConfig[] = [
     centerU: 0.45,
     tint: 0xd2d6d3,
     label: '正面 / FRONT',
-  },
-  {
-    id: 'b01-comic-right',
-    facade: 'right',
-    image: 'images/images1.jpg',
-    aspect: 447 / 447,
-    width: 5.4,
-    centerRatio: 0.55,
-    centerU: -0.75,
-    tint: 0xd8dcda,
-    label: '右面 / RIGHT',
-  },
-  {
-    id: 'b01-comic-back',
-    facade: 'back',
-    image: 'images/w700d1q75cms.jpg',
-    aspect: 640 / 576,
-    width: 5.6,
-    centerRatio: 0.7,
-    centerU: 2.45,
-    tint: 0xccd1cf,
-    label: '背面 / BACK',
-  },
-  {
-    id: 'b01-comic-left',
-    facade: 'left',
-    image: 'images/images1.jpg',
-    aspect: 447 / 447,
-    width: 4.9,
-    centerRatio: 0.45,
-    centerU: -0.5,
-    tint: 0xd8dcda,
-    label: '左面 / LEFT',
   },
 ];
 

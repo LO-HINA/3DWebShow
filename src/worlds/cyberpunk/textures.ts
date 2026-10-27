@@ -54,36 +54,61 @@ export function createGroundTexture(): THREE.CanvasTexture {
   const size = 512;
   const [canvas, ctx] = canvas2d(size, size);
   const rand = seededRandom(90210);
-  ctx.fillStyle = '#1b1f2d';
+  // 近黑蓝紫基面：接缝与颗粒只提供尺度感，主要视觉来自霓虹倒影。
+  ctx.fillStyle = '#0d1019';
   ctx.fillRect(0, 0, size, size);
 
   const cells = 8;
   const cell = size / cells;
   for (let y = 0; y < cells; y += 1) {
     for (let x = 0; x < cells; x += 1) {
-      const shade = 28 + Math.floor(rand() * 10);
-      ctx.fillStyle = `rgb(${shade},${shade + 4},${shade + 12})`;
-      ctx.fillRect(x * cell + 2, y * cell + 2, cell - 4, cell - 4);
-      if (rand() > 0.6) {
-        ctx.fillStyle = 'rgba(255,255,255,0.025)';
-        ctx.fillRect(x * cell + 4, y * cell + 4, cell - 8, 2);
+      const shade = 10 + Math.floor(rand() * 10);
+      ctx.fillStyle = `rgb(${shade},${shade + 1},${shade + 7})`;
+      ctx.fillRect(x * cell + 1, y * cell + 1, cell - 2, cell - 2);
+      if (rand() > 0.7) {
+        ctx.fillStyle = 'rgba(96,110,158,0.018)';
+        ctx.fillRect(x * cell + 2, y * cell + 2, cell - 4, 1);
       }
     }
   }
 
-  for (let i = 0; i < 4200; i += 1) {
-    const alpha = 0.02 + rand() * 0.05;
-    ctx.fillStyle = rand() > 0.55 ? `rgba(255,255,255,${alpha})` : `rgba(0,0,0,${alpha})`;
-    ctx.fillRect(rand() * size, rand() * size, 1 + rand() * 2.4, 1 + rand() * 2.4);
+  // 接缝极弱：近看能读到石板尺度，远看融回黑色。
+  ctx.strokeStyle = 'rgba(46,52,76,0.22)';
+  ctx.lineWidth = 1.4;
+  for (let i = 0; i <= cells; i += 1) {
+    const p = Math.min(size - 0.5, i * cell + 0.5);
+    ctx.beginPath();
+    ctx.moveTo(p, 0);
+    ctx.lineTo(p, size);
+    ctx.moveTo(0, p);
+    ctx.lineTo(size, p);
+    ctx.stroke();
+  }
+  ctx.strokeStyle = 'rgba(2,3,6,0.5)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= cells; i += 1) {
+    const p = Math.min(size - 0.5, i * cell + 2);
+    ctx.beginPath();
+    ctx.moveTo(p, 0);
+    ctx.lineTo(p, size);
+    ctx.moveTo(0, p);
+    ctx.lineTo(size, p);
+    ctx.stroke();
   }
 
-  // 轻微湿痕，仅在材质粗糙度上形成变化，不代表真实反射。
-  for (let i = 0; i < 7; i += 1) {
+  for (let i = 0; i < 1600; i += 1) {
+    const alpha = 0.012 + rand() * 0.026;
+    ctx.fillStyle = rand() > 0.58 ? `rgba(150,164,214,${alpha})` : `rgba(0,0,0,${alpha * 1.6})`;
+    ctx.fillRect(rand() * size, rand() * size, 1 + rand() * 1.8, 1 + rand() * 1.8);
+  }
+
+  // 极淡的湿斑只打破均匀黑色，真实反射由 CityLook 提供。
+  for (let i = 0; i < 5; i += 1) {
     const x = rand() * size;
     const y = rand() * size;
-    const gradient = ctx.createRadialGradient(x, y, 0, x, y, 40 + rand() * 90);
-    gradient.addColorStop(0, 'rgba(80,110,160,0.05)');
-    gradient.addColorStop(1, 'rgba(80,110,160,0)');
+    const gradient = ctx.createRadialGradient(x, y, 0, x, y, 50 + rand() * 90);
+    gradient.addColorStop(0, 'rgba(72,96,150,0.028)');
+    gradient.addColorStop(1, 'rgba(72,96,150,0)');
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, size, size);
   }

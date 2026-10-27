@@ -237,6 +237,7 @@ export class WorldEngine {
     this.sky = createSky(this.materialBundle.materials);
     this.scene.add(this.sky);
     this.voidCity = createVoidCity([
+      ...buildings.map(building=>({x:building.position[0],z:building.position[2],radius:Math.hypot(building.size[0],building.size[2])/2+9})),
       { x: MEDIA_TOWER.position[0], z: MEDIA_TOWER.position[2], radius: 34 },
       {x:BUILDING_WORKSHOP.position[0],z:BUILDING_WORKSHOP.position[2],radius:BUILDING_WORKSHOP.backgroundClearRadius},
     ]);
@@ -293,6 +294,12 @@ export class WorldEngine {
     for (const mesh of this.occluderMeshes) staticExclusions.add(mesh);
     mergeStaticScene(this.scene, staticExclusions);
     const groundMaterials=[this.materialBundle.materials.ground,this.materialBundle.materials.walkway,this.materialBundle.materials.plaza];
+    this.scene.traverse(object=>{
+      if(!(object instanceof THREE.Mesh))return;
+      for(const material of Array.isArray(object.material)?object.material:[object.material]){
+        if(material instanceof THREE.MeshStandardMaterial&&material.userData.nwStudyWet&&!groundMaterials.includes(material))groundMaterials.push(material);
+      }
+    });
     const outerFloor=this.voidCity.group.getObjectByName('VoidFloor');
     if(outerFloor instanceof THREE.Mesh&&outerFloor.material instanceof THREE.MeshStandardMaterial)groundMaterials.push(outerFloor.material);
     this.cityLook=new CityLook(this.renderer,this.scene,groundMaterials,CITY_LOOK);
@@ -628,6 +635,13 @@ export class WorldEngine {
           this.follow.snapTo(0,-0.2,8.5,this.player.position);
           return {id:spec.id,position:spec.position,standingPoint:position};
         },
+        nightStudy: () => {
+          const spec=buildings.find(building=>building.id==='NW(0)')!;
+          const feet:[number,number,number]=[spec.position[0],0,spec.position[2]+29];
+          if(!isSafeFeet(feet))return false;
+          this.clearInput();this.reviewCamera=null;this.player.teleport(feet,Math.PI);
+          this.follow.snapTo(0,-.3,8.5,this.player.position);return {id:spec.id,feet};
+        },
         landmarkState: () => {
           this.landmark.group.updateMatrixWorld(true);
           const stars:object[]=[];
@@ -726,6 +740,9 @@ export class WorldEngine {
       }
       if(new URLSearchParams(window.location.search).get('workshop')===BUILDING_WORKSHOP.buildingId){
         (window as unknown as {__lohina:{buildingWorkshop:()=>unknown}}).__lohina.buildingWorkshop();
+      }
+      if(new URLSearchParams(window.location.search).get('study')==='NW(0)'){
+        (window as unknown as {__lohina:{nightStudy:()=>unknown}}).__lohina.nightStudy();
       }
     }
     this.clock.start();

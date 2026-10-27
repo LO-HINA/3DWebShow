@@ -1,5 +1,11 @@
 # LOHINA WORLD · Round 01 + E-01 / T-02 / T-03 / B-01
 
+> 最新夜景样板仅作用于NW(0)，查看开发入口 `/world?study=NW(0)`。编号、道路和交互保留；弧形灯槽、局部照明与原比例图片已接入。运行截图采集受权限限制，尚未视觉验收；[样板范围与验证记录](docs/nw-night-review/README.md)。
+
+> 当前运行布局已按用户要求更新为新十字街区首轮试做：NW弧面玻璃、SW外凸曲面、NE霓虹漫画、SE单屏媒体楼，中央M、北侧12m画幕；原建筑和内容移至外围保留。查看 `/world`。尺寸、示意、检查和未验收项见 [新街区试做记录](docs/block-plan/trial-1.md)。下文旧八栋布局和8m屏描述属于历史版本。
+
+> 2026-10-24 最新 B-01 打磨：上部改为仅正面主屏，删除另外三面的整套屏幕安装构造，恢复侧背面建筑细节，四面装饰光幕保留。查看 `/world?workshop=B-01`，检查与历史证据边界见 [打磨区记录](docs/building-workshop/README.md)。下文四面漫画章节是旧版本记录。
+
 **首次接手先读 [当前任务与 agent 交接说明](docs/CURRENT_TASK.md)**：当前工作范围、必须保留的功能、文件归属、启动端口和证据状态集中在那里。本 README 后半部分保留历史模块记录，不能把每个“本轮”当成同一次构建。
 
 暮光新野兽派风格的 3D 学习成果街区。当前版本在 Round 01 可运行初稿基础上，完成 E-01「视觉与摄影馆」与 T-02 品牌塔的建筑美术精修，接入 T-03 媒体塔，并完成 B-01「北岸媒体楼」的结构模式、四面错层漫画与流动光幕第一轮；已按 `AGENTS.md` V3.0 核对当前进度。本 README 是并行 agent 的进度总览；模块细节以各自评审文档为准，文档导航见 [`docs/README.md`](docs/README.md)。
@@ -17,6 +23,8 @@
 
 现有八栋已接入实体窗框、内凹玻璃和窗后空间，保留原位置、入口与媒体内容。精细画质开启分区窗光辉光及统一湿地面反射，流畅画质保留实窗、关闭增强。主场景仍为 WebGL2。实现、调参、检查和未完成的 GPU/运行视觉验收见 [本轮记录](docs/city-style-review/README.md)。
 
+黑色湿镜面地坪（2026-10-24 最新指令）：地面改为近黑蓝紫连续基面，铺装接缝与颗粒压到极弱；共享 `CityLook` 反射升级为时间驱动的微波动、5 采样适度模糊、高光压缩与蓝紫染色，反射目标提升到视口 0.6 倍、上限 1024。正常行走机位可辨认 12m 屏文字与建筑轮廓，屏幕内容变化时倒影同步；贯穿广场的青/金细线降至 0.05/0.045 不透明度，新增四向入口阈值与短斜路缘。实现、机位、亮度统计与证据边界见 [黑色湿镜面地坪记录](docs/ground-review/README.md)；截图来自 Edge + SwiftShader，真实 GPU 与连续走动录屏未验收。
+
 第二轮已补足厚窗台、楼板边、遮阳板/支架、竖肋和实体百叶；普通楼后墙相对原立面内退目标约 1.35m，玻璃后退约 0.46m。塔楼与展馆分别使用竖向、横向、盒式构件，降低整片亮窗背板的发光。正视/斜视射线检查通过，当前仍不能宣称“贴图感已通过视觉验收”。参数位置、逐栋覆盖与操作验收清单见同一记录。
 
 城市光影这一轮仍没有逐栋浏览器截图、真实性能或主观视觉验收结论；较早的自动采集受 `WinError 5` 限制。B-01 已单独用 Playwright + Edge + SwiftShader 补齐固定机位，见后文与 `docs/screenshots/b01/`。各模块旧截图与旧统计不能替代本轮证据。
@@ -26,6 +34,7 @@
 | 模块 | 状态 | 主要文件 | 证据 / 限制 |
 | --- | --- | --- | --- |
 | 街区基础与中心区 | 可运行 | `src/worlds/cyberpunk/layout.ts`、`src/worlds/cyberpunk/props/street.ts`、`src/worlds/cyberpunk/buildings/buildings.ts` | 双塔、三馆、广场、环路、虚空街区与 5 个画框展位已接入 |
+| 黑色湿镜面地坪 | 已接入（工作区） | `src/engine/core/cityLook.ts`、`theme.ts` 的 `CITY_LOOK`、`textures.ts`、`materials.ts`、`props/street.ts` | `docs/ground-review/` 含正常视角、屏幕倒影、反射/辉光对照与亮度统计；Edge + SwiftShader，真实 GPU 与连续录屏未验收 |
 | E-01 建筑美术样板 | 完成第一轮 | `src/worlds/cyberpunk/buildings/buildings.ts` 的 `gallery()`、`src/worlds/cyberpunk/textures.ts`、`WorldEngine.ts` 的 E-01 灯光 | 01–06 截图与前后性能已记录；05/06 宽景 160/192 calls，超过 150 目标 |
 | T-02 品牌塔立面精修 | 完成第一轮（工作区） | `buildings.ts` 的 `towerB()`、`textures.ts` 的竖向字标选项 | 截图见 `docs/screenshots/t02/after/`；未单独记录 draw calls，宽景统计待复测 |
 | T-03 媒体塔 | 已接入，素材待补齐 | `buildings/mediaTower.ts`、`media.ts`、`layout.ts` 的 `MEDIA_TOWER`、`colliders.ts` | 图片 2 张、暂无视频；素材清单与操作说明见 `public/assets/worlds/cyberpunk/media/README.md` |
@@ -38,7 +47,7 @@
 | 中央大屏与世界切换 | 未开始（P1） | 目标为 `features/world-screen`、`worlds/*` | 广场现有 SCREEN-01 只是静态封面屏，没有 `HUB-SCREEN`、主题滑条和跨世界快照 |
 | 世界模块架构迁移 | 首批完成（P1） | `src/app`、`src/engine`、`src/worlds/cyberpunk`、`src/features`、`src/content` | 角色/镜头解耦，赛博配置拆分；完整 WorldHandle 与多世界切换待后续实现 |
 
-当前建筑细化与 B-01 的检查结果（2026-10-24）：`npx tsc --noEmit`、依赖边界（177 个本地 import）与当前工作区的 `npm run build` 通过；生产构建主 JS 5,451.67 kB / gzip 1,963.11 kB。八栋几何/媒体槽/射线遮挡检查为 2026-10-23 记录，早于本轮 B-01 四面媒体改动，需重跑后再引用。较早的受限会话曾在 Vite 启动子进程时遇到 `spawn EPERM`、在浏览器驱动启动时遇到 `WinError 5`；B-01 已改用 Playwright + Edge + SwiftShader 完成固定机位与绕楼录屏采集，城市光影的逐栋采集仍未完成。固定机位截图、calls / 三角面与软件渲染录屏不能替代真实 GPU、连续操作与主观视觉验收。
+当前建筑细化、黑色湿镜面地坪与 B-01 的检查结果（2026-10-24）：`npx tsc --noEmit`、依赖边界（177 个本地 import）与当前工作区的 `npm run build` 通过；生产构建主 JS 5,483.78 kB / gzip 1,974.94 kB。八栋几何/媒体槽/射线遮挡检查为 2026-10-23 记录，早于本轮 B-01 四面媒体改动，需重跑后再引用。较早的受限会话曾在 Vite 启动子进程时遇到 `spawn EPERM`、在浏览器驱动启动时遇到 `WinError 5`；B-01 已改用 Playwright + Edge + SwiftShader 完成固定机位与绕楼录屏采集，城市光影的逐栋采集仍未完成。固定机位截图、calls / 三角面与软件渲染录屏不能替代真实 GPU、连续操作与主观视觉验收。
 
 以下命令保留各模块最近一次结果；历史包体积、截图与通过记录只在注明适用构建时使用：
 

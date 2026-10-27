@@ -1,0 +1,148 @@
+{
+  "status": "passed",
+  "layoutVersion": "lohina-junction-v2-2026-10-24-trial-1",
+  "evidence": "geometry, registration, safe anchors and actual Rapier capsule sweeps; not browser/GPU acceptance",
+  "geometry": [
+    {
+      "id": "NW(0)",
+      "variant": "curveConcave",
+      "position": [
+        -25,
+        0,
+        -25
+      ],
+      "size": [
+        24,
+        42,
+        20
+      ],
+      "bounds": {
+        "min": [
+          -39,
+          0,
+          -35.279999999999994
+        ],
+        "max": [
+          -11,
+          42.135,
+          -3
+        ]
+      },
+      "meshes": 1253,
+      "rooms": 160,
+      "comicInstallations": 0
+    },
+    {
+      "id": "SW(0)",
+      "variant": "curveConvex",
+      "position": [
+        -26,
+        0,
+        25
+      ],
+      "size": [
+        26,
+        30,
+        22
+      ],
+      "bounds": {
+        "min": [
+          -39.49,
+          0,
+          12.25
+        ],
+        "max": [
+          -12.51,
+          30.135,
+          36.28
+        ]
+      },
+      "meshes": 972,
+      "rooms": 112,
+      "comicInstallations": 0
+    },
+    {
+      "id": "NE(0)",
+      "variant": "comicCorner",
+      "position": [
+        25,
+        0,
+        -25
+      ],
+      "size": [
+        20,
+        36,
+        18
+      ],
+      "bounds": {
+        "min": [
+          14.949999958276749,
+          0,
+          -34.05000004172325
+        ],
+        "max": [
+          35.05000004172325,
+          37.684999999999995,
+          -14.5
+        ]
+      },
+      "meshes": 27,
+      "rooms": 0,
+      "comicInstallations": 0
+    },
+    {
+      "id": "SE(0)",
+      "variant": "heroMedia",
+      "position": [
+        24,
+        0,
+        25
+      ],
+      "size": [
+        14,
+        40,
+        12
+      ],
+      "bounds": {
+        "min": [
+          15.499999999999998,
+          5.960464483090178e-9,
+          -4.000000000000002
+        ],
+        "max": [
+          32.5,
+          41.55000000357627,
+          32.1
+        ]
+      },
+      "meshes": 685,
+      "rooms": 0,
+      "comicInstallations": 1
+    }
+  ],
+  "routes": [
+    "east",
+    "west",
+    "north-bypass",
+    "south"
+  ],
+  "safeAnchors": 9,
+  "legacyPreserved": [
+    "T-01",
+    "T-02",
+    "H-01",
+    "B-01",
+    "E-01",
+    "E-02",
+    "E-03"
+  ],
+  "oldSnapshotRejected": true,
+  "nightStudy": {
+    "id": "NW(0)",
+    "images": 2,
+    "imageRatiosAndColorsPreserved": true,
+    "imageExitsBloom": true,
+    "cornicesAvoidPictures": true,
+    "otherBuildingsUnchanged": true
+  }
+}

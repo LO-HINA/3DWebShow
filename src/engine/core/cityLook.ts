@@ -20,6 +20,8 @@ export class CityLook {
   private readonly reflectionMatrix = new THREE.Matrix4();
   private readonly reflectionTexture:THREE.IUniform<THREE.Texture>;
   private readonly reflectionStrength = {value:0};
+  private readonly reflectionTexel = {value:new THREE.Vector2(1/512,1/320)};
+  private readonly time = {value:0};
   private readonly strength = {value:1};
   private readonly bloomComposer:EffectComposer;
   private readonly finalComposer:EffectComposer;
@@ -41,29 +43,47 @@ export class CityLook {
     this.mirror.rotation.x=-Math.PI/2;this.mirror.position.y=0.035;this.mirror.updateMatrixWorld(true);
     scene.traverse(object=>{if(object instanceof Reflector){object.visible=false;object.userData.noMerge=true;this.oldMirrors.push(object);}});
     for(const material of groundMaterials){
+      const softened=material.userData.nwStudyWet===true;
       material.roughness=material.map?options.groundRoughness:options.plainGroundRoughness;material.envMapIntensity=options.groundEnvironment;
       material.color.setHex(material.map?options.groundTint:options.plainGroundTint);
+      if(softened){material.roughness=.34;material.envMapIntensity=.65;}
       const original=material.onBeforeCompile,cacheKey=material.customProgramCacheKey;
       material.onBeforeCompile=(shader,renderer)=>{
         original.call(material,shader,renderer);
         shader.uniforms.uCityReflection=this.reflectionTexture;
         shader.uniforms.uCityReflectionMatrix={value:this.reflectionMatrix};
         shader.uniforms.uCityReflectionStrength=this.reflectionStrength;
+        shader.uniforms.uCityReflectionTexel=this.reflectionTexel;
+        shader.uniforms.uCityTime=this.time;
         shader.uniforms.uCityWetRange={value:new THREE.Vector2(options.wetMin,options.wetMax)};
         shader.vertexShader='uniform mat4 uCityReflectionMatrix; varying vec4 vCityReflectionUv; varying vec2 vCityWorldXZ;\n'+shader.vertexShader;
         shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>',`#include <begin_vertex>
           vec4 cityWorld = modelMatrix * vec4(transformed, 1.0);
           vCityReflectionUv = uCityReflectionMatrix * cityWorld;
           vCityWorldXZ = cityWorld.xz;`);
-        shader.fragmentShader='uniform sampler2D uCityReflection; uniform float uCityReflectionStrength; uniform vec2 uCityWetRange; varying vec4 vCityReflectionUv; varying vec2 vCityWorldXZ;\n'+shader.fragmentShader;
+        shader.fragmentShader='uniform sampler2D uCityReflection; uniform float uCityReflectionStrength; uniform float uCityTime; uniform vec2 uCityReflectionTexel; uniform vec2 uCityWetRange; varying vec4 vCityReflectionUv; varying vec2 vCityWorldXZ;\n'+shader.fragmentShader;
         shader.fragmentShader=shader.fragmentShader.replace('#include <emissivemap_fragment>',`#include <emissivemap_fragment>
           vec2 cityUV = vCityReflectionUv.xy / max(vCityReflectionUv.w, 0.0001);
           float cityBounds = step(0.0, cityUV.x) * step(cityUV.x,1.0) * step(0.0,cityUV.y) * step(cityUV.y,1.0) * step(0.0,vCityReflectionUv.w);
-          float cityWet = mix(uCityWetRange.x,uCityWetRange.y, smoothstep(-0.4,0.65,sin(vCityWorldXZ.x*0.62)*sin(vCityWorldXZ.y*0.47)));
+          float cityPatch = smoothstep(-0.35,0.72,sin(vCityWorldXZ.x*0.29+sin(vCityWorldXZ.y*0.17)*1.4)*sin(vCityWorldXZ.y*0.24+sin(vCityWorldXZ.x*0.11)*1.2));
+          float cityFilm = 0.86+0.14*smoothstep(-0.7,0.8,sin(vCityWorldXZ.x*2.7)*sin(vCityWorldXZ.y*2.3));
+          float cityWet = mix(uCityWetRange.x,uCityWetRange.y,cityPatch)*cityFilm;
+          vec2 cityRipple = vec2(
+            sin(vCityWorldXZ.y*2.1+uCityTime*0.72)+0.55*sin(vCityWorldXZ.y*5.3-uCityTime*0.41),
+            sin(vCityWorldXZ.x*1.8-uCityTime*0.61)+0.55*sin(vCityWorldXZ.x*4.7+uCityTime*0.36)
+          )*${softened?'0.0024':'0.0017'}*cityWet;
+          vec2 cityReflUv = clamp(cityUV+cityRipple,vec2(0.001),vec2(0.999));
+          vec2 cityBlur = uCityReflectionTexel*vec2(1.0,1.35)*${softened?'1.6':'1.0'};
+          vec3 cityReflected = texture2D(uCityReflection,cityReflUv).rgb*0.36;
+          cityReflected += texture2D(uCityReflection,cityReflUv+vec2(cityBlur.x,cityBlur.y)).rgb*0.16;
+          cityReflected += texture2D(uCityReflection,cityReflUv+vec2(-cityBlur.x,cityBlur.y)).rgb*0.16;
+          cityReflected += texture2D(uCityReflection,cityReflUv+vec2(cityBlur.x,-cityBlur.y)).rgb*0.16;
+          cityReflected += texture2D(uCityReflection,cityReflUv+vec2(-cityBlur.x,-cityBlur.y)).rgb*0.16;
+          cityReflected = cityReflected/(1.0+cityReflected*0.18);
           float cityFresnel = pow(1.0-max(dot(normalize(vViewPosition),normal),0.0),2.0);
-          totalEmissiveRadiance += texture2D(uCityReflection,cityUV).rgb * cityWet * (0.32+0.68*cityFresnel) * uCityReflectionStrength * cityBounds;`);
+          totalEmissiveRadiance += cityReflected*vec3(0.86,0.92,1.12)*cityWet*(0.5+0.5*cityFresnel)*uCityReflectionStrength*cityBounds;`);
       };
-      material.customProgramCacheKey=()=>cacheKey.call(material)+':city-reflection-v1';material.needsUpdate=true;
+      material.customProgramCacheKey=()=>cacheKey.call(material)+(softened?':city-reflection-nw-soft-v3':':city-reflection-v3');material.needsUpdate=true;
       this.restoreHooks.push(()=>{material.onBeforeCompile=original;material.customProgramCacheKey=cacheKey;});
     }
     const camera=new THREE.PerspectiveCamera();
@@ -87,12 +107,14 @@ export class CityLook {
     if(options.reflection!==undefined)this.reflectionEnabled=options.reflection;
   }
   resize():void{
-    if(!this.high){this.finalComposer.setSize(1,1);this.bloomComposer.setSize(1,1);this.mirror.getRenderTarget().setSize(1,1);return;}
+    if(!this.high){this.finalComposer.setSize(1,1);this.bloomComposer.setSize(1,1);this.mirror.getRenderTarget().setSize(1,1);this.reflectionTexel.value.set(1,1);return;}
     const size=this.renderer.getDrawingBufferSize(new THREE.Vector2());
     this.finalComposer.setPixelRatio(1);this.finalComposer.setSize(size.x,size.y);
     this.bloomComposer.setPixelRatio(1);this.bloomComposer.setSize(Math.max(1,Math.round(size.x*0.5)),Math.max(1,Math.round(size.y*0.5)));
     const scale=Math.min(this.options.reflectionScale,this.options.reflectionMaxSize/Math.max(size.x,size.y));
-    this.mirror.getRenderTarget().setSize(Math.max(1,Math.round(size.x*scale)),Math.max(1,Math.round(size.y*scale)));
+    const target=this.mirror.getRenderTarget();
+    target.setSize(Math.max(1,Math.round(size.x*scale)),Math.max(1,Math.round(size.y*scale)));
+    this.reflectionTexel.value.set(1/target.width,1/target.height);
   }
   private bloomMaterial(source:THREE.Material):THREE.Material{
     const emitting=source.userData.bloom===true||
@@ -113,6 +135,7 @@ export class CityLook {
   }
   render(camera:THREE.Camera):void{
     this.scene.updateMatrixWorld();camera.updateMatrixWorld();
+    this.time.value=(performance.now()*0.001)%1000;
     this.renderer.info.autoReset=false;this.renderer.info.reset();
     const shadowUpdate=this.renderer.shadowMap.autoUpdate;
     if(this.high&&this.reflectionEnabled){
