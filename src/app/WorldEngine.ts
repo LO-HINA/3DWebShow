@@ -236,10 +236,17 @@ export class WorldEngine {
     // 天空球与星空跟随玩家，离开中心很远时不会看到天空球外侧的空白。
     this.sky = createSky(this.materialBundle.materials);
     this.scene.add(this.sky);
+    // 道路延伸到 48m 清空区之外，沿两条主轴补扫清走廊，
+    // 避免外围程序化黑塔长在马路上。
+    const roadKeepOut = [
+      ...Array.from({ length: 7 }, (_, i) => ({ x: -84 + i * 28, z: 0, radius: 13 })),
+      ...Array.from({ length: 7 }, (_, i) => ({ x: 0, z: -84 + i * 28, radius: 13 })),
+    ];
     this.voidCity = createVoidCity([
       ...buildings.map(building=>({x:building.position[0],z:building.position[2],radius:Math.hypot(building.size[0],building.size[2])/2+9})),
       { x: MEDIA_TOWER.position[0], z: MEDIA_TOWER.position[2], radius: 34 },
       {x:BUILDING_WORKSHOP.position[0],z:BUILDING_WORKSHOP.position[2],radius:BUILDING_WORKSHOP.backgroundClearRadius},
+      ...roadKeepOut,
     ]);
     this.scene.add(this.voidCity.group);
     const ground = createGround(this.materialBundle.materials);
@@ -388,10 +395,11 @@ export class WorldEngine {
   }
 
   private setupLights(): void {
-    const hemisphere = new THREE.HemisphereLight(0x8baecf, 0x20232a, 0.82);
+    // 夜景整体提亮：天空补光与环境底光略抬，保留暮色而非改成白天。
+    const hemisphere = new THREE.HemisphereLight(0x8baecf, 0x20232a, 0.95);
     this.scene.add(hemisphere);
 
-    const ambient = new THREE.AmbientLight(0x38446a, 0.18);
+    const ambient = new THREE.AmbientLight(0x38446a, 0.24);
     this.scene.add(ambient);
 
     // 南侧暖色补光：让面向出生点的立面在暮色里仍然可读。

@@ -17,7 +17,9 @@
 
 当前规划依据：[新街区布局与编号规划](block-plan/README.md)。用户已明确授权按文档更新建筑群，[第一版试做](block-plan/trial-1.md)已接入四个转角建筑、M与北侧SCREEN，原楼移至外围保留；视觉与性能尚未验收。
 
-当前单栋美术任务：[NW(0)夜景样板](nw-night-review/README.md)。仅NW接入，四视角截图采集受限，确认前不向其他三栋推广。
+当前单栋美术任务：[NW(0) 巨幕虚拟屏](nw-night-review/README.md)。NW(0) 已转 45° 正对中心 LM-01，原两幅小画作替换为 17×20m 弧形巨幕；仅 NW 接入，确认前不向其他三栋推广。
+
+最新街道任务：[十字马路与全城提亮](road-review/2026-11-11/README.md)。中央十字路已补路缘线、中心虚线、斑马线、停止线、引导点与流动光带，路灯下补暖色光池，路面/环境/辉光整体提亮；LEARNING、AI LAB 与 W4 已移出 18m 东西向马路。截图为 Edge + SwiftShader，真实 GPU 未验收。
 
 并行实现记录：[LM-01 光轨出生庭与页面入口](orrery-review/2026-10-24.md)。14m×11.8m候选、下方出生与可交互仪表盘已接入，入口配置和模型位已明确；截图/录屏及完整浏览器往返待验收，不按大屏遮挡提前移动建筑。
 
@@ -32,6 +34,7 @@
 | [`references/buildings/README.md`](references/buildings/README.md) | 用户选定的三张建筑参考截图与下一轮改造简报 | 风格参考，不是运行截图或性能证据 |
 | [`city-style-review/README.md`](city-style-review/README.md) | 八栋实体窗与第二轮构造细化、调参表、复现命令、连续操作验收清单 | 几何/射线检查通过；真实 GPU 与主观视觉仍待验收 |
 | [`ground-review/README.md`](ground-review/README.md) | 黑色湿镜面地坪：实现范围、关键参数、14 张机位、反射/辉光对照与亮度统计 | 已接入；Edge + SwiftShader 截图，真实 GPU 与连续走动未验收 |
+| [`road-review/2026-11-11/README.md`](road-review/2026-11-11/README.md) | 中央十字马路标线、流动光带、路灯与提亮参数、LEARNING/AI LAB/W4 移楼、虚空走廊清理 | 已接入；Edge + SwiftShader 截图，真实 GPU 未验收 |
 | [`screenshots/b01/README.md`](screenshots/b01/README.md) | B-01 北岸媒体楼：四面错层漫画、流动光幕、结构审阅模式与证据边界 | 四面布局/材质第一轮完成；截图与录屏来自 Edge + SwiftShader，真实 GPU 未验收 |
 | [`E01_STYLE_GUIDE.md`](E01_STYLE_GUIDE.md) | E-01 视觉与摄影馆的体量、门窗、招牌、灯光与可复用构件 | E-01 专用样板规则；E-01 在媒体立面策略中保持暗面留白 |
 | [`zenith-building-review/README.md`](zenith-building-review/README.md) | Neon Zenith 单栋退台办公塔复现样板、许可与预览方式 | 独立 WebGPU/TSL 预览，不进入正式主场景 |
@@ -92,6 +95,7 @@
 | `scripts/check-city-look.ts` | 选择性辉光、反射与画质降级逻辑检查 | 先用 esbuild 打包到 `.camera-preview/` 再执行 |
 | `python scripts/capture-city-style.py` | 城市光影浏览器采集 | 本机曾遇 Playwright 驱动权限错误，未完成 |
 | `python scripts/capture-ground-mirror.py` | 黑色湿镜面地坪 14 张机位、反射/辉光对照、地面亮度与帧间差 | 需 5173 开发服务与 Edge + SwiftShader；输出 `docs/ground-review/` |
+| `python scripts/capture-road-brightening.py` | 十字马路 11 机位、流动光带两帧、辉光开关、移楼与外围走廊 | 需 5173 开发服务与 Edge + SwiftShader；输出 `docs/road-review/2026-11-11/` |
 | `python scripts/capture-zenith-study.py` | 单栋样板四视角采集 | 本机曾遇驱动权限错误，未完成 |
 
 脚本的完整命令、端口和已知失败见根 [`README.md`](../README.md) 与对应评审目录。

@@ -16,8 +16,10 @@ export const PALETTE = {
 
 /** Shared by the city lighting pipeline; geometry/contents keep their own materials. */
 export const CITY_LOOK = {
-  groundTint:0x9aa3bd,plainGroundTint:0x141827,groundRoughness:0.46,plainGroundRoughness:0.44,
-  groundEnvironment:0.35,bloomStrength:0.32,bloomRadius:0.42,bloomThreshold:0.78,
+  // 2026-11-11 用户指令“尽量让城市亮起来”：路面底色提亮，环境反射略增，
+  // 辉光阈值下调，让霓虹与马路标线更早进入光晕。
+  groundTint:0x9aa3bd,plainGroundTint:0x1e2638,groundRoughness:0.46,plainGroundRoughness:0.4,
+  groundEnvironment:0.42,bloomStrength:0.38,bloomRadius:0.44,bloomThreshold:0.72,
   reflectionScale:0.6,reflectionMaxSize:1024,wetMin:0.62,wetMax:0.96,
 } as const;
 

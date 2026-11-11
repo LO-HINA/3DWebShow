@@ -15,7 +15,7 @@ export const plazaScreen: PlazaScreenSpec = {
 };
 
 export const WORLD_NAME = 'LOHINA WORLD';
-export const LAYOUT_VERSION = 'lohina-junction-v2-2026-10-24-trial-1';
+export const LAYOUT_VERSION = 'lohina-junction-v4-2026-11-11-roads';
 export const SNAPSHOT_KEY = 'lohina-world:snapshot:v1';
 
 export const WORLD_BOUNDS = { min: -900, max: 900 } as const;
@@ -36,7 +36,7 @@ export const BUILDING_WORKSHOP = {
 
 /** Trial dimensions, not final architecture approvals; +Z south, +X east. */
 export const junctionBuildings: BuildingSpec[] = [
-  {id:'NW(0)',name:'西北弧面玻璃楼',variant:'curveConcave',position:[-25,0,-25],size:[24,42,20],yawRad:0,sign:'NW(0)',subSign:'弧面玻璃 · 用途待定',accent:'cyan'},
+  {id:'NW(0)',name:'西北弧面玻璃楼',variant:'curveConcave',position:[-25,0,-25],size:[24,42,20],yawRad:Math.PI/4,sign:'NW(0)',subSign:'弧面玻璃 · 虚拟巨幕',accent:'cyan'},
   {id:'SW(0)',name:'西南外凸曲面楼',variant:'curveConvex',position:[-26,0,25],size:[26,30,22],yawRad:Math.PI,sign:'SW(0)',subSign:'外凸曲面 · 用途待定',accent:'gold'},
   {id:'NE(0)',name:'东北霓虹漫画楼',variant:'comicCorner',position:[25,0,-25],size:[20,36,18],yawRad:0,sign:'NE(0)',subSign:'霓虹漫画 · 用途待定',accent:'cyan'},
   {id:'SE(0)',name:'东南媒体楼',variant:'heroMedia',position:[24,0,25],size:[14,40,12],yawRad:Math.PI,sign:'SE(0)',subSign:'媒体楼 · 单面主屏试做',accent:'cyan'},
@@ -111,7 +111,8 @@ export const legacyBuildings: BuildingSpec[] = [
     id: 'E-02',
     name: '前端与算法学习馆',
     variant: 'learning',
-    position: [-62, 0, -6],
+    // 2026-11-11：原 z=-6 落在 18m 东西向马路中间，移至北侧人行边线外。
+    position: [-62, 0, -17],
     size: [8, 9.5, 8],
     yawRad: 0,
     sign: 'LEARNING',
@@ -122,7 +123,8 @@ export const legacyBuildings: BuildingSpec[] = [
     id: 'E-03',
     name: 'AI 终端亭',
     variant: 'terminal',
-    position: [62, 0, -6],
+    // 2026-11-11：同上，从东西向马路中移出。
+    position: [62, 0, -17],
     size: [7, 5, 8],
     yawRad: deg(-90),
     sign: 'AI LAB',
@@ -171,9 +173,10 @@ export const frames = [
   },
   {
     exhibitId: 'W4',
-    position: [44, 0, 8] as Vec3,
+    // 2026-11-11：原 z=8 落在东西向马路内，随学习馆一起移到路缘外。
+    position: [44, 0, 13] as Vec3,
     yawRad: deg(-90),
-    anchor: [42.5, 0, 8] as Vec3,
+    anchor: [42.5, 0, 13] as Vec3,
     lit: false,
   },
   {
@@ -205,6 +208,9 @@ export const planters = [
 export const lamps = [
   ...[-42,42].flatMap(z=>[-10,10].map(x=>({position:[x,0,z] as Vec3}))),
   ...[-42,42].map(x=>({position:[x,0,10] as Vec3})),
+  // 2026-11-11：主路向外延伸后补灯，保持两侧连续照度。
+  ...[-58,-72,58,72].flatMap(z=>[-10,10].map(x=>({position:[x,0,z] as Vec3}))),
+  ...[-58,-72,58,72].flatMap(x=>[-10,10].map(z=>({position:[x,0,z] as Vec3}))),
 ];
 
 export const paths = [
@@ -231,8 +237,8 @@ export const zones: ZoneSpec[] = [
   {id:'se',label:'SE(0) · 媒体楼',center:[24,25],radius:18},
   { id: 'west', label: '西侧图片步道', center: [-43, 0], radius: 13 },
   { id: 'north', label: '北侧画幕', center: [0, -24], radius: 10 },
-  { id: 'learning', label: '旧学习馆', center: [-62, -1], radius: 5 },
-  { id: 'terminal', label: '旧终端亭', center: [56, -6], radius: 6 },
+  { id: 'learning', label: '旧学习馆', center: [-62, -17], radius: 5 },
+  { id: 'terminal', label: '旧终端亭', center: [62, -17], radius: 6 },
   { id: 'alley', label: '东侧展位', center: [44, 34], radius: 10 },
 ];
 

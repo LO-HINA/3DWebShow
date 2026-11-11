@@ -1,0 +1,2346 @@
+{
+  "backend": "Edge + SwiftShader",
+  "viewport": [
+    1440,
+    810
+  ],
+  "dpr": 1,
+  "views": [
+    {
+      "view": "01-north-approach",
+      "feet": [
+        0,
+        22
+      ],
+      "yaw": 0.0,
+      "diagnostics": {
+        "player": {
+          "feet": [
+            0.0023504378421534966,
+            0.012988597678486258,
+            22.002283707115772
+          ],
+          "yaw": 0.2,
+          "moving": false,
+          "speed": 2.0091194510477916e-05,
+          "velocity": [
+            0,
+            0,
+            0
+          ],
+          "verticalVelocity": 0,
+          "grounded": true
+        },
+        "gait": {
+          "state": "idle",
+          "phase": 0.3,
+          "run": 0,
+          "feet": [
+            {
+              "position": [
+                -0.10497074587290768,
+                0.09089556092745625,
+                22.000031412378014
+              ],
+              "planted": true,
+              "pitch": 0,
+              "toe": 0,
+              "yaw": 0
+            },
+            {
+              "position": [
+                0.10502925412709231,
+                0.09089556092745625,
+                22.000031412378014
+              ],
+              "planted": true,
+              "pitch": 0,
+              "toe": 0,
+              "yaw": 0
+            }
+          ],
+          "updates": 10,
+          "maxReachError": 0,
+          "joints": [
+            {
+              "hip": [
+                -0.12454043169689166,
+                0,
+                0.00019874977135025658,
+                0.9922145137878604
+              ],
+              "knee": [
+                0.28192609406387625,
+                0,
+                1.4403490399843214e-05,
+                0.9594361246474025
+              ],
+              "ankle": [
+                -0.15946247951192621,
+                -0.09860119827199681,
+                0.015793729232979784,
+                0.9821405599221277
+              ]
+            },
+            {
+              "hip": [
+                -0.15661500386706984,
+                -0.0,
+                -0.002894870407217639,
+                0.9876554866394673
+              ],
+              "knee": [
+                0.2827202694986629,
+                0,
+                -0.0002695843820710034,
+                0.9592023647483697
+              ],
+              "ankle": [
+                -0.12805644936353436,
+                -0.09814267378158731,
+                0.0159069150582722,
+                0.9867707593016396
+              ]
+            }
+          ]
+        },
+        "camera": {
+          "orientationVersion": 2,
+          "mode": "follow",
+          "yaw": -0.0,
+          "pitch": -0.05,
+          "distance": 8.5,
+          "framing": "medium",
+          "lookUpPitch": -0.42,
+          "lookUpHeight": 6,
+          "lookUpYaw": 0,
+          "lookUpDistance": 8.5,
+          "targetPitchUpDeg": 2.8647889756541165,
+          "actualPitchUpDeg": 2.8647889756541165,
+          "viewPitchUpDeg": 2.8647889756541147,
+          "actualYaw": -0.0,
+          "yawDeg": -0.0,
+          "position": [
+            0.002350674619151505,
+            1.8758270521160685,
+            30.480155045903103
+          ],
+          "cameraHeight": 1.8758270521160685,
+          "lookAt": [
+            0.002350674619151505,
+            2.3756187448228516,
+            20.49265244195344
+          ],
+          "pivot": [
+            0.002350674619151505,
+            1.2628885982412612,
+            22.002283470338774
+          ],
+          "viewDirection": [
+            -0.0,
+            0.0499791692706783,
+            -0.9987502603949663
+          ],
+          "solverViewDirection": [
+            0,
+            0.04997916927067833,
+            -0.9987502603949663
+          ],
+          "boomLength": 8.500000000000002,
+          "desiredDistance": 8.5,
+          "targetDistance": 8.5,
+          "desiredLength": 8.500000000000002,
+          "groundHeight": 5.435911010209793e-08,
+          "clearance": 0.4,
+          "sweepRadius": 0.28,
+          "characterScreen": [
+            0.5,
+            0.6809672472171427
+          ]
+        },
+        "cameraCollision": {
+          "primaryHit": null,
+          "primaryRawHit": null,
+          "primaryObject": "—",
+          "primaryHandle": null,
+          "primaryStartOverlap": false,
+          "probeUsed": false,
+          "temporalHit": null,
+          "sphereRadius": 0.28
+        },
+        "avatarFade": {
+          "fading": false,
+          "reason": "none",
+          "targetOpacity": 1,
+          "opacity": 1,
+          "nearFading": false,
+          "centerFading": false,
+          "upLookFactor": 0,
+          "upLookPitchDeg": 2.8647889756541147,
+          "nearDistance": 8.487922279241847,
+          "centerDistance": 0.8361393668647628,
+          "screenHeight": 0.19210709441883628,
+          "materialOpacity": 1,
+          "transparentMaterials": 1,
+          "materialCount": 9,
+          "meshCount": 28
+        },
+        "plazaScreen": {
+          "imageStatus": "loaded"
+        },
+        "review": {
+          "view": "follow",
+          "inputScale": 1,
+          "position": null
+        },
+        "occluded": [],
+        "fps": 1
+      }
+    },
+    {
+      "view": "02-south-to-plaza",
+      "feet": [
+        0,
+        -24
+      ],
+      "yaw": 3.141592653589793,
+      "diagnostics": {
+        "player": {
+          "feet": [
+            0.0005073220122113753,
+            0.012559526607219595,
+            -23.999527896892943
+          ],
+          "yaw": 3.141592653589793,
+          "moving": false,
+          "speed": 1.6301154303373236e-05,
+          "velocity": [
+            0,
+            0,
+            0
+          ],
+          "verticalVelocity": 0,
+          "grounded": true
+        },
+        "gait": {
+          "state": "idle",
+          "phase": 0.3,
+          "run": 0,
+          "feet": [
+            {
+              "position": [
+                0.10502826171946424,
+                0.09087978377734544,
+                -23.999947679454394
+              ],
+              "planted": true,
+              "pitch": 0,
+              "toe": 0,
+              "yaw": 3.141592653589793
+            },
+            {
+              "position": [
+                -0.10497173828053576,
+                0.09087978377734544,
+                -23.999947679454394
+              ],
+              "planted": true,
+              "pitch": 0,
+              "toe": 0,
+              "yaw": 3.141592653589793
+            }
+          ],
+          "updates": 13,
+          "maxReachError": 0,
+          "joints": [
+            {
+              "hip": [
+                -0.1448793062078976,
+                0,
+                0.00035615579506261924,
+                0.9894492709511529
+              ],
+              "knee": [
+                0.2860845834548051,
+                0,
+                3.081741877845872e-05,
+                0.9582043676376023
+              ],
+              "ankle": [
+                -0.1442421986977454,
+                -0.00010673952216163108,
+                -0.00037162763650321697,
+                0.9895423379595307
+              ]
+            },
+            {
+              "hip": [
+                -0.1448795165038306,
+                0,
+                0.00035615577866545463,
+                0.9894492401587246
+              ],
+              "knee": [
+                0.28608474401920203,
+                0,
+                3.081748330844378e-05,
+                0.9582043196989619
+              ],
+              "ankle": [
+                -0.14424215419767253,
+                -0.00010673959049250012,
+                -0.00037162766663523006,
+                0.9895423444461343
+              ]
+            }
+          ]
+        },
+        "camera": {
+          "orientationVersion": 2,
+          "mode": "follow",
+          "yaw": 3.141592653589793,
+          "pitch": -0.04,
+          "distance": 8.5,
+          "framing": "medium",
+          "lookUpPitch": -0.42,
+          "lookUpHeight": 6,
+          "lookUpYaw": 0,
+          "lookUpDistance": 8.5,
+          "targetPitchUpDeg": 2.291831180523293,
+          "actualPitchUpDeg": 2.291831180523293,
+          "viewPitchUpDeg": 2.2918311805232916,
+          "actualYaw": 3.141592653589793,
+          "yawDeg": 180,
+          "position": [
+            0.0005075141231582308,
+            1.9601446369797113,
+            -32.470846492139025
+          ],
+          "cameraHeight": 1.9601446369797113,
+          "lookAt": [
+            0.0005075141231570072,
+            2.360037978846053,
+            -22.478845425529244
+          ],
+          "pivot": [
+            0.0005075141231571934,
+            1.2624595269880956,
+            -23.99952808900389
+          ],
+          "viewDirection": [
+            -1.2236305718671397e-16,
+            0.03998933418663414,
+            0.9992001066609779
+          ],
+          "solverViewDirection": [
+            -1.2236672123300604e-16,
+            0.03998933418663416,
+            0.9992001066609779
+          ],
+          "boomLength": 8.500000000000002,
+          "desiredDistance": 8.5,
+          "targetDistance": 8.5,
+          "desiredLength": 8.500000000000002,
+          "groundHeight": -4.495083061328842e-08,
+          "clearance": 0.4,
+          "sweepRadius": 0.28,
+          "characterScreen": [
+            0.5,
+            0.6808952638592626
+          ]
+        },
+        "cameraCollision": {
+          "primaryHit": null,
+          "primaryRawHit": null,
+          "primaryObject": "—",
+          "primaryHandle": null,
+          "primaryStartOverlap": false,
+          "probeUsed": false,
+          "temporalHit": null,
+          "sphereRadius": 0.28
+        },
+        "avatarFade": {
+          "fading": false,
+          "reason": "none",
+          "targetOpacity": 1,
+          "opacity": 1,
+          "nearFading": false,
+          "centerFading": false,
+          "upLookFactor": 0,
+          "upLookPitchDeg": 2.2918311805232916,
+          "nearDistance": 8.485925167947416,
+          "centerDistance": 0.8360493976115462,
+          "screenHeight": 0.19201782688094907,
+          "materialOpacity": 1,
+          "transparentMaterials": 1,
+          "materialCount": 9,
+          "meshCount": 28
+        },
+        "plazaScreen": {
+          "imageStatus": "loaded"
+        },
+        "review": {
+          "view": "follow",
+          "inputScale": 1,
+          "position": null
+        },
+        "occluded": [],
+        "fps": 1
+      }
+    },
+    {
+      "view": "03-crossing-north",
+      "feet": [
+        0,
+        15
+      ],
+      "yaw": 0.0,
+      "diagnostics": {
+        "player": {
+          "feet": [
+            -0.00029518556575069965,
+            0.013049489061813802,
+            14.997800606318547
+          ],
+          "yaw": 0,
+          "moving": false,
+          "speed": 8.544226147932932e-05,
+          "velocity": [
+            0,
+            0,
+            0
+          ],
+          "verticalVelocity": 0,
+          "grounded": true
+        },
+        "gait": {
+          "state": "idle",
+          "phase": 0.3,
+          "run": 0,
+          "feet": [
+            {
+              "position": [
+                -0.1049688275859171,
+                0.09089986278646393,
+                14.999999772206195
+              ],
+              "planted": true,
+              "pitch": 0,
+              "toe": 0,
+              "yaw": 0
+            },
+            {
+              "position": [
+                0.1050311724140829,
+                0.09089986278646393,
+                14.999999772206195
+              ],
+              "planted": true,
+              "pitch": 0,
+              "toe": 0,
+              "yaw": 0
+            }
+          ],
+          "updates": 17,
+          "maxReachError": 0,
+          "joints": [
+            {
+              "hip": [
+                -0.14477904576580114,
+                0,
+                0.00024361326755222303,
+                0.9894639804256241
+              ],
+              "knee": [
+                0.2832752973073863,
+                0,
+                2.085664521082486e-05,
+                0.9590386360832456
+              ],
+              "ankle": [
+                -0.14144200504004484,
+                -7.344696562652176e-05,
+                -0.00025377875642473694,
+                0.9899465083589808
+              ]
+            },
+            {
+              "hip": [
+                -0.14477981989492023,
+                0,
+                0.00024361322580420555,
+                0.9894638671542235
+              ],
+              "knee": [
+                0.2832758874642439,
+                0,
+                2.0856806367503364e-05,
+                0.9590384617659183
+              ],
+              "ankle": [
+                -0.14144183970983856,
+                -7.344713713060859e-05,
+                -0.00025377883125379336,
+                0.9899465319810558
+              ]
+            }
+          ]
+        },
+        "camera": {
+          "orientationVersion": 2,
+          "mode": "follow",
+          "yaw": -0.0,
+          "pitch": -0.18,
+          "distance": 8.5,
+          "framing": "medium",
+          "lookUpPitch": -0.42,
+          "lookUpHeight": 6,
+          "lookUpYaw": 0,
+          "lookUpDistance": 8.5,
+          "targetPitchUpDeg": 10.313240312354818,
+          "actualPitchUpDeg": 10.313240312354818,
+          "viewPitchUpDeg": 10.313240312354813,
+          "actualYaw": -0.0,
+          "yawDeg": -0.0,
+          "position": [
+            -0.0002966096034420218,
+            0.7717911468409883,
+            23.483592751402586
+          ],
+          "cameraHeight": 0.7717911468409883,
+          "lookAt": [
+            -0.0002966096034420218,
+            2.56208688109923,
+            13.645155823521371
+          ],
+          "pivot": [
+            -0.0002966096034420218,
+            1.2630463457244332,
+            14.997800606318547
+          ],
+          "viewDirection": [
+            -0.0,
+            0.1790295734258241,
+            -0.9838436927881214
+          ],
+          "solverViewDirection": [
+            0,
+            0.17902957342582418,
+            -0.9838436927881214
+          ],
+          "boomLength": 8.5,
+          "desiredDistance": 8.5,
+          "targetDistance": 8.5,
+          "desiredLength": 8.5,
+          "groundHeight": 1.573699410784002e-07,
+          "clearance": 0.4,
+          "sweepRadius": 0.28,
+          "characterScreen": [
+            0.5,
+            0.681401970249112
+          ]
+        },
+        "cameraCollision": {
+          "primaryHit": null,
+          "primaryRawHit": null,
+          "primaryObject": "—",
+          "primaryHandle": null,
+          "primaryStartOverlap": false,
+          "probeUsed": false,
+          "temporalHit": null,
+          "sphereRadius": 0.28
+        },
+        "avatarFade": {
+          "fading": false,
+          "reason": "none",
+          "targetOpacity": 1,
+          "opacity": 1,
+          "nearFading": false,
+          "centerFading": false,
+          "upLookFactor": 0,
+          "upLookPitchDeg": 10.313240312354813,
+          "nearDistance": 8.485792145084039,
+          "centerDistance": 0.839120680386123,
+          "screenHeight": 0.19328168893454498,
+          "materialOpacity": 1,
+          "transparentMaterials": 1,
+          "materialCount": 9,
+          "meshCount": 28
+        },
+        "plazaScreen": {
+          "imageStatus": "loaded"
+        },
+        "review": {
+          "view": "follow",
+          "inputScale": 1,
+          "position": null
+        },
+        "occluded": [],
+        "fps": 0
+      }
+    },
+    {
+      "view": "04-corners",
+      "feet": [
+        17,
+        17
+      ],
+      "yaw": 0.4636476090008061,
+      "diagnostics": {
+        "player": {
+          "feet": [
+            17.000001423383424,
+            0,
+            17
+          ],
+          "yaw": 0.4636476090008061,
+          "moving": false,
+          "speed": 0,
+          "velocity": [
+            0,
+            0,
+            0
+          ],
+          "verticalVelocity": 0,
+          "grounded": true
+        },
+        "gait": {
+          "state": "idle",
+          "phase": 0.3,
+          "run": 0,
+          "feet": [
+            {
+              "position": [
+                16.906086568328433,
+                0.085,
+                17.046957427527495
+              ],
+              "planted": true,
+              "pitch": 0,
+              "toe": 0,
+              "yaw": 0.4636476090008061
+            },
+            {
+              "position": [
+                17.093916278438414,
+                0.085,
+                16.953042572472505
+              ],
+              "planted": true,
+              "pitch": 0,
+              "toe": 0,
+              "yaw": 0.4636476090008061
+            }
+          ],
+          "updates": 20,
+          "maxReachError": 0,
+          "joints": [
+            {
+              "hip": [
+                -0.16042223697993727,
+                0,
+                8.063757376560581e-16,
+                0.987048482032343
+              ],
+              "knee": [
+                0.3166890509905597,
+                0,
+                8.638021138926978e-17,
+                0.9485294117647056
+              ],
+              "ankle": [
+                -0.16042223697993713,
+                -2.6922767384197607e-16,
+                -8.501325606296429e-16,
+                0.9870484820323429
+              ]
+            },
+            {
+              "hip": [
+                -0.16042223697993727,
+                -0.0,
+                -8.063757376560581e-16,
+                0.987048482032343
+              ],
+              "knee": [
+                0.3166890509905597,
+                0,
+                -8.638021138926978e-17,
+                0.9485294117647056
+              ],
+              "ankle": [
+                -0.16042223697993713,
+                2.6922767384197607e-16,
+                8.501325606296429e-16,
+                0.9870484820323429
+              ]
+            }
+          ]
+        },
+        "camera": {
+          "orientationVersion": 2,
+          "mode": "follow",
+          "yaw": 0.4636476090008061,
+          "pitch": -0.12,
+          "distance": 8.5,
+          "framing": "medium",
+          "lookUpPitch": -0.42,
+          "lookUpHeight": 6,
+          "lookUpYaw": 0,
+          "lookUpDistance": 8.5,
+          "targetPitchUpDeg": 6.875493541569878,
+          "actualPitchUpDeg": 6.875493541569878,
+          "viewPitchUpDeg": 6.875493541569881,
+          "actualYaw": 0.4636476090008061,
+          "yawDeg": 26.56505117707799,
+          "position": [
+            17.842043556065153,
+            1.2540915584129653,
+            18.68408426536346
+          ],
+          "cameraHeight": 1.2540915584129653,
+          "lookAt": [
+            13.402068359228995,
+            2.451213631302159,
+            9.80413387169114
+          ],
+          "pivot": [
+            17.000001423383424,
+            1.25,
+            17
+          ],
+          "viewDirection": [
+            -0.44399751968361595,
+            0.1197122072889194,
+            -0.887995039367232
+          ],
+          "solverViewDirection": [
+            -0.44399751968361595,
+            0.11971220728891936,
+            -0.8879950393672319
+          ],
+          "boomLength": 1.8828678941726702,
+          "desiredDistance": 8.5,
+          "targetDistance": 8.5,
+          "desiredLength": 8.499999999999998,
+          "groundHeight": 2.0253339760856193e-07,
+          "clearance": 0.4,
+          "sweepRadius": 0.28,
+          "characterScreen": [
+            0.4999999999999997,
+            0.8819561433026193
+          ]
+        },
+        "cameraCollision": {
+          "primaryHit": 1.9228678941726685,
+          "primaryRawHit": 1.9228678941726685,
+          "primaryObject": "SE(0):footprint",
+          "primaryHandle": 1.8e-322,
+          "primaryStartOverlap": false,
+          "probeUsed": false,
+          "temporalHit": null,
+          "sphereRadius": 0.28
+        },
+        "avatarFade": {
+          "fading": true,
+          "reason": "中心遮挡",
+          "targetOpacity": 0.06,
+          "opacity": 0.06,
+          "nearFading": false,
+          "centerFading": true,
+          "upLookFactor": 0,
+          "upLookPitchDeg": 6.875493541569881,
+          "nearDistance": 1.8828634485952451,
+          "centerDistance": 0.030902146810676746,
+          "screenHeight": 0.8517480237117352,
+          "materialOpacity": 0.06,
+          "transparentMaterials": 9,
+          "materialCount": 9,
+          "meshCount": 28
+        },
+        "plazaScreen": {
+          "imageStatus": "loaded"
+        },
+        "review": {
+          "view": "follow",
+          "inputScale": 1,
+          "position": null
+        },
+        "occluded": [],
+        "fps": 0
+      }
+    },
+    {
+      "view": "05-east-road",
+      "feet": [
+        30,
+        4
+      ],
+      "yaw": 1.5042281630190728,
+      "diagnostics": {
+        "player": {
+          "feet": [
+            30.000001089514832,
+            0.011133281426737085,
+            4.000001171911883
+          ],
+          "yaw": 1.5042281630190728,
+          "moving": false,
+          "speed": 2.175583576405577e-05,
+          "velocity": [
+            0,
+            0,
+            0
+          ],
+          "verticalVelocity": 0,
+          "grounded": true
+        },
+        "gait": {
+          "state": "idle",
+          "phase": 0.3,
+          "run": 0,
+          "feet": [
+            {
+              "position": [
+                29.993015503895005,
+                0.09079999980254798,
+                4.1047674415749436
+              ],
+              "planted": true,
+              "pitch": 0,
+              "toe": 0,
+              "yaw": 1.5042281630190728
+            },
+            {
+              "position": [
+                30.006984496104995,
+                0.09079999980254798,
+                3.895232558425056
+              ],
+              "planted": true,
+              "pitch": 0,
+              "toe": 0,
+              "yaw": 1.5042281630190728
+            }
+          ],
+          "updates": 23,
+          "maxReachError": 0,
+          "joints": [
+            {
+              "hip": [
+                -0.14794546273710155,
+                0,
+                8.041176956034429e-07,
+                0.9889955207455988
+              ],
+              "knee": [
+                0.2926361257911596,
+                0,
+                7.281476248357936e-08,
+                0.95622387435262
+              ],
+              "ankle": [
+                -0.14794683404474293,
+                -6.166025048359286e-07,
+                -7.094357981008714e-07,
+                0.988995315608347
+              ]
+            },
+            {
+              "hip": [
+                -0.14794566451285804,
+                0,
+                8.041176101269836e-07,
+                0.9889954905616113
+              ],
+              "knee": [
+                0.2926362776250123,
+                0,
+                7.281490092460943e-08,
+                0.956223827886427
+              ],
+              "ankle": [
+                -0.14794678930648958,
+                -6.166026430369874e-07,
+                -7.094358304823558e-07,
+                0.9889953223008779
+              ]
+            }
+          ]
+        },
+        "camera": {
+          "orientationVersion": 2,
+          "mode": "follow",
+          "yaw": 1.5042281630190728,
+          "pitch": -0.04,
+          "distance": 8.5,
+          "framing": "medium",
+          "lookUpPitch": -0.42,
+          "lookUpHeight": 6,
+          "lookUpYaw": 0,
+          "lookUpDistance": 8.5,
+          "targetPitchUpDeg": 2.291831180523293,
+          "actualPitchUpDeg": 2.291831180523293,
+          "viewPitchUpDeg": 2.291831180523292,
+          "actualYaw": 1.5042281630190728,
+          "yawDeg": 86.18592516570965,
+          "position": [
+            38.452556523424924,
+            1.9587183920757152,
+            4.563504754141833
+          ],
+          "cameraHeight": 1.9587183920757152,
+          "lookAt": [
+            28.48268616187428,
+            2.3586117339420567,
+            3.898846730038457
+          ],
+          "pivot": [
+            30.00000075329914,
+            1.2610332820840995,
+            4.0000010361334475
+          ],
+          "viewDirection": [
+            -0.9969870361550643,
+            0.03998933418663415,
+            -0.0664658024103376
+          ],
+          "solverViewDirection": [
+            -0.9969870361550643,
+            0.03998933418663416,
+            -0.06646580241033764
+          ],
+          "boomLength": 8.499999999999998,
+          "desiredDistance": 8.5,
+          "targetDistance": 8.5,
+          "desiredLength": 8.499999999999998,
+          "groundHeight": -6.991464118755175e-08,
+          "clearance": 0.4,
+          "sweepRadius": 0.28,
+          "characterScreen": [
+            0.5,
+            0.6808952638592627
+          ]
+        },
+        "cameraCollision": {
+          "primaryHit": null,
+          "primaryRawHit": null,
+          "primaryObject": "—",
+          "primaryHandle": null,
+          "primaryStartOverlap": false,
+          "probeUsed": false,
+          "temporalHit": null,
+          "sphereRadius": 0.28
+        },
+        "avatarFade": {
+          "fading": false,
+          "reason": "none",
+          "targetOpacity": 1,
+          "opacity": 1,
+          "nearFading": false,
+          "centerFading": false,
+          "upLookFactor": 0,
+          "upLookPitchDeg": 2.291831180523292,
+          "nearDistance": 8.485925167947412,
+          "centerDistance": 0.8360493976115546,
+          "screenHeight": 0.19201782688094915,
+          "materialOpacity": 1,
+          "transparentMaterials": 1,
+          "materialCount": 9,
+          "meshCount": 28
+        },
+        "plazaScreen": {
+          "imageStatus": "loaded"
+        },
+        "review": {
+          "view": "follow",
+          "inputScale": 1,
+          "position": null
+        },
+        "occluded": [],
+        "fps": 0
+      }
+    },
+    {
+      "view": "06-west-road",
+      "feet": [
+        -30,
+        4
+      ],
+      "yaw": -1.5042281630190728,
+      "diagnostics": {
+        "player": {
+          "feet": [
+            -29.99990325550082,
+            0.010137563262105687,
+            3.9999457946674863
+          ],
+          "yaw": -1.5042281630190728,
+          "moving": false,
+          "speed": 1.1415067862992754e-05,
+          "velocity": [
+            0,
+            0,
+            0
+          ],
+          "verticalVelocity": 0,
+          "grounded": true
+        },
+        "gait": {
+          "state": "idle",
+          "phase": 0.3,
+          "run": 0,
+          "feet": [
+            {
+              "position": [
+                -30.00695240579712,
+                0.09089350798691158,
+                3.8952016600632136
+              ],
+              "planted": true,
+              "pitch": 0,
+              "toe": 0,
+              "yaw": -1.5042281630190728
+            },
+            {
+              "position": [
+                -29.99298341358713,
+                0.09089350798691158,
+                4.104736543213101
+              ],
+              "planted": true,
+              "pitch": 0,
+              "toe": 0,
+              "yaw": -1.5042281630190728
+            }
+          ],
+          "updates": 26,
+          "maxReachError": 0,
+          "joints": [
+            {
+              "hip": [
+                -0.15043318243427514,
+                0,
+                1.416393267122705e-05,
+                0.9886201785428412
+              ],
+              "knee": [
+                0.2973457450078528,
+                0,
+                1.3271934568749975e-06,
+                0.9547698717093892
+              ],
+              "ankle": [
+                -0.15033293322804217,
+                -4.597218002802653e-06,
+                -1.4768877700096548e-05,
+                0.9886354277223729
+              ]
+            },
+            {
+              "hip": [
+                -0.15043328321392646,
+                0,
+                1.4163932324974174e-05,
+                0.9886201632077213
+              ],
+              "knee": [
+                0.29734581992397435,
+                0,
+                1.3271947322422844e-06,
+                0.9547698483781198
+              ],
+              "ankle": [
+                -0.15033291002022248,
+                -4.597219288125756e-06,
+                -1.476887828390914e-05,
+                0.9886354312513776
+              ]
+            }
+          ]
+        },
+        "camera": {
+          "orientationVersion": 2,
+          "mode": "follow",
+          "yaw": -1.5042281630190728,
+          "pitch": -0.04,
+          "distance": 8.5,
+          "framing": "medium",
+          "lookUpPitch": -0.42,
+          "lookUpHeight": 6,
+          "lookUpYaw": 0,
+          "lookUpDistance": 8.5,
+          "targetPitchUpDeg": 2.291831180523293,
+          "actualPitchUpDeg": 2.291831180523293,
+          "viewPitchUpDeg": 2.291831180523292,
+          "actualYaw": -1.5042281630190728,
+          "yawDeg": -86.18592516570965,
+          "position": [
+            -38.45245921377286,
+            1.9578226534776686,
+            4.5634494844539315
+          ],
+          "cameraHeight": 1.9578226534776686,
+          "lookAt": [
+            -28.482588852222218,
+            2.35771599534401,
+            3.898791460350555
+          ],
+          "pivot": [
+            -29.999903443647078,
+            1.260137543486053,
+            3.999945766445546
+          ],
+          "viewDirection": [
+            0.9969870361550643,
+            0.03998933418663415,
+            -0.0664658024103376
+          ],
+          "solverViewDirection": [
+            0.9969870361550643,
+            0.03998933418663416,
+            -0.06646580241033764
+          ],
+          "boomLength": 8.499999999999998,
+          "desiredDistance": 8.5,
+          "targetDistance": 8.5,
+          "desiredLength": 8.499999999999998,
+          "groundHeight": -6.991100320874466e-08,
+          "clearance": 0.4,
+          "sweepRadius": 0.28,
+          "characterScreen": [
+            0.5,
+            0.6808952638592626
+          ]
+        },
+        "cameraCollision": {
+          "primaryHit": null,
+          "primaryRawHit": null,
+          "primaryObject": "—",
+          "primaryHandle": null,
+          "primaryStartOverlap": false,
+          "probeUsed": false,
+          "temporalHit": null,
+          "sphereRadius": 0.28
+        },
+        "avatarFade": {
+          "fading": false,
+          "reason": "none",
+          "targetOpacity": 1,
+          "opacity": 1,
+          "nearFading": false,
+          "centerFading": false,
+          "upLookFactor": 0,
+          "upLookPitchDeg": 2.291831180523292,
+          "nearDistance": 8.485925167947412,
+          "centerDistance": 0.8360493976115546,
+          "screenHeight": 0.19201782688094915,
+          "materialOpacity": 1,
+          "transparentMaterials": 1,
+          "materialCount": 9,
+          "meshCount": 28
+        },
+        "plazaScreen": {
+          "imageStatus": "loaded"
+        },
+        "review": {
+          "view": "follow",
+          "inputScale": 1,
+          "position": null
+        },
+        "occluded": [],
+        "fps": 0
+      }
+    },
+    {
+      "view": "09-learning-off-road",
+      "feet": [
+        -48,
+        -17
+      ],
+      "yaw": 1.5707963267948966,
+      "diagnostics": {
+        "player": {
+          "feet": [
+            -47.99809473273429,
+            0.0072969573811860755,
+            -16.99816382010156
+          ],
+          "yaw": 1.3707963267948966,
+          "moving": false,
+          "speed": 2.544161020523461e-05,
+          "velocity": [
+            0,
+            0,
+            0
+          ],
+          "verticalVelocity": 0,
+          "grounded": true
+        },
+        "gait": {
+          "state": "idle",
+          "phase": 0.3,
+          "run": 0,
+          "feet": [
+            {
+              "position": [
+                -47.99999756883324,
+                0.09079999171895907,
+                -16.894995818036403
+              ],
+              "planted": true,
+              "pitch": 0,
+              "toe": 0,
+              "yaw": 1.5707963267948966
+            },
+            {
+              "position": [
+                -47.99999756883324,
+                0.09079999171895907,
+                -17.104995818036404
+              ],
+              "planted": true,
+              "pitch": 0,
+              "toe": 0,
+              "yaw": 1.5707963267948966
+            }
+          ],
+          "updates": 30,
+          "maxReachError": 0,
+          "joints": [
+            {
+              "hip": [
+                -0.17075310415457143,
+                0,
+                0.0025955237789651304,
+                0.9853104285847637
+              ],
+              "knee": [
+                0.309218973952305,
+                0,
+                0.00029106051138472774,
+                0.9509908208976902
+              ],
+              "ankle": [
+                -0.1413061419902589,
+                0.09796871785949232,
+                -0.016946695182852217,
+                0.9849606662599149
+              ]
+            },
+            {
+              "hip": [
+                -0.13856598474061413,
+                -0.0,
+                -0.000506979923591828,
+                0.9903530738298443
+              ],
+              "knee": [
+                0.30860980288360124,
+                0,
+                -4.509133909675146e-05,
+                0.951188723403992
+              ],
+              "ankle": [
+                -0.17301445447536587,
+                0.09847497991692149,
+                -0.016829652059142282,
+                0.9798394968996309
+              ]
+            }
+          ]
+        },
+        "camera": {
+          "orientationVersion": 2,
+          "mode": "follow",
+          "yaw": 1.5707963267948966,
+          "pitch": -0.1,
+          "distance": 8.5,
+          "framing": "medium",
+          "lookUpPitch": -0.42,
+          "lookUpHeight": 6,
+          "lookUpYaw": 0,
+          "lookUpDistance": 8.5,
+          "targetPitchUpDeg": 5.729577951308233,
+          "actualPitchUpDeg": 5.729577951308233,
+          "viewPitchUpDeg": 5.729577951308234,
+          "actualYaw": 1.5707963267948966,
+          "yawDeg": 90,
+          "position": [
+            -39.50018413430561,
+            1.4456524201692809,
+            -16.998163396074723
+          ],
+          "cameraHeight": 1.4456524201692809,
+          "lookAt": [
+            -49.45022578708587,
+            2.4439865866375623,
+            -16.998163396074723
+          ],
+          "pivot": [
+            -47.99809473273429,
+            1.257196958285931,
+            -16.998163396074723
+          ],
+          "viewDirection": [
+            -0.9950041652780259,
+            0.09983341664682818,
+            -2.2204460492503136e-16
+          ],
+          "solverViewDirection": [
+            -0.9950041652780258,
+            0.09983341664682815,
+            -6.092643330730091e-17
+          ],
+          "boomLength": 8.500000000000004,
+          "desiredDistance": 8.5,
+          "targetDistance": 8.5,
+          "desiredLength": 8.500000000000004,
+          "groundHeight": 1.1569427416091571e-08,
+          "clearance": 0.4,
+          "sweepRadius": 0.28,
+          "characterScreen": [
+            0.4999999999999998,
+            0.6812451106290582
+          ]
+        },
+        "cameraCollision": {
+          "primaryHit": null,
+          "primaryRawHit": null,
+          "primaryObject": "—",
+          "primaryHandle": null,
+          "primaryStartOverlap": false,
+          "probeUsed": false,
+          "temporalHit": null,
+          "sphereRadius": 0.28
+        },
+        "avatarFade": {
+          "fading": false,
+          "reason": "none",
+          "targetOpacity": 1,
+          "opacity": 1,
+          "nearFading": false,
+          "centerFading": false,
+          "upLookFactor": 0,
+          "upLookPitchDeg": 5.729577951308234,
+          "nearDistance": 8.497910598428675,
+          "centerDistance": 0.8368885858881397,
+          "screenHeight": 0.1925561029590555,
+          "materialOpacity": 1,
+          "transparentMaterials": 1,
+          "materialCount": 9,
+          "meshCount": 28
+        },
+        "plazaScreen": {
+          "imageStatus": "loaded"
+        },
+        "review": {
+          "view": "follow",
+          "inputScale": 1,
+          "position": null
+        },
+        "occluded": [],
+        "fps": 2
+      }
+    },
+    {
+      "view": "10-terminal-off-road",
+      "feet": [
+        48,
+        -17
+      ],
+      "yaw": -1.5707963267948966,
+      "diagnostics": {
+        "player": {
+          "feet": [
+            47.99183544242315,
+            0.010405712986539584,
+            -17.007126780879975
+          ],
+          "yaw": -2.045756568256043,
+          "moving": false,
+          "speed": 1.2417547736731649e-05,
+          "velocity": [
+            0,
+            0,
+            0
+          ],
+          "verticalVelocity": 0,
+          "grounded": true
+        },
+        "gait": {
+          "state": "idle",
+          "phase": 0.3,
+          "run": 0,
+          "feet": [
+            {
+              "position": [
+                48.00974180059178,
+                0.09036656950134785,
+                -17.10602269887329
+              ],
+              "planted": true,
+              "pitch": 0,
+              "toe": 0,
+              "yaw": -1.7094387710974632
+            },
+            {
+              "position": [
+                47.98072007083998,
+                0.09036656950134785,
+                -16.89803774941248
+              ],
+              "planted": true,
+              "pitch": 0,
+              "toe": 0,
+              "yaw": -1.7094387710974632
+            }
+          ],
+          "updates": 34,
+          "maxReachError": 0,
+          "joints": [
+            {
+              "hip": [
+                -0.16900674237428157,
+                0,
+                0.006521105754325566,
+                0.9855933219192254
+              ],
+              "knee": [
+                0.2903479179534265,
+                0,
+                0.0006787667857317581,
+                0.9569209088612082
+              ],
+              "ankle": [
+                -0.1215272626966224,
+                0.16408225150366385,
+                -0.02763867267873074,
+                0.9785418963618839
+              ]
+            },
+            {
+              "hip": [
+                -0.11499693280691876,
+                -0.0,
+                -0.0021884306406594143,
+                0.9933634361180866
+              ],
+              "knee": [
+                0.287837146396479,
+                0,
+                -0.00014881166964361112,
+                0.9576793591852228
+              ],
+              "ankle": [
+                -0.1736925459257166,
+                0.16539823885679197,
+                -0.027210587564230983,
+                0.970429753252302
+              ]
+            }
+          ]
+        },
+        "camera": {
+          "orientationVersion": 2,
+          "mode": "follow",
+          "yaw": -1.5707963267948966,
+          "pitch": -0.1,
+          "distance": 8.5,
+          "framing": "medium",
+          "lookUpPitch": -0.42,
+          "lookUpHeight": 6,
+          "lookUpYaw": 0,
+          "lookUpDistance": 8.5,
+          "targetPitchUpDeg": 5.729577951308233,
+          "actualPitchUpDeg": 5.729577951308233,
+          "viewPitchUpDeg": 5.729577951308234,
+          "actualYaw": -1.5707963267948966,
+          "yawDeg": -90,
+          "position": [
+            39.49392473472007,
+            1.4488083749826506,
+            -17.007126780879975
+          ],
+          "cameraHeight": 1.4488083749826506,
+          "lookAt": [
+            49.443966387500325,
+            2.447142541450932,
+            -17.007126780879975
+          ],
+          "pivot": [
+            47.991835333148735,
+            1.2603529130993008,
+            -17.007126780879975
+          ],
+          "viewDirection": [
+            0.9950041652780259,
+            0.09983341664682818,
+            -2.2204460492503136e-16
+          ],
+          "solverViewDirection": [
+            0.9950041652780258,
+            0.09983341664682815,
+            -6.092643330730091e-17
+          ],
+          "boomLength": 8.499999999999996,
+          "desiredDistance": 8.5,
+          "targetDistance": 8.5,
+          "desiredLength": 8.499999999999996,
+          "groundHeight": 1.965122975455813e-08,
+          "clearance": 0.4,
+          "sweepRadius": 0.28,
+          "characterScreen": [
+            0.5000000000000002,
+            0.6812451106290582
+          ]
+        },
+        "cameraCollision": {
+          "primaryHit": null,
+          "primaryRawHit": null,
+          "primaryObject": "—",
+          "primaryHandle": null,
+          "primaryStartOverlap": false,
+          "probeUsed": false,
+          "temporalHit": null,
+          "sphereRadius": 0.28
+        },
+        "avatarFade": {
+          "fading": false,
+          "reason": "none",
+          "targetOpacity": 1,
+          "opacity": 1,
+          "nearFading": false,
+          "centerFading": false,
+          "upLookFactor": 0,
+          "upLookPitchDeg": 5.729577951308234,
+          "nearDistance": 8.497910598428668,
+          "centerDistance": 0.8368885858881482,
+          "screenHeight": 0.19255610295905565,
+          "materialOpacity": 1,
+          "transparentMaterials": 1,
+          "materialCount": 9,
+          "meshCount": 28
+        },
+        "plazaScreen": {
+          "imageStatus": "loaded"
+        },
+        "review": {
+          "view": "follow",
+          "inputScale": 1,
+          "position": null
+        },
+        "occluded": [],
+        "fps": 1
+      }
+    },
+    {
+      "view": "11-west-road-clear",
+      "feet": [
+        0,
+        -12
+      ],
+      "yaw": 1.5707963267948966,
+      "diagnostics": {
+        "player": {
+          "feet": [
+            0.0033747799270553713,
+            0.012729701433272567,
+            -12.00022473507035
+          ],
+          "yaw": 1.5649223461061674,
+          "moving": false,
+          "speed": 3.851016158511597e-06,
+          "velocity": [
+            0,
+            0,
+            0
+          ],
+          "verticalVelocity": 0,
+          "grounded": true
+        },
+        "gait": {
+          "state": "idle",
+          "phase": 0.3,
+          "run": 0,
+          "feet": [
+            {
+              "position": [
+                6.390042017273556e-06,
+                0.09056930536185973,
+                -11.895017440043052
+              ],
+              "planted": true,
+              "pitch": 0,
+              "toe": 0,
+              "yaw": 1.5707963267948966
+            },
+            {
+              "position": [
+                6.390042017329067e-06,
+                0.09056930536185973,
+                -12.105017440043053
+              ],
+              "planted": true,
+              "pitch": 0,
+              "toe": 0,
+              "yaw": 1.5707963267948966
+            }
+          ],
+          "updates": 38,
+          "maxReachError": 0,
+          "joints": [
+            {
+              "hip": [
+                -0.14122917004836227,
+                -0.0,
+                -0.00016755160310512625,
+                0.9899769156166779
+              ],
+              "knee": [
+                0.28367436675700314,
+                0,
+                -1.3983075571731427e-05,
+                0.9589206710930196
+              ],
+              "ankle": [
+                -0.14540338959399676,
+                0.0029552144156550996,
+                -0.00025251490754221224,
+                0.9893680090029976
+              ]
+            },
+            {
+              "hip": [
+                -0.14027642675172802,
+                -0.0,
+                -0.00017031750038963876,
+                0.9901123648807322
+              ],
+              "knee": [
+                0.2836427222918424,
+                0,
+                -1.4108559089564361e-05,
+                0.9589300318020192
+              ],
+              "ankle": [
+                -0.14632277785610867,
+                0.0029555998156106924,
+                -0.0002524350717440085,
+                0.9892324526554598
+              ]
+            }
+          ]
+        },
+        "camera": {
+          "orientationVersion": 2,
+          "mode": "follow",
+          "yaw": 1.5707963267948966,
+          "pitch": -0.05,
+          "distance": 8.5,
+          "framing": "medium",
+          "lookUpPitch": -0.42,
+          "lookUpHeight": 6,
+          "lookUpYaw": 0,
+          "lookUpDistance": 8.5,
+          "targetPitchUpDeg": 2.8647889756541165,
+          "actualPitchUpDeg": 2.8647889756541165,
+          "viewPitchUpDeg": 2.8647889756541165,
+          "actualYaw": 1.5707963267948966,
+          "yawDeg": 90,
+          "position": [
+            8.481246325287334,
+            1.875568155332434,
+            -12.00022479170294
+          ],
+          "cameraHeight": 1.875568155332434,
+          "lookAt": [
+            -1.5062562786623293,
+            2.375359848039217,
+            -12.00022479170294
+          ],
+          "pivot": [
+            0.0033747497230063317,
+            1.2626297014576267,
+            -12.00022479170294
+          ],
+          "viewDirection": [
+            -0.9987502603949664,
+            0.04997916927067833,
+            4.440892098500626e-16
+          ],
+          "solverViewDirection": [
+            -0.9987502603949663,
+            0.04997916927067833,
+            -6.115581547701405e-17
+          ],
+          "boomLength": 8.5,
+          "desiredDistance": 8.5,
+          "targetDistance": 8.5,
+          "desiredLength": 8.5,
+          "groundHeight": 8.015237984437817e-08,
+          "clearance": 0.4,
+          "sweepRadius": 0.28,
+          "characterScreen": [
+            0.5000000000000003,
+            0.6809672472171429
+          ]
+        },
+        "cameraCollision": {
+          "primaryHit": null,
+          "primaryRawHit": null,
+          "primaryObject": "—",
+          "primaryHandle": null,
+          "primaryStartOverlap": false,
+          "probeUsed": false,
+          "temporalHit": null,
+          "sphereRadius": 0.28
+        },
+        "avatarFade": {
+          "fading": false,
+          "reason": "none",
+          "targetOpacity": 1,
+          "opacity": 1,
+          "nearFading": false,
+          "centerFading": false,
+          "upLookFactor": 0,
+          "upLookPitchDeg": 2.8647889756541165,
+          "nearDistance": 8.487922279241845,
+          "centerDistance": 0.8361393668647457,
+          "screenHeight": 0.19210709441883633,
+          "materialOpacity": 1,
+          "transparentMaterials": 1,
+          "materialCount": 9,
+          "meshCount": 28
+        },
+        "plazaScreen": {
+          "imageStatus": "loaded"
+        },
+        "review": {
+          "view": "follow",
+          "inputScale": 1,
+          "position": null
+        },
+        "occluded": [],
+        "fps": 1
+      }
+    },
+    {
+      "view": "12-west-road-far",
+      "feet": [
+        -50,
+        0
+      ],
+      "yaw": 1.5707963267948966,
+      "diagnostics": {
+        "player": {
+          "feet": [
+            -49.999087555163065,
+            0.007683372336032335,
+            0.0007844971576371762
+          ],
+          "yaw": 1.3707963267948966,
+          "moving": false,
+          "speed": 1.241121509565346e-05,
+          "velocity": [
+            0,
+            0,
+            0
+          ],
+          "verticalVelocity": 0,
+          "grounded": true
+        },
+        "gait": {
+          "state": "idle",
+          "phase": 0.3,
+          "run": 0,
+          "feet": [
+            {
+              "position": [
+                -50.00002005425688,
+                0.09089994291658514,
+                0.10500276045954093
+              ],
+              "planted": true,
+              "pitch": 0,
+              "toe": 0,
+              "yaw": 1.5707963267948966
+            },
+            {
+              "position": [
+                -50.00002005425688,
+                0.09089994291658514,
+                -0.10499723954045903
+              ],
+              "planted": true,
+              "pitch": 0,
+              "toe": 0,
+              "yaw": 1.5707963267948966
+            }
+          ],
+          "updates": 41,
+          "maxReachError": 0,
+          "joints": [
+            {
+              "hip": [
+                -0.1706481215680649,
+                0,
+                0.0019757228180691125,
+                0.9853300539030753
+              ],
+              "knee": [
+                0.3073284071870413,
+                0,
+                0.00022004966349723016,
+                0.951603489755067
+              ],
+              "ankle": [
+                -0.1395196642783014,
+                0.09820214991695796,
+                -0.016106043875530204,
+                0.9852061694802958
+              ]
+            },
+            {
+              "hip": [
+                -0.1386422578863413,
+                -0.0,
+                -0.0011348944284862565,
+                0.9903418785161078
+              ],
+              "knee": [
+                0.30703167400222864,
+                0,
+                -0.00010048225839345934,
+                0.9516992913009366
+              ],
+              "ankle": [
+                -0.17137847012383894,
+                0.09870378393988787,
+                -0.016009612796844624,
+                0.9801176844196084
+              ]
+            }
+          ]
+        },
+        "camera": {
+          "orientationVersion": 2,
+          "mode": "follow",
+          "yaw": 1.5707963267948966,
+          "pitch": -0.03,
+          "distance": 8.5,
+          "framing": "medium",
+          "lookUpPitch": -0.42,
+          "lookUpHeight": 6,
+          "lookUpYaw": 0,
+          "lookUpDistance": 8.5,
+          "targetPitchUpDeg": 1.7188733853924696,
+          "actualPitchUpDeg": 1.7188733853924696,
+          "viewPitchUpDeg": 1.718873385392472,
+          "actualYaw": 1.5707963267948966,
+          "yawDeg": 90,
+          "position": [
+            -41.53516965609161,
+            2.040044631823263,
+            0.0007844971576376944
+          ],
+          "cameraHeight": 2.040044631823263,
+          "lookAt": [
+            -51.53066999358148,
+            2.33999963384822,
+            0.0007844971576370824
+          ],
+          "pivot": [
+            -49.99908776201665,
+            1.2576826336444356,
+            0.0007844971576371762
+          ],
+          "viewDirection": [
+            -0.9995500337489877,
+            0.029995500202495702,
+            4.440892098500626e-16
+          ],
+          "solverViewDirection": [
+            -0.9995500337489875,
+            0.02999550020249566,
+            -6.120478747091633e-17
+          ],
+          "boomLength": 8.500000000000004,
+          "desiredDistance": 8.5,
+          "targetDistance": 8.5,
+          "desiredLength": 8.500000000000004,
+          "groundHeight": -7.642869004342856e-08,
+          "clearance": 0.4,
+          "sweepRadius": 0.28,
+          "characterScreen": [
+            0.5000000000000004,
+            0.6808178463368026
+          ]
+        },
+        "cameraCollision": {
+          "primaryHit": null,
+          "primaryRawHit": null,
+          "primaryObject": "—",
+          "primaryHandle": null,
+          "primaryStartOverlap": false,
+          "probeUsed": false,
+          "temporalHit": null,
+          "sphereRadius": 0.28
+        },
+        "avatarFade": {
+          "fading": false,
+          "reason": "none",
+          "targetOpacity": 1,
+          "opacity": 1,
+          "nearFading": false,
+          "centerFading": false,
+          "upLookFactor": 0,
+          "upLookPitchDeg": 1.718873385392472,
+          "nearDistance": 8.483929231242358,
+          "centerDistance": 0.8359794121939457,
+          "screenHeight": 0.19192875700529782,
+          "materialOpacity": 1,
+          "transparentMaterials": 1,
+          "materialCount": 9,
+          "meshCount": 28
+        },
+        "plazaScreen": {
+          "imageStatus": "loaded"
+        },
+        "review": {
+          "view": "follow",
+          "inputScale": 1,
+          "position": null
+        },
+        "occluded": [],
+        "fps": 1
+      }
+    },
+    {
+      "view": "13-east-road-far",
+      "feet": [
+        50,
+        0
+      ],
+      "yaw": -1.5707963267948966,
+      "diagnostics": {
+        "player": {
+          "feet": [
+            49.99322579321935,
+            0.015000203806266654,
+            -0.002860445144373003
+          ],
+          "yaw": -1.8295764413049527,
+          "moving": false,
+          "speed": 0,
+          "velocity": [
+            0,
+            0,
+            0
+          ],
+          "verticalVelocity": 0,
+          "grounded": true
+        },
+        "gait": {
+          "state": "idle",
+          "phase": 0.3,
+          "run": 0,
+          "feet": [
+            {
+              "position": [
+                50.00002050924688,
+                0.0908000625067507,
+                -0.10499777214793538
+              ],
+              "planted": true,
+              "pitch": 0,
+              "toe": 0,
+              "yaw": -1.5707963267948966
+            },
+            {
+              "position": [
+                50.00002050924688,
+                0.0908000625067507,
+                0.10500222785206459
+              ],
+              "planted": true,
+              "pitch": 0,
+              "toe": 0,
+              "yaw": -1.5707963267948966
+            }
+          ],
+          "updates": 45,
+          "maxReachError": 0,
+          "joints": [
+            {
+              "hip": [
+                -0.15172151542378637,
+                0,
+                0.0033376502284926924,
+                0.9884176454558375
+              ],
+              "knee": [
+                0.27127218404574965,
+                0,
+                0.00028800004751381223,
+                0.9625026333569282
+              ],
+              "ankle": [
+                -0.12062597592894501,
+                0.12712190664171874,
+                -0.019222131471678575,
+                0.9843372920115587
+              ]
+            },
+            {
+              "hip": [
+                -0.10944162437074242,
+                -0.0,
+                -0.0018519387836445484,
+                0.9939914995500893
+              ],
+              "knee": [
+                0.2681841720331572,
+                0,
+                -0.00011137877244979855,
+                0.9633676543592582
+              ],
+              "ankle": [
+                -0.16003774492865036,
+                0.1278474496773797,
+                -0.01891285104499766,
+                0.9786139452687622
+              ]
+            }
+          ]
+        },
+        "camera": {
+          "orientationVersion": 2,
+          "mode": "follow",
+          "yaw": -1.5707963267948966,
+          "pitch": -0.03,
+          "distance": 8.5,
+          "framing": "medium",
+          "lookUpPitch": -0.42,
+          "lookUpHeight": 6,
+          "lookUpYaw": 0,
+          "lookUpDistance": 8.5,
+          "targetPitchUpDeg": 1.7188733853924696,
+          "actualPitchUpDeg": 1.7188733853924696,
+          "viewPitchUpDeg": 1.718873385392472,
+          "actualYaw": -1.5707963267948966,
+          "yawDeg": -90,
+          "position": [
+            41.52930768729432,
+            2.0473556019856876,
+            -0.0028604451443724845
+          ],
+          "cameraHeight": 2.0473556019856876,
+          "lookAt": [
+            51.52480802478419,
+            2.3473106040106444,
+            -0.0028604451443730965
+          ],
+          "pivot": [
+            49.99322579321935,
+            1.2649936038068599,
+            -0.002860445144373003
+          ],
+          "viewDirection": [
+            0.9995500337489877,
+            0.029995500202495702,
+            4.440892098500626e-16
+          ],
+          "solverViewDirection": [
+            0.9995500337489875,
+            0.02999550020249566,
+            -6.120478747091633e-17
+          ],
+          "boomLength": 8.499999999999996,
+          "desiredDistance": 8.5,
+          "targetDistance": 8.5,
+          "desiredLength": 8.499999999999996,
+          "groundHeight": 2.6424164190075317e-08,
+          "clearance": 0.4,
+          "sweepRadius": 0.28,
+          "characterScreen": [
+            0.49999999999999956,
+            0.6808178463368026
+          ]
+        },
+        "cameraCollision": {
+          "primaryHit": null,
+          "primaryRawHit": null,
+          "primaryObject": "—",
+          "primaryHandle": null,
+          "primaryStartOverlap": false,
+          "probeUsed": false,
+          "temporalHit": null,
+          "sphereRadius": 0.28
+        },
+        "avatarFade": {
+          "fading": false,
+          "reason": "none",
+          "targetOpacity": 1,
+          "opacity": 1,
+          "nearFading": false,
+          "centerFading": false,
+          "upLookFactor": 0,
+          "upLookPitchDeg": 1.718873385392472,
+          "nearDistance": 8.48392923124235,
+          "centerDistance": 0.8359794121939372,
+          "screenHeight": 0.19192875700529805,
+          "materialOpacity": 1,
+          "transparentMaterials": 1,
+          "materialCount": 9,
+          "meshCount": 28
+        },
+        "plazaScreen": {
+          "imageStatus": "loaded"
+        },
+        "review": {
+          "view": "follow",
+          "inputScale": 1,
+          "position": null
+        },
+        "occluded": [],
+        "fps": 1
+      }
+    }
+  ],
+  "stats": {
+    "calls": 835,
+    "triangles": 1422442,
+    "meshes": 445,
+    "casters": [
+      "NW(0)_Core [MeshStandardMaterial] ×16",
+      "NW(0)_ScreenRail [MeshStandardMaterial] ×2",
+      "NW(0)_ScreenPillar [MeshStandardMaterial] ×2",
+      "NW(0)_ScreenMullion [MeshStandardMaterial] ×5",
+      "NW(0)_ScreenWalkway [MeshStandardMaterial] ×1",
+      "NW(0)_Merged [MeshStandardMaterial] ×1",
+      "SW(0)_Core [MeshStandardMaterial] ×16",
+      "SW(0)_Merged [MeshStandardMaterial] ×1",
+      "NE(0)_InsetCore [MeshStandardMaterial] ×3",
+      "City_WindowSpandrel [City_WindowSpandrel] ×10",
+      "City_WindowFrame [City_WindowFrame] ×10",
+      "City_RoomFloor [City_RoomFloor] ×10",
+      "City_UnlitRoom [City_UnlitRoom] ×10",
+      "City_RoomFurniture [City_RoomFurniture] ×9",
+      "NE(0)_Merged [MeshStandardMaterial] ×1",
+      "SE(0)_Merged [B01_ShellEdge] ×1",
+      "SE(0)_Merged [B01_ObsidianShell] ×1",
+      "SE(0)_Merged [B01_Bronze] ×1",
+      "SE(0)_Merged [B01_ShellMid] ×1",
+      "T-01_Occluder_Shell_InsetCore [Shell_Warm] ×1",
+      "T-01_Merged [Shell_WarmLight] ×1",
+      "T-01_Merged [Shell_Dark] ×1",
+      "T-01_Merged [MeshStandardMaterial] ×2",
+      "T-02_Occluder_Shell_InsetCore [T-02_GlassShell] ×1",
+      "T-02_Merged [T-02_Podium] ×1",
+      "T-02_Merged [T-02_Frame] ×1",
+      "T-02_Merged [T-02_Panel] ×1",
+      "T-02_Merged [MeshStandardMaterial] ×2",
+      "H-01_Merged [MeshStandardMaterial] ×2",
+      "B-01_Merged [B01_ShellEdge] ×1",
+      "B-01_Merged [B01_ObsidianShell] ×1",
+      "B-01_Merged [B01_Bronze] ×1",
+      "B-01_Merged [B01_ShellMid] ×1",
+      "_InsetCore [Shell_WarmLight] ×2",
+      "E-01_Merged [Shell_Warm] ×1",
+      "E-01_Merged [Shell_Dark] ×1",
+      "E-01_Merged [Gallery_DarkBronze] ×1",
+      "E-01_Merged [Gallery_Bronze] ×1",
+      "E-01_Merged [MeshStandardMaterial] ×1",
+      "E-02_Occluder_Shell_InsetCore [Shell_Warm] ×1",
+      "(unnamed) [Shell_Dark] ×2",
+      "E-02_Merged [MeshStandardMaterial] ×1",
+      "LM-01_SpawnCourt [MeshStandardMaterial] ×1",
+      "LM-01_Foot_-1_-1 [MeshStandardMaterial] ×1",
+      "LM-01_Arch_-1_-1 [MeshStandardMaterial] ×1",
+      "LM-01_Foot_-1_1 [MeshStandardMaterial] ×1",
+      "LM-01_Arch_-1_1 [MeshStandardMaterial] ×1",
+      "LM-01_Foot_1_-1 [MeshStandardMaterial] ×1",
+      "LM-01_Arch_1_-1 [MeshStandardMaterial] ×1",
+      "LM-01_Foot_1_1 [MeshStandardMaterial] ×1",
+      "LM-01_Arch_1_1 [MeshStandardMaterial] ×1",
+      "LM-01_UpperBearing [MeshStandardMaterial] ×1",
+      "LM-01_ConsoleBase [MeshStandardMaterial] ×1",
+      "LM-01_ConsolePedestal [MeshStandardMaterial] ×1",
+      "LM-01_ConsoleHousing [MeshStandardMaterial] ×1",
+      "LM-01_ConsoleDisplay [MeshBasicMaterial] ×1",
+      "LM-01_EarthBody [MeshStandardMaterial] ×1",
+      "LM-01_MoonBody [MeshStandardMaterial] ×1",
+      "SCREEN-01_Merged [MeshStandardMaterial] ×3",
+      "(unnamed) [MediaTower_Podium] ×1",
+      "MediaTower_Static_Merged [MediaTower_Frame] ×1",
+      "MediaTower_Static_Merged [MediaTower_Shell] ×1",
+      "(unnamed) [MeshStandardMaterial] ×11",
+      "StaticScene_Merged [MeshStandardMaterial] ×15",
+      "StaticScene_Merged [B01_NeonAmber] ×2",
+      "StaticScene_Merged [B01_Recess] ×2",
+      "StaticScene_Merged [B01_Metal] ×2",
+      "StaticScene_Merged [B01_ScreenFrame] ×2",
+      "StaticScene_Merged [Street_Frame_Bronze] ×1"
+    ],
+    "transparentDetails": [
+      "(unnamed) | parent=NW(0) | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "(unnamed) | parent=(none) | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "(unnamed) | parent=(none) | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "(unnamed) | parent=SW(0) | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "City_RecessedGlass | parent=NE(0) | BoxGeometry | opacity=0.09 | depthWrite=false | map=false",
+      "(unnamed) | parent=NE(0) | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "SE(0)_LightCurtain_front | parent=SE(0) | PlaneGeometry | opacity=1 | depthWrite=false | map=false",
+      "SE(0)_LightCurtain_right | parent=SE(0) | PlaneGeometry | opacity=1 | depthWrite=false | map=false",
+      "SE(0)_LightCurtain_back | parent=SE(0) | PlaneGeometry | opacity=1 | depthWrite=false | map=false",
+      "SE(0)_LightCurtain_left | parent=SE(0) | PlaneGeometry | opacity=1 | depthWrite=false | map=false",
+      "SE(0)_RoofSign | parent=SE(0) | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "SE(0)_EntrySign | parent=SE(0) | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "B01_GroundReflection | parent=SE(0) | PlaneGeometry | opacity=0.28 | depthWrite=false | map=true",
+      "B01_GroundReflectionCore | parent=SE(0) | PlaneGeometry | opacity=0.24 | depthWrite=false | map=true",
+      "B01_ContactShadow | parent=SE(0) | PlaneGeometry | opacity=0.58 | depthWrite=false | map=true",
+      "City_RecessedGlass | parent=SE(0) | BoxGeometry | opacity=0.09 | depthWrite=false | map=false",
+      "SE(0)_Merged | parent=SE(0) | BufferGeometry | opacity=0.34 | depthWrite=false | map=false",
+      "(unnamed) | parent=T-01 | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "(unnamed) | parent=T-01 | PlaneGeometry | opacity=0.46 | depthWrite=false | map=true",
+      "City_RecessedGlass | parent=T-01 | BoxGeometry | opacity=0.09 | depthWrite=false | map=false",
+      "(unnamed) | parent=T-02 | BoxGeometry | opacity=0.22 | depthWrite=false | map=false",
+      "(unnamed) | parent=T-02 | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "(unnamed) | parent=T-02 | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "(unnamed) | parent=T-02 | PlaneGeometry | opacity=0.48 | depthWrite=false | map=true",
+      "City_RecessedGlass | parent=T-02 | BoxGeometry | opacity=0.09 | depthWrite=false | map=false",
+      "H-01_RoofSign | parent=H-01 | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "H-01_Media_Typography | parent=H-01 | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "H-01_Media_Dream | parent=H-01 | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "H-01_Media_BannerL | parent=H-01 | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "H-01_Media_BannerR | parent=H-01 | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "(unnamed) | parent=H-01_Ghost | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "City_RecessedGlass | parent=H-01 | BoxGeometry | opacity=0.09 | depthWrite=false | map=false",
+      "H-01_Merged | parent=H-01 | BufferGeometry | opacity=0.58 | depthWrite=false | map=true",
+      "B-01_LightCurtain_front | parent=B-01 | PlaneGeometry | opacity=1 | depthWrite=false | map=false",
+      "B-01_LightCurtain_right | parent=B-01 | PlaneGeometry | opacity=1 | depthWrite=false | map=false",
+      "B-01_LightCurtain_back | parent=B-01 | PlaneGeometry | opacity=1 | depthWrite=false | map=false",
+      "B-01_LightCurtain_left | parent=B-01 | PlaneGeometry | opacity=1 | depthWrite=false | map=false",
+      "B-01_RoofSign | parent=B-01 | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "B-01_EntrySign | parent=B-01 | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "B01_GroundReflection | parent=B-01 | PlaneGeometry | opacity=0.28 | depthWrite=false | map=true",
+      "B01_GroundReflectionCore | parent=B-01 | PlaneGeometry | opacity=0.24 | depthWrite=false | map=true",
+      "B01_ContactShadow | parent=B-01 | PlaneGeometry | opacity=0.58 | depthWrite=false | map=true",
+      "City_RecessedGlass | parent=B-01 | BoxGeometry | opacity=0.09 | depthWrite=false | map=false",
+      "B-01_Merged | parent=B-01 | BufferGeometry | opacity=0.34 | depthWrite=false | map=false",
+      "(unnamed) | parent=E-01 | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "(unnamed) | parent=E-01 | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "(unnamed) | parent=E-01 | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "(unnamed) | parent=E-01 | PlaneGeometry | opacity=0.44 | depthWrite=false | map=true",
+      "City_RecessedGlass | parent=E-01 | BoxGeometry | opacity=0.09 | depthWrite=false | map=false",
+      "E-01_Merged | parent=E-01 | BufferGeometry | opacity=0.06 | depthWrite=false | map=false",
+      "(unnamed) | parent=E-02 | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "(unnamed) | parent=E-02 | PlaneGeometry | opacity=0.44 | depthWrite=false | map=true",
+      "City_RecessedGlass | parent=E-02 | BoxGeometry | opacity=0.09 | depthWrite=false | map=false",
+      "(unnamed) | parent=E-03 | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "(unnamed) | parent=E-03 | PlaneGeometry | opacity=0.42 | depthWrite=false | map=true",
+      "City_RecessedGlass | parent=E-03 | BoxGeometry | opacity=0.09 | depthWrite=false | map=false",
+      "RoadFlowLine | parent=Ground | PlaneGeometry | opacity=1 | depthWrite=false | map=false",
+      "(unnamed) | parent=Ground | RingGeometry | opacity=0.06 | depthWrite=false | map=false",
+      "(unnamed) | parent=Ground | RingGeometry | opacity=0.055 | depthWrite=false | map=false",
+      "GroundVoidFade | parent=Ground | PlaneGeometry | opacity=1 | depthWrite=false | map=false",
+      "Ground_Merged | parent=Ground | BufferGeometry | opacity=0.5 | depthWrite=false | map=false",
+      "Ground_Merged | parent=Ground | BufferGeometry | opacity=0.28 | depthWrite=false | map=false",
+      "Ground_Merged | parent=Ground | BufferGeometry | opacity=0.44 | depthWrite=false | map=false",
+      "Ground_Merged | parent=Ground | BufferGeometry | opacity=0.2 | depthWrite=false | map=false",
+      "Ground_Merged | parent=Ground | BufferGeometry | opacity=0.32 | depthWrite=false | map=false",
+      "Ground_Merged | parent=Ground | BufferGeometry | opacity=0.5 | depthWrite=false | map=false",
+      "Ground_Merged | parent=Ground | BufferGeometry | opacity=0.44 | depthWrite=false | map=false",
+      "Ground_Merged | parent=Ground | BufferGeometry | opacity=0.05 | depthWrite=false | map=false",
+      "Ground_Merged | parent=Ground | BufferGeometry | opacity=0.045 | depthWrite=false | map=false",
+      "Ground_Merged | parent=Ground | BufferGeometry | opacity=0.3 | depthWrite=false | map=false",
+      "Ground_Merged | parent=Ground | BufferGeometry | opacity=0.26 | depthWrite=false | map=false",
+      "(unnamed) | parent=(none) | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "(unnamed) | parent=(none) | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "(unnamed) | parent=StreetProps | PlaneGeometry | opacity=0.2 | depthWrite=false | map=true",
+      "(unnamed) | parent=StreetProps | PlaneGeometry | opacity=0.1 | depthWrite=false | map=true",
+      "StreetProps_Merged | parent=StreetProps | BufferGeometry | opacity=0.16 | depthWrite=false | map=true",
+      "LM-01_SpawnOutline | parent=LM-01 | RingGeometry | opacity=0.8 | depthWrite=false | map=false",
+      "LM-01_Projector_-1_-1 | parent=LM-01 | TorusGeometry | opacity=0.8 | depthWrite=false | map=false",
+      "LM-01_Projector_-1_1 | parent=LM-01 | TorusGeometry | opacity=0.8 | depthWrite=false | map=false",
+      "LM-01_Projector_1_-1 | parent=LM-01 | TorusGeometry | opacity=0.8 | depthWrite=false | map=false",
+      "LM-01_Projector_1_1 | parent=LM-01 | TorusGeometry | opacity=0.8 | depthWrite=false | map=false",
+      "LM-01_ConsoleStatus | parent=LM-01 | BoxGeometry | opacity=0.8 | depthWrite=false | map=false",
+      "LM-01_EarthPlane_Merged | parent=LM-01_EarthPlane | BufferGeometry | opacity=0.96 | depthWrite=false | map=false",
+      "LM-01_EarthPlane_Merged | parent=LM-01_EarthPlane | BufferGeometry | opacity=0.21 | depthWrite=false | map=false",
+      "LM-01_EarthPlane_Merged | parent=LM-01_EarthPlane | BufferGeometry | opacity=0.045 | depthWrite=false | map=false",
+      "LM-01_EarthDatum | parent=LM-01_EarthPlaceholder | TorusGeometry | opacity=0.8 | depthWrite=false | map=false",
+      "LM-01_EarthFlowSignals | parent=LM-01_EarthPlane | SphereGeometry | opacity=0.9 | depthWrite=false | map=false",
+      "LM-01_MoonPlane_Merged | parent=LM-01_MoonPlane | BufferGeometry | opacity=0.96 | depthWrite=false | map=false",
+      "LM-01_MoonPlane_Merged | parent=LM-01_MoonPlane | BufferGeometry | opacity=0.21 | depthWrite=false | map=false",
+      "LM-01_MoonPlane_Merged | parent=LM-01_MoonPlane | BufferGeometry | opacity=0.045 | depthWrite=false | map=false",
+      "LM-01_MoonDatum | parent=LM-01_MoonPlaceholder | TorusGeometry | opacity=0.8 | depthWrite=false | map=false",
+      "LM-01_MoonFlowSignals | parent=LM-01_MoonPlane | SphereGeometry | opacity=0.9 | depthWrite=false | map=false",
+      "City_RecessedGlass | parent=T-03 | BoxGeometry | opacity=0.09 | depthWrite=false | map=false",
+      "(unnamed) | parent=MediaTower_Static | PlaneGeometry | opacity=0.55 | depthWrite=false | map=true",
+      "(unnamed) | parent=MediaTower_Static | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "(unnamed) | parent=T-03 | PlaneGeometry | opacity=0.85 | depthWrite=false | map=true",
+      "(unnamed) | parent=Frame_W1 | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "(unnamed) | parent=Frame_W2 | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "(unnamed) | parent=Frame_W3 | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "(unnamed) | parent=Frame_W4 | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "(unnamed) | parent=Frame_W5 | PlaneGeometry | opacity=1 | depthWrite=false | map=true",
+      "(unnamed) | parent=PlayerRig | PlaneGeometry | opacity=0.5460333567294157 | depthWrite=false | map=true",
+      "StaticScene_Merged | parent=(none) | BufferGeometry | opacity=0.32 | depthWrite=false | map=false",
+      "StaticScene_Merged | parent=(none) | BufferGeometry | opacity=0.42 | depthWrite=false | map=false",
+      "StaticScene_Merged | parent=(none) | BufferGeometry | opacity=0.7 | depthWrite=false | map=true",
+      "StaticScene_Merged | parent=(none) | BufferGeometry | opacity=0.4 | depthWrite=false | map=true"
+    ],
+    "materials": [
+      "MeshStandardMaterial:unnamed ×180",
+      "MeshBasicMaterial:unnamed ×110 [T]",
+      "ShaderMaterial:unnamed ×11 [T]",
+      "MeshStandardMaterial:City_WindowSpandrel ×10",
+      "MeshStandardMaterial:City_WindowFrame ×10",
+      "MeshStandardMaterial:City_RoomFloor ×10",
+      "MeshStandardMaterial:City_UnlitRoom ×10",
+      "MeshStandardMaterial:City_WarmRoom ×10",
+      "MeshStandardMaterial:City_CeilingLamp ×10",
+      "MeshStandardMaterial:City_RecessedGlass ×10 [T]",
+      "MeshStandardMaterial:City_RoomFurniture ×9",
+      "MeshStandardMaterial:City_CoolRoom ×9",
+      "MeshStandardMaterial:Shell_Dark ×4",
+      "MeshStandardMaterial:Shell_Warm ×3",
+      "MeshStandardMaterial:Shell_WarmLight ×3",
+      "MeshStandardMaterial:B01_Glass ×2",
+      "MeshStandardMaterial:B01_Beacon ×2",
+      "MeshStandardMaterial:B01_ShellEdge ×2",
+      "MeshStandardMaterial:B01_ObsidianShell ×2",
+      "MeshStandardMaterial:B01_LobbyWarm ×2",
+      "MeshStandardMaterial:B01_Bronze ×2",
+      "MeshStandardMaterial:B01_ShellMid ×2",
+      "MeshStandardMaterial:B01_NeonCyan ×2",
+      "MeshStandardMaterial:B01_LobbyGlass ×2 [T]",
+      "MeshStandardMaterial:B01_NeonAmber ×2",
+      "MeshStandardMaterial:B01_Recess ×2",
+      "MeshStandardMaterial:B01_Metal ×2",
+      "MeshStandardMaterial:B01_ScreenFrame ×2",
+      "MeshStandardMaterial:NW(0)_WetForecourt ×1",
+      "MeshStandardMaterial:T-02_LobbyGlow ×1",
+      "MeshStandardMaterial:T-02_DoorGlass ×1 [T]",
+      "MeshStandardMaterial:T-02_GlassShell ×1",
+      "MeshStandardMaterial:T-02_Podium ×1",
+      "MeshStandardMaterial:T-02_Reveal ×1",
+      "MeshStandardMaterial:T-02_Frame ×1",
+      "MeshStandardMaterial:T-02_Panel ×1",
+      "MeshStandardMaterial:T-02_Beacon ×1",
+      "MeshStandardMaterial:Gallery_Recess ×1",
+      "MeshStandardMaterial:Gallery_DarkBronze ×1",
+      "MeshStandardMaterial:Gallery_Bronze ×1",
+      "MeshStandardMaterial:Gallery_Glass ×1 [T]",
+      "MeshStandardMaterial:Gallery_PictureLight ×1",
+      "MeshStandardMaterial:CityOuterWetFloor ×1",
+      "MeshStandardMaterial:MediaTower_Podium ×1",
+      "MeshStandardMaterial:MediaTower_Frame ×1",
+      "MeshStandardMaterial:MediaTower_Shell ×1",
+      "MeshStandardMaterial:MediaTower_Beacon ×1",
+      "MeshStandardMaterial:Street_Frame_Bronze ×1"
+    ]
+  },
+  "pageErrors": []
+}

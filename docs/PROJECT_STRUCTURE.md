@@ -55,6 +55,7 @@ src/
       buildings/mediaTower.ts      T-03 媒体塔：裙房、塔身、视频墙/图片带与待机画面
       buildings/zenithStudy/       Neon Zenith 单栋复现样板；不进入正式世界 index
       props/street.ts              地面、天空、雕塑、画框、道具和外围剪影
+      props/roadMarkings.ts        中央十字马路标线、路缘引导点与两条流动光带
       props/orrery.ts              LM-01 公开入口，兼容 createLandmark；实际外观在 orreryVisuals
       props/orreryVisuals.ts       稳定分段光轨、双色柔光/短尾、地月模型位、出生庭与控制台
       props/orreryConfig.ts        LM-01 共用尺寸/支撑曲线、碰撞及控制台 PortalSpec

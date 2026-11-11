@@ -3,7 +3,8 @@ import type { BuildContext, BuiltBuilding } from './buildings';
 import { curveFront } from './junctionGeometry';
 import {createLabelMaterial} from '../materials';
 import {createSignTexture} from '../textures';
-import {NW_NIGHT_STUDY} from './nwNightConfig';
+import { NW_NIGHT_STUDY } from './nwNightConfig';
+import { createNwMediaScreen } from './nwMediaScreen';
 
 /** Only NW(0) opts into this first night study. SW and the street palette stay unchanged. */
 
@@ -63,19 +64,12 @@ export function addNwNightStudy(built:BuiltBuilding,ctx:BuildContext):BuiltBuild
     const rail=tangent(x,0);box(rail,recess,0,22,.1,.22,36,.18,'RailRecess');
     box(rail,cyan,0,22,.205,.045,35.7,.035,'EmbeddedRail');
   }
-  for(const config of NW_NIGHT_STUDY.panels){
-    const height=config.width/config.aspect,node=tangent(config.x,config.y);
-    box(node,metal,0,0,.25,config.width+.38,height+.38,.58,'ArtHousing');
-    box(node,recess,0,0,.57,config.width+.1,height+.1,.12,'ArtReveal');
-    const texture=new THREE.TextureLoader().load(`/assets/worlds/cyberpunk/media/images/${config.image}`);
-    texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=ctx.anisotropy;
-    const material=new THREE.MeshBasicMaterial({map:texture,color:0xffffff,toneMapped:false});
-    material.userData.bloom=false;fadeMaterials.push(material);
-    const panel=new THREE.Mesh(new THREE.PlaneGeometry(config.width,height),material);panel.position.z=.641;
-    panel.name=config.id;panel.userData.nwArtwork={...config,height,fit:'contain',bloom:false};node.add(panel);fadeMeshes.push(panel);
-    built.posterSlots.set(config.id,panel);
-    box(node,gold,0,-height/2-.22,.34,config.width*.7,.025,.04,'ArtDownlight');
-  }
+  // 2026-11-11：原两幅小画作已由面向中心 LM-01 的整幅巨幕取代。
+  const screen=createNwMediaScreen(spec,ctx.anisotropy);
+  details.add(screen.group);
+  fadeMaterials.push(screen.material);
+  fadeMeshes.push(screen.mesh);
+  built.mediaSlots=new Map([['nw-giant-screen',screen.mesh]]);
   // Smaller signs establish different reading distances without filling every bay.
   const sign=(text:string,sub:string,x:number,y:number,w:number,h:number,m:THREE.Material)=>{
     const node=tangent(x,y);box(node,metal,0,0,.28,w+.22,h+.22,.45,'SignHousing');
@@ -100,9 +94,10 @@ export function addNwNightStudy(built:BuiltBuilding,ctx:BuildContext):BuiltBuild
   const sideFill=new THREE.PointLight(0x9a86da,14,21,2);sideFill.position.set(-15,7,-1);sideFill.name='NW(0)_CornerFill';details.add(sideFill);
   // Reuse the single city mirror. Only this surface opts into softened/perturbed sampling.
   const wet=ctx.materials.ground.clone();wet.name='NW(0)_WetForecourt';wet.userData.nwStudyWet=true;wet.userData.noBloom=true;
-  const paving=new THREE.Mesh(new THREE.PlaneGeometry(28,18),wet);paving.rotation.x=-Math.PI/2;paving.position.set(0,.026,13);
+  // 建筑转 45° 面向中心后，前庭收在本地入口前，避免越过中路铺装。
+  const paving=new THREE.Mesh(new THREE.PlaneGeometry(18,7),wet);paving.rotation.x=-Math.PI/2;paving.position.set(0,.026,8.5);
   paving.name='NW(0)_WetForecourt';paving.receiveShadow=true;details.add(paving);
-  group.userData.nightStudy={id:spec.id,revision:NW_NIGHT_STUDY.revision,panels:2,cornices:5,localLights:3};
+  group.userData.nightStudy={id:spec.id,revision:NW_NIGHT_STUDY.revision,panels:0,screen:'nw-giant-screen',cornices:5,localLights:3};
   return built;
 }
 

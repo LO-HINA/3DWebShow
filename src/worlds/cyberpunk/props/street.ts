@@ -16,6 +16,7 @@ import { createSignTexture } from '../textures';
 import { getArtwork } from '../../../content/artworks/index';
 import { createOrrery } from './orrery';
 import type { OrrerySpec } from './orreryConfig';
+import { createRoadMarkings } from './roadMarkings';
 
 export interface LandmarkHandle {
   group: THREE.Group;
@@ -96,6 +97,11 @@ export function createGround(materials: WorldMaterials): THREE.Group {
     mesh.position.z = path.center[2];
     mesh.receiveShadow = true;
     group.add(mesh);
+  }
+
+  // 马路标线与流动光带；拆成顶层子节点，让静态合并按材质收拢。
+  for (const marking of createRoadMarkings(materials).children) {
+    group.add(marking);
   }
 
   const cyanLine = new THREE.MeshBasicMaterial({
@@ -721,6 +727,8 @@ export function createProps(materials: WorldMaterials): THREE.Group {
   }
   for (const lamp of lamps) {
     group.add(createLamp(materials, lamp.position));
+    // 每盏路灯下铺一层暖色光池；同材质会在静态合并中收成一次绘制。
+    addGlowPool(group, materials, lamp.position[0], lamp.position[2], PALETTE.emissiveGold, 8.5, 8.5, 0.12);
   }
 
   group.add(createWayfinding(materials, [-7.7, 0, 15.4], '← GALLERY · LEARNING', '西侧图片街 / 学习馆', 'gold'));
